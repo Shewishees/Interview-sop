@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["sop_0_resume_optimizer"],
+  "properties": {
+    "sop_0_resume_optimizer": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "project_id",
+          "project_name",
+          "target_jd_alignment",
+          "original_snippet",
+          "diagnosis",
+          "keyword_matches",
+          "refined_bullet_points"
+        ],
+        "properties": {
+          "project_id": { "type": "string" },
+          "project_name": { "type": "string" },
+          "target_jd_alignment": { "type": "string" },
+          "original_snippet": { "type": "string" },
+          "diagnosis": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "flaw", "tip"],
+              "properties": {
+                "type": { "type": "string" },
+                "flaw": { "type": "string" },
+                "tip": { "type": "string" }
+              }
+            }
+          },
+          "keyword_matches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["keyword", "status"],
+              "properties": {
+                "keyword": { "type": "string" },
+                "status": { "type": "string" }
+              }
+            }
+          },
+          "refined_bullet_points": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

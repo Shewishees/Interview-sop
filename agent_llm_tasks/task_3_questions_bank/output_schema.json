@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["sop_3_questions"],
+  "properties": {
+    "sop_3_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "title", "framework", "bonus_tip"],
+        "properties": {
+          "category": { "type": "string" },
+          "title": { "type": "string" },
+          "framework": { "type": "string" },
+          "bonus_tip": { "type": "string" }
+        }
+      }
+    }
+  }
+}

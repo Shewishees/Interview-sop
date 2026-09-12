@@ -1,0 +1,28 @@
+# 阶段二 · 岗位胜任匹配与 STAR 权衡决策矩阵 (Stage 2 Matching & STAR)
+
+【任务目标】
+1. 评估候选人针对目标岗位的 5 维胜任力雷达得分（0-100）、求职核心差异化壁垒（杀手锏）、潜在考查盲区 (Gap) 以及面试前 72 小时 Sprint 冲刺清单。
+2. 针对核心项目提炼 SITUATION / TASK / ACTION / RESULT 四段式硬核复盘，并构建核心技术决策权衡对比矩阵 (Trade-off Matrix，核心攻坚'为什么不选方案 B')。
+
+【输出规范】
+输出文件应保存至 agent_llm_tasks/outputs/stage_2_output.json，必须包含顶级键 sop_1_matching 与 sop_2_star。
+
+## 输入全景上下文 (Input Context):
+```json
+{
+  "stage": 2,
+  "company": "目标公司",
+  "job_title": "应聘岗位",
+  "jd": "",
+  "resume": "【基本信息】
+张三 (示例候选人) | 某重点大学 计算机科学与技术
+
+【项目经历 1：Mini-LLaVA: 端到端轻量化多模态大模型系统开发】\n- 【架构自研重构】主导设计轻量级多模态底座，自研两层 MLP 投射层（768->1024->1024，1.8M 参数）将 CLIP-ViT 提取的 197 个 Patch 特征与 Qwen 语言模型深度对齐，兼顾非线性表征与极低推理延迟；\n- 【两阶段训练闭环】实施'对齐预训练 + 指令微调'两阶段策略，Stage 1 冻结主干仅微调投影层（SA1B 100k，PPL 自 16.0 降至 6.4），Stage 2 联合优化使得 CogVLM 验证 PPL 达到 8.5；\n- 【分布式加速调优】攻坚 4 卡 RTX 4090 分布式环境，重构 FSDP ZeRO-3 显存切分拓扑并结合 FlashAttention-2，显存占用降低 58%，单步迭代耗时缩短 42%，实现 100% 满负载零 OOM 稳定收敛。\n\n【项目经历 2：OpenVLA 具身智能策略微调与仿真评测】\n- 【策略正交微调】引入正交微调（Orthogonal Finetuning, OFT）机制对高维动作空间进行参数微调，在精准保留预训练视觉先验的同时，有效规避灾难性遗忘；\n- 【动作空间解耦】在 LLM 顶层接入自研 7 自由度轻量回归 ActionHead，利用 L1 动作损失实现亚毫米级连续位姿轨迹预测；\n- 【数据闭环与落地】基于 Aloha 机械臂 600 条高质量演示轨迹与域随机化（Domain Randomization）仿真，经 50k 步训练实现策略收敛，抓取成功率提升至 81%。\n\n【专业技能】\n- 深度掌握 Transformer、多模态视觉大模型架构及分布式训练对齐；\n- 熟练掌握 PyTorch、FSDP、DeepSpeed、LoRA 显存优化与高效量化部署；\n- 熟悉 ReAct / Plan-and-Solve 智能体架构、工具调用与多步推理评估；\n- 具备高并发模型 Serving 框架与低延迟推理工程落地实战经验。",
+  "repo_paths": [],
+  "scanned_repo_facts": [],
+  "style": "geek",
+  "focus": "code"
+}
+```
+
+请严格输出合法 JSON，并确保通过 python run_pipeline.py --stage 2 --validate 校验。

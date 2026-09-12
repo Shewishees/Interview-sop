@@ -1,0 +1,46 @@
+{
+  "company": "浙江核新同花顺网络信息股份有限公司",
+  "job_title": "基于LLM与Agent架构的金融投研预测系统研发项目",
+  "jd": "【岗位职责】\n1. 负责基于 LLM 与 Agent 架构的金融投研预测系统研发与实际业务落地，包括高质量金融数据构建、复杂推理链路设计、模型微调与效果评估；\n2. 深入探索 Multi-Agent 协作、复杂任务规划（Plan-and-Solve）、自我反思纠错机制在宏观研报解读、金融时序预测与量化投研中的应用；\n3. 探索将代码解释器（Code Interpreter）、外部金融知识库检索（Hybrid RAG）与大模型原生 Tool Use 高效集成，推动前沿学术论文发表或核心业务转化。\n\n【岗位要求】\n1. 参与过大模型训练、调优或应用，深入理解 Agent 工作原理（如 ReAct、Plan-and-Solve等），有 Multi-Agent 应用或复杂推理系统实践经历的优先；熟悉主流 AI 编程辅助工具（如 Cursor、Claude Code 等）；\n2. 计算机、人工智能或金融工程相关专业，具备优秀的算法与代码基础，ACM/NOI/Top coder 等竞赛获奖者或高质量开源 Agent 项目者优先；\n3. 具备出色的逻辑分析、解决问题的能力，对突破 AI 在复杂金融预测领域的上限充满激情，拥有卓越的团队协作精神。",
+  "resume": "【基本信息】\n张三 (示例候选人) | 2002.06 | 某重点大学 计算机科学与技术 (本/硕)\n邮箱: candidate@example.com | 电话: 138-0000-0000\n求职意向: 大模型算法工程师 / 系统架构师\n\n【重点项目 1：基于 Transformer 的轻量化多模态对话模型研发 (示例项目)】\n- 架构实现：基于开源轻量语言模型底座与预训练视觉编码器，自主设计双层非线性特征映射桥接层 (Projector)，将高维视觉 Token 精准对齐至文本 Embedding 空间；\n- 模态对齐预训练：在千万级高质量图文数据集上实施 Stage 1 投影层特征对齐预训练，有效冻结主干权重，降低模态坍塌风险，验证集困惑度 (PPL) 显著收敛；\n- 指令微调与部署：构建多轮图文对话微调集实施 Stage 2 全链路增量微调，结合 FlashAttention 与 FP16 混合精度优化，推理端单图端到端响应延迟低于 150ms。\n\n【重点项目 2：企业级多智能体协同分析与决策系统 (示例项目)】\n- 架构设计：基于 ReAct 范式与 Plan-and-Solve 机制主导设计分布式 Multi-Agent 协作架构，定义有向无环图 (DAG) 状态迁移流转规范；\n- 工具沙箱与检索增强：集成工具调用安全沙箱与 Hybrid RAG 稠密检索模块，结合动态反思自纠机制，工具调用准确率提升至 94.2%；\n- 性能优化与压测：采用异步并发读写与局部状态隔离机制，单节点吞吐处理能力突破 300 QPS，稳定保障高并发业务场景。\n\n【专业技能】\n- 熟练掌握 Python、C++、Linux、Docker、Git；\n- 熟练掌握 PyTorch 深度学习框架与主流大模型微调推理工具；\n- 深入理解 Transformer、VLM、LLM 底层注意力与分布式并行机制 (FSDP / DeepSpeed / LoRA)；\n- 熟悉大模型 Agent 开发范式 (ReAct, Function Calling, LangGraph, RAG)。",
+  "scanned_repositories": [
+    {
+      "repo_name": "LLaVA",
+      "repo_path": "c:/Users/24974/Desktop/DL/LLaVA",
+      "model_architecture": {
+        "vision_tower": "CLIP ViT-B/16 (768维, 196+1=197 tokens)",
+        "projection": "2-Layer MLP (768 -> 1024 -> 1024, GELU 激活, ~1.8M 参数)",
+        "llm": "Qwen3-0.6B (hidden_size=1024, bfloat16)",
+        "tokenizer_details": "增量前缀差值编码 (BPE Tokenizer Alignment, 解决 Label Masking 漂移)"
+      },
+      "training_pipeline": {
+        "stage_1": "SA1B 100k 图文对模态对齐 (PPL: 16.0 -> 6.4)",
+        "stage_2": "CogVLM 120k 多轮对话微调 (PPL: 20.0 -> 8.5)",
+        "inference": "PyTorch FP16 流式推理 (显存开销 2.4GB, 首字延迟 120ms)"
+      },
+      "code_highlights": [
+        "手动重写 CLIP forward 提取 197 个 patch 特征",
+        "手动实现 2 层 MLP 模态投射层与权重保存/加载",
+        "自主设计 DataLoader 多轮增量差值编码算法"
+      ]
+    },
+    {
+      "repo_name": "RoboTwin",
+      "repo_path": "c:/Users/24974/Desktop/DL/RoboTwin",
+      "model_architecture": {
+        "base_model": "OpenVLA-7B (OFT 结构改造, 嵌入占位符并行编码)",
+        "action_head": "多层 MLP 回归头 (输出连续 7-DOF 动作空间, Smooth L1 损失)",
+        "multimodal_inputs": "多视角 RGB 观测 + 机械臂本体感觉 (线性投射融合)"
+      },
+      "training_pipeline": {
+        "distributed": "PyTorch FSDP (ZeRO-3 分片, 4 卡 RTX 4090, 显存节约 55%)",
+        "finetuning": "LoRA (r=16, alpha=32, target_modules=['q_proj','v_proj'])",
+        "data_and_eval": "Aloha 600 条专家轨迹 + 域随机化, 50k step 收敛, 仿真成功率 81%"
+      },
+      "code_highlights": [
+        "OpenVLA-oft 改造与机械臂动作预测 ActionHead 实现",
+        "RoboTwin 仿真闭环评测与多视角环境域随机化扰动实现"
+      ]
+    }
+  ]
+}

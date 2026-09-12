@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["mock_interviewer_prompt"],
+  "properties": {
+    "mock_interviewer_prompt": {
+      "type": "string",
+      "minLength": 100
+    }
+  }
+}

@@ -1,0 +1,30 @@
+# 阶段三 · 源码真题、模拟对练与临考速记 (Stage 3 Questions & Mock)
+
+【任务目标】
+1. 结合代码库深度实现定制 4 道大厂高频面试真题与三层加分锦囊。
+2. 构建高维定制化面试官 Master Prompt，融合候选人真实背景与深挖逻辑。
+3. 制定分轮次高阶反向提问清单（技术一面/二面、总监三面、HR终面）。
+4. 输出 30 分钟临考必背核心数字与极速破局口诀。
+
+【输出规范】
+输出文件应保存至 agent_llm_tasks/outputs/stage_3_output.json，包含顶级键 sop_3_questions, mock_interviewer_prompt, sop_5_reverse, sop_6_cheatsheet。
+
+## 输入全景上下文 (Input Context):
+```json
+{
+  "stage": 3,
+  "company": "目标公司",
+  "job_title": "应聘岗位",
+  "jd": "",
+  "resume": "【基本信息】
+张三 (示例候选人) | 某重点大学 计算机科学与技术
+
+【项目经历 1：Mini-LLaVA: 端到端轻量化多模态大模型系统开发】\n- 【架构自研重构】主导设计轻量级多模态底座，自研两层 MLP 投射层（768->1024->1024，1.8M 参数）将 CLIP-ViT 提取的 197 个 Patch 特征与 Qwen 语言模型深度对齐，兼顾非线性表征与极低推理延迟；\n- 【两阶段训练闭环】实施'对齐预训练 + 指令微调'两阶段策略，Stage 1 冻结主干仅微调投影层（SA1B 100k，PPL 自 16.0 降至 6.4），Stage 2 联合优化使得 CogVLM 验证 PPL 达到 8.5；\n- 【分布式加速调优】攻坚 4 卡 RTX 4090 分布式环境，重构 FSDP ZeRO-3 显存切分拓扑并结合 FlashAttention-2，显存占用降低 58%，单步迭代耗时缩短 42%，实现 100% 满负载零 OOM 稳定收敛。\n\n【项目经历 2：OpenVLA 具身智能策略微调与仿真评测】\n- 【策略正交微调】引入正交微调（Orthogonal Finetuning, OFT）机制对高维动作空间进行参数微调，在精准保留预训练视觉先验的同时，有效规避灾难性遗忘；\n- 【动作空间解耦】在 LLM 顶层接入自研 7 自由度轻量回归 ActionHead，利用 L1 动作损失实现亚毫米级连续位姿轨迹预测；\n- 【数据闭环与落地】基于 Aloha 机械臂 600 条高质量演示轨迹与域随机化（Domain Randomization）仿真，经 50k 步训练实现策略收敛，抓取成功率提升至 81%。\n\n【专业技能】\n- 深度掌握 Transformer、多模态视觉大模型架构及分布式训练对齐；\n- 熟练掌握 PyTorch、FSDP、DeepSpeed、LoRA 显存优化与高效量化部署；\n- 熟悉 ReAct / Plan-and-Solve 智能体架构、工具调用与多步推理评估；\n- 具备高并发模型 Serving 框架与低延迟推理工程落地实战经验。",
+  "repo_paths": [],
+  "scanned_repo_facts": [],
+  "style": "geek",
+  "focus": "code"
+}
+```
+
+请严格输出合法 JSON，并确保通过 python run_pipeline.py --stage 3 --validate 校验。

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["sop_5_reverse"],
+  "properties": {
+    "sop_5_reverse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stage", "purpose", "questions"],
+        "properties": {
+          "stage": { "type": "string" },
+          "purpose": { "type": "string" },
+          "questions": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

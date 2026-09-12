@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["sop_2_star"],
+  "properties": {
+    "sop_2_star": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "project_name",
+          "one_sentence_pitch",
+          "star_framework",
+          "trade_off_matrix",
+          "pitfalls_and_countermeasures"
+        ],
+        "properties": {
+          "project_name": { "type": "string" },
+          "one_sentence_pitch": { "type": "string" },
+          "star_framework": {
+            "type": "object",
+            "required": ["situation", "task", "action", "result"],
+            "properties": {
+              "situation": { "type": "string" },
+              "task": { "type": "string" },
+              "action": { "type": "string" },
+              "result": { "type": "string" }
+            }
+          },
+          "trade_off_matrix": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "decision_point",
+                "chosen_solution",
+                "pros_of_chosen",
+                "alternative_solution",
+                "why_not_alternative",
+                "frontier_technology"
+              ],
+              "properties": {
+                "decision_point": { "type": "string" },
+                "chosen_solution": { "type": "string" },
+                "pros_of_chosen": { "type": "string" },
+                "alternative_solution": { "type": "string" },
+                "why_not_alternative": { "type": "string" },
+                "frontier_technology": { "type": "string" }
+              }
+            }
+          },
+          "pitfalls_and_countermeasures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["question", "danger", "best_answer"],
+              "properties": {
+                "question": { "type": "string" },
+                "danger": { "type": "string" },
+                "best_answer": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

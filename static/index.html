@@ -1,0 +1,3321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InterviewSOP Master | 多项目面试全流程 SOP 备战系统</title>
+  
+  <!-- Local Vendor Dependencies (Offline & GFW-Resilient) -->
+  <script src="/static/vendor/tailwind.js"></script>
+  <script src="/static/vendor/vue.global.prod.js"></script>
+  <link rel="stylesheet" href="/static/vendor/element-plus.css" />
+  <script src="/static/vendor/element-plus.min.js"></script>
+  <script src="/static/vendor/lucide.min.js"></script>
+  <script src="/static/vendor/confetti.browser.js"></script>
+
+  <style>
+    [v-cloak] {
+      display: none !important;
+    }
+
+    :root {
+      --apple-canvas: #f5f5f7;
+      --apple-card-bg: rgba(255, 255, 255, 0.88);
+      --apple-card-solid: #ffffff;
+      --apple-border: rgba(0, 0, 0, 0.08);
+      --apple-border-strong: rgba(0, 0, 0, 0.14);
+      --apple-text-primary: #1d1d1f;
+      --apple-text-secondary: #6e6e73;
+      --apple-text-tertiary: #86868b;
+      --apple-blue: #0071e3;
+      --apple-blue-hover: #0077ed;
+      --apple-blue-active: #0062c4;
+      --apple-green: #34c759;
+      --apple-orange: #ff9500;
+      --apple-purple: #af52de;
+      --apple-indigo: #5856d6;
+      --apple-rose: #ff3b30;
+    }
+
+    * {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", 'Inter', "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    body {
+      background-color: #f5f5f7 !important;
+      color: #1d1d1f !important;
+    }
+
+    /* Apple Frosted Glass Surface */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.88) !important;
+      backdrop-filter: blur(28px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02) !important;
+      border-radius: 18px !important;
+    }
+
+    /* Apple Custom Scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.16); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.28); }
+
+    /* Apple Dialog Sheet Style */
+    .dark-dialog.el-dialog, .apple-dialog.el-dialog, .el-dialog {
+      background-color: rgba(255, 255, 255, 0.96) !important;
+      backdrop-filter: blur(32px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      border-radius: 20px !important;
+      color: #1d1d1f !important;
+      box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+    }
+    .dark-dialog .el-dialog__header, .apple-dialog .el-dialog__header, .el-dialog__header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+      padding: 16px 22px !important;
+      margin-right: 0 !important;
+    }
+    .dark-dialog .el-dialog__title, .apple-dialog .el-dialog__title, .el-dialog__title {
+      color: #1d1d1f !important;
+      font-size: 1rem !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.01em !important;
+    }
+    .dark-dialog .el-dialog__body, .apple-dialog .el-dialog__body, .el-dialog__body {
+      color: #3a3a3c !important;
+      padding: 20px 24px !important;
+    }
+    .dark-dialog .el-dialog__footer, .apple-dialog .el-dialog__footer, .el-dialog__footer {
+      border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+      padding: 14px 24px !important;
+    }
+
+    /* Print Stylesheet (Required for PDF export & audit) */
+    @media print {
+      header, .no-print, nav, .border-b, button { display: none !important; }
+      body, #app { background: #ffffff !important; color: #000000 !important; }
+      .glass-panel { background: #ffffff !important; border: 1px solid #e2e8f0 !important; box-shadow: none !important; margin-bottom: 20px; page-break-inside: avoid; }
+      pre, code { background: #f8fafc !important; color: #0f172a !important; border: 1px solid #cbd5e1 !important; }
+      .text-slate-300, .text-slate-400, .text-slate-200 { color: #334155 !important; }
+      .text-white { color: #0f172a !important; }
+    }
+
+    /* Apple Light Mode Palette Overrides for Tailwind Slate Utilities */
+    .bg-slate-950 { background-color: #f5f5f7 !important; }
+    .bg-slate-900, .bg-slate-900\/90, .bg-slate-900\/80, .bg-slate-900\/60, .bg-slate-900\/40 {
+      background-color: #ffffff !important;
+    }
+    .bg-slate-800, .bg-slate-800\/90, .bg-slate-800\/80, .bg-slate-800\/70 {
+      background-color: #e5e5ea !important;
+    }
+    .bg-slate-950\/20, .bg-slate-950\/40, .bg-slate-950\/60, .bg-slate-950\/80 {
+      background-color: rgba(0, 0, 0, 0.03) !important;
+    }
+    .border-slate-800, .border-slate-800\/80, .border-slate-800\/60,
+    .border-slate-700, .border-slate-700\/50, .border-slate-700\/40 {
+      border-color: rgba(0, 0, 0, 0.08) !important;
+    }
+    .text-slate-100, .text-slate-200 { color: #1d1d1f !important; }
+    .text-slate-300 { color: #3a3a3c !important; }
+    .text-slate-400 { color: #6e6e73 !important; }
+    .text-slate-500 { color: #86868b !important; }
+    .text-slate-600 { color: #aeaeb2 !important; }
+
+    /* Headers and Titles */
+    h1, h2, h3, h4, h5, h6,
+    h1.text-white, h2.text-white, h3.text-white, h4.text-white, h5.text-white, h6.text-white,
+    div.text-white:not(button *), span.text-white:not(button *):not([class*="bg-"]) {
+      color: #1d1d1f !important;
+    }
+
+    /* Buttons retaining clean white text on colored backgrounds */
+    button.text-white, button .text-white,
+    [class*="bg-gradient"].text-white, [class*="bg-emerald-6"].text-white,
+    [class*="bg-cyan-6"].text-white, [class*="bg-blue-6"].text-white,
+    [class*="bg-[#0071e3]"].text-white, [class*="bg-[#248a3d]"].text-white {
+      color: #ffffff !important;
+    }
+
+    /* Apple Inputs & Textarea */
+    input[type="text"], textarea {
+      background-color: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      color: #1d1d1f !important;
+      border-radius: 12px !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    input[type="text"]:focus, textarea:focus {
+      border-color: #0071e3 !important;
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.16) !important;
+      outline: none !important;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #aeaeb2 !important;
+    }
+
+    /* Apple Pre / Code containers */
+    pre {
+      background-color: #f6f8fa !important;
+      color: #24292f !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      border-radius: 12px !important;
+    }
+
+    /* Accent colors mapped to Apple HIG */
+    .text-cyan-400, .text-cyan-300 { color: #0071e3 !important; }
+    .bg-cyan-500\/10, .bg-cyan-500\/20 { background-color: rgba(0, 113, 227, 0.08) !important; }
+    .border-cyan-500\/20, .border-cyan-500\/30, .border-cyan-500\/40, .border-cyan-500\/50 {
+      border-color: rgba(0, 113, 227, 0.22) !important;
+    }
+
+    .text-emerald-400, .text-emerald-300, .text-emerald-400\/90 { color: #248a3d !important; }
+    .bg-emerald-500\/10, .bg-emerald-500\/20, .bg-emerald-950\/10, .bg-emerald-950\/20 {
+      background-color: rgba(52, 199, 89, 0.09) !important;
+    }
+    .border-emerald-500\/20, .border-emerald-500\/30, .border-emerald-500\/40, .border-emerald-500\/50 {
+      border-color: rgba(52, 199, 89, 0.25) !important;
+    }
+
+    .text-purple-400, .text-purple-300 { color: #8e24aa !important; }
+    .bg-purple-500\/10, .bg-purple-500\/20 { background-color: rgba(175, 82, 222, 0.08) !important; }
+    .border-purple-500\/20, .border-purple-500\/30 { border-color: rgba(175, 82, 222, 0.2) !important; }
+
+    .text-amber-400, .text-amber-300 { color: #d97706 !important; }
+    .bg-amber-500\/10, .bg-amber-500\/20 { background-color: rgba(255, 149, 0, 0.09) !important; }
+    .border-amber-500\/20, .border-amber-500\/30 { border-color: rgba(255, 149, 0, 0.25) !important; }
+
+    .text-rose-400, .text-rose-300 { color: #d32f2f !important; }
+    .bg-rose-500\/10, .bg-rose-500\/20, .bg-rose-950\/20 { background-color: rgba(255, 59, 48, 0.08) !important; }
+    .border-rose-500\/20, .border-rose-900\/20, .border-rose-900\/30 { border-color: rgba(255, 59, 48, 0.2) !important; }
+
+    .text-indigo-400, .text-indigo-300, .text-indigo-200 { color: #5856d6 !important; }
+    .bg-indigo-500\/10, .bg-indigo-500\/20, .bg-indigo-950\/30 { background-color: rgba(88, 86, 214, 0.08) !important; }
+    .border-indigo-500\/20, .border-indigo-500\/30 { border-color: rgba(88, 86, 214, 0.2) !important; }
+  </style>
+</head>
+<body class="bg-[#f5f5f7] text-[#1d1d1f] min-h-screen selection:bg-[#0071e3]/20 selection:text-[#0071e3]">
+  <div id="app" v-cloak class="relative overflow-hidden min-h-screen flex flex-col">
+    <!-- Apple 风格环境光晕 (Apple Light Mode Subtle Ambience) -->
+    <div class="fixed top-0 left-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-0 right-1/4 w-[700px] h-[700px] bg-purple-500/5 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+
+    <!-- 顶部导航栏 (macOS 风格磨砂玻璃 Header) -->
+    <header class="sticky top-0 z-40 border-b border-black/5 bg-white/80 backdrop-blur-xl px-6 py-3 flex items-center justify-between shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+      <div class="flex items-center space-x-3">
+        <!-- macOS 窗口控制红黄绿三色圆点 (Traffic Light Controls) -->
+        <div class="flex items-center space-x-2 mr-1">
+          <span class="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e]/40 inline-block shadow-sm"></span>
+          <span class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]/40 inline-block shadow-sm"></span>
+          <span class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29]/40 inline-block shadow-sm"></span>
+        </div>
+
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#0071e3] to-[#42a5f5] flex items-center justify-center shadow-md shadow-blue-500/20">
+          <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="font-bold text-lg tracking-tight text-[#1d1d1f]">
+              InterviewSOP Master
+            </span>
+            <span class="px-2 py-0.5 text-[10px] font-semibold bg-[#0071e3]/10 text-[#0071e3] border border-[#0071e3]/20 rounded-full">v1.2</span>
+          </div>
+          <p class="text-[11px] text-[#86868b]">多本地代码仓库透视与面试 SOP 备战平台</p>
+        </div>
+      </div>
+
+      <!-- 右侧控制区 (macOS 风格极简功能下拉菜单) -->
+      <div class="flex items-center space-x-2">
+        <!-- 1. 样例演示下拉菜单 -->
+        <div class="relative dropdown-trigger-container" @mouseenter="handleMenuEnter('demo')" @mouseleave="handleMenuLeave">
+          <button @click="toggleMenu('demo')" class="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-xl bg-black/5 hover:bg-black/10 text-[#1d1d1f] border border-black/5 transition shadow-sm">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#ff9500]"></i>
+            <span>样例演示</span>
+            <i data-lucide="chevron-down" class="w-3 h-3 text-[#86868b]"></i>
+          </button>
+          <div v-show="menuOpen === 'demo'" class="absolute right-0 top-full pt-1.5 w-60 z-50">
+            <div class="bg-white/95 backdrop-blur-2xl border border-black/10 rounded-2xl shadow-xl p-1.5 space-y-1">
+              <button @click="loadDemoData(); menuOpen = null" class="w-full flex items-center space-x-2.5 px-3 py-2 text-xs rounded-xl hover:bg-[#f5f5f7] text-left transition text-[#1d1d1f]">
+                <i data-lucide="play-circle" class="w-4 h-4 text-[#5856d6] shrink-0"></i>
+                <div>
+                  <div class="font-semibold text-[#1d1d1f]">✨ 多模态 Demo (LLaVA)</div>
+                  <div class="text-[10px] text-[#86868b]">视觉编码器 + 投影层 + LLM</div>
+                </div>
+              </button>
+              <button @click="loadDemoAgentData(); menuOpen = null" class="w-full flex items-center space-x-2.5 px-3 py-2 text-xs rounded-xl hover:bg-[#f5f5f7] text-left transition text-[#1d1d1f]">
+                <i data-lucide="trending-up" class="w-4 h-4 text-[#d97706] shrink-0"></i>
+                <div>
+                  <div class="font-semibold text-[#1d1d1f]">📈 金融 Agent Demo (同花顺)</div>
+                  <div class="text-[10px] text-[#86868b]">投研预测 + ReAct 智能体架构</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Agent 协同下拉菜单 (3 大阶段流转) -->
+        <div class="relative dropdown-trigger-container" @mouseenter="handleMenuEnter('agent')" @mouseleave="handleMenuLeave">
+          <button @click="toggleMenu('agent')" class="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-xl bg-[#0071e3]/10 hover:bg-[#0071e3]/15 text-[#0071e3] border border-[#0071e3]/20 transition shadow-sm">
+            <i data-lucide="bot" class="w-3.5 h-3.5 text-[#0071e3]"></i>
+            <span>Agent 协同</span>
+            <i data-lucide="chevron-down" class="w-3 h-3 text-[#0071e3]"></i>
+          </button>
+          <div v-show="menuOpen === 'agent'" class="absolute right-0 top-full pt-1.5 w-72 z-50">
+            <div class="bg-white/95 backdrop-blur-2xl border border-black/10 rounded-2xl shadow-xl p-1.5 space-y-1">
+              <button @click="openStageModal(1); menuOpen = null" class="w-full flex items-center space-x-2.5 px-3 py-2 text-xs rounded-xl hover:bg-[#f5f5f7] text-left transition text-[#1d1d1f]">
+                <div class="w-5 h-5 rounded-md bg-blue-500/10 text-[#0071e3] flex items-center justify-center font-bold text-[10px] shrink-0">1</div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-[#1d1d1f] flex items-center justify-between">
+                    <span>阶段一：简历靶向重构</span>
+                    <span class="text-[9px] font-normal px-1.5 py-0.2 rounded" :class="stageStatus[1]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : 'bg-black/5 text-[#86868b]'">
+                      {{ stageStatus[1]?.output_exists ? '已就绪' : '工单' }}
+                    </span>
+                  </div>
+                  <div class="text-[10px] text-[#86868b] truncate">填入资料 ➔ 导出 ➔ Agent 诊断重塑</div>
+                </div>
+              </button>
+
+              <button @click="openStageModal(2); menuOpen = null" class="w-full flex items-center space-x-2.5 px-3 py-2 text-xs rounded-xl hover:bg-[#f5f5f7] text-left transition text-[#1d1d1f]">
+                <div class="w-5 h-5 rounded-md bg-emerald-500/10 text-[#248a3d] flex items-center justify-center font-bold text-[10px] shrink-0">2</div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-[#1d1d1f] flex items-center justify-between">
+                    <span>阶段二：胜任匹配与权衡</span>
+                    <span class="text-[9px] font-normal px-1.5 py-0.2 rounded" :class="stageStatus[2]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : 'bg-black/5 text-[#86868b]'">
+                      {{ stageStatus[2]?.output_exists ? '已就绪' : '工单' }}
+                    </span>
+                  </div>
+                  <div class="text-[10px] text-[#86868b] truncate">五维雷达画像 + 方案B深度权衡矩阵</div>
+                </div>
+              </button>
+
+              <button @click="openStageModal(3); menuOpen = null" class="w-full flex items-center space-x-2.5 px-3 py-2 text-xs rounded-xl hover:bg-[#f5f5f7] text-left transition text-[#1d1d1f]">
+                <div class="w-5 h-5 rounded-md bg-purple-500/10 text-[#8e24aa] flex items-center justify-center font-bold text-[10px] shrink-0">3</div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-[#1d1d1f] flex items-center justify-between">
+                    <span>阶段三：真题对练与速记</span>
+                    <span class="text-[9px] font-normal px-1.5 py-0.2 rounded" :class="stageStatus[3]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : 'bg-black/5 text-[#86868b]'">
+                      {{ stageStatus[3]?.output_exists ? '已就绪' : '工单' }}
+                    </span>
+                  </div>
+                  <div class="text-[10px] text-[#86868b] truncate">源码真题 + 专属对练 Prompt + 考前速记</div>
+                </div>
+              </button>
+
+              <div class="border-t border-black/5 my-1"></div>
+
+              <button @click="openAgentExportModal(); menuOpen = null" class="w-full flex items-center space-x-2 px-3 py-1.5 text-xs rounded-xl hover:bg-[#f5f5f7] text-left transition text-[#6e6e73]">
+                <i data-lucide="bot" class="w-3.5 h-3.5 text-[#248a3d] shrink-0"></i>
+                <span class="text-[11px]">🤖 导出给 Agent (导出全景上下文给外部 Agent)</span>
+              </button>
+
+              <button @click="openAgentImportModal(); menuOpen = null" class="w-full flex items-center space-x-2 px-3 py-1.5 text-xs rounded-xl hover:bg-[#f5f5f7] text-left transition text-[#6e6e73]">
+                <i data-lucide="upload-cloud" class="w-3.5 h-3.5 text-[#8e24aa] shrink-0"></i>
+                <span class="text-[11px]">📥 装载 Agent 成果 (装载外部 Agent 生成的 SOP 成果)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. 导出与操作下拉菜单 -->
+        <div class="relative dropdown-trigger-container" @mouseenter="handleMenuEnter('more')" @mouseleave="handleMenuLeave">
+          <button @click="toggleMenu('more')" class="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-xl bg-black/5 hover:bg-black/10 text-[#1d1d1f] border border-black/5 transition shadow-sm">
+            <i data-lucide="more-horizontal" class="w-3.5 h-3.5 text-[#6e6e73]"></i>
+            <span>操作</span>
+            <i data-lucide="chevron-down" class="w-3 h-3 text-[#86868b]"></i>
+          </button>
+          <div v-show="menuOpen === 'more'" class="absolute right-0 top-full pt-1.5 w-48 z-50">
+            <div class="bg-white/95 backdrop-blur-2xl border border-black/10 rounded-2xl shadow-xl p-1.5 space-y-1">
+              <button v-if="sopData" @click="exportFullMarkdown(); menuOpen = null" class="w-full flex items-center space-x-2 px-3 py-2 text-xs rounded-xl hover:bg-[#f5f5f7] text-left transition text-[#1d1d1f]">
+                <i data-lucide="download" class="w-3.5 h-3.5 text-[#0071e3]"></i>
+                <span>导出 Markdown</span>
+              </button>
+              <button v-if="sopData" @click="printAsPdf(); menuOpen = null" class="w-full flex items-center space-x-2 px-3 py-2 text-xs rounded-xl hover:bg-[#f5f5f7] text-left transition text-[#1d1d1f]">
+                <i data-lucide="printer" class="w-3.5 h-3.5 text-[#6e6e73]"></i>
+                <span>🖨️ 打印/存为PDF</span>
+              </button>
+              <button @click="clearAllForm(); menuOpen = null" class="w-full flex items-center space-x-2 px-3 py-2 text-xs rounded-xl hover:bg-rose-50 text-left transition text-[#d32f2f]">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-[#d32f2f]"></i>
+                <span>清空重置</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 步骤导航条 (macOS 风格分段胶囊控制器 Segmented Control) -->
+    <div class="border-b border-black/5 bg-[#f5f5f7]/95 backdrop-blur-md px-6 py-2 sticky top-[57px] z-30">
+      <div class="max-w-4xl mx-auto flex items-center justify-between text-xs font-medium bg-[#e5e5ea]/80 p-1 rounded-2xl border border-black/5 shadow-inner">
+        <button @click="activeTab = 'input'" :class="activeTab === 'input' ? 'bg-white text-[#1d1d1f] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : 'text-[#6e6e73] hover:text-[#1d1d1f]'" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="第一步：自主录入与多代码仓库透视">
+          <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">1</span>
+          <span>录入</span>
+        </button>
+
+        <button @click="activeTab = 'optimizer'" :disabled="!sopData" :class="activeTab === 'optimizer' ? 'bg-white text-[#248a3d] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#248a3d] hover:text-[#1e6f31]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-0 简历靶向精修 (Diff)">
+          <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-[#248a3d] border border-emerald-500/30 flex items-center justify-center text-[10px] font-bold">0</span>
+          <span class="font-bold">靶向精修</span>
+          <span class="sr-only">SOP-0 简历靶向精修 (Diff)</span>
+        </button>
+
+        <button @click="activeTab = 'matching'" :disabled="!sopData" :class="activeTab === 'matching' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-1 职位匹配与雷达画像">
+          <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">2</span>
+          <span>胜任匹配</span>
+        </button>
+
+        <button @click="activeTab = 'star'" :disabled="!sopData" :class="activeTab === 'star' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-2 STAR 深挖与技术权衡矩阵">
+          <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">3</span>
+          <span>STAR复盘</span>
+        </button>
+
+        <button @click="activeTab = 'questions'" :disabled="!sopData" :class="activeTab === 'questions' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-3 源码结合型定制题库">
+          <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">4</span>
+          <span>源码真题</span>
+        </button>
+
+        <button @click="activeTab = 'mock_prompt'" :disabled="!sopData" :class="activeTab === 'mock_prompt' ? 'bg-white text-[#d97706] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-4 专属面试官 Prompt 发生器">
+          <span class="w-4 h-4 rounded-full bg-amber-500/20 text-[#d97706] flex items-center justify-center text-[10px]">5</span>
+          <span class="font-bold">模拟对练</span>
+        </button>
+
+        <button @click="activeTab = 'reverse'" :disabled="!sopData" :class="activeTab === 'reverse' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-5 反向提问 & 考前速记">
+          <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">6</span>
+          <span>临考速记</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 阶段协同流转条 (3-Stage Milestone Workflow Bar) -->
+    <div class="max-w-7xl mx-auto px-6 pt-3 pb-1 w-full">
+      <div class="glass-panel p-3 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-3 border border-black/5 shadow-sm">
+        <div class="flex items-center space-x-2 text-xs font-semibold text-[#1d1d1f]">
+          <span class="w-6 h-6 rounded-lg bg-gradient-to-tr from-[#0071e3] to-[#42a5f5] flex items-center justify-center text-white text-[11px] shadow-sm">
+            <i data-lucide="git-merge" class="w-3.5 h-3.5 text-white"></i>
+          </span>
+          <span class="tracking-tight">Agent 协同三阶段工作流:</span>
+        </div>
+
+        <div class="flex items-center flex-wrap gap-2 flex-1 justify-center md:justify-end text-xs">
+          <!-- 阶段一：简历靶向重构 -->
+          <div @click="openStageModal(1)" class="cursor-pointer flex items-center space-x-2 px-3 py-1.5 rounded-xl border transition group"
+               :class="stageStatus[1]?.output_exists ? 'bg-emerald-50/80 border-emerald-200 text-[#248a3d]' : (stageStatus[1]?.input_exists ? 'bg-blue-50/80 border-blue-200 text-[#0071e3]' : 'bg-black/[0.02] border-black/5 text-[#6e6e73] hover:bg-black/[0.05]')">
+            <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold"
+                  :class="stageStatus[1]?.output_exists ? 'bg-[#34c759] text-white' : 'bg-black/10 text-[#1d1d1f]'">
+              <i v-if="stageStatus[1]?.output_exists" data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
+              <span v-else>1</span>
+            </span>
+            <span class="font-medium">阶段一: 简历靶向重构</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded-md font-mono"
+                  :class="stageStatus[1]?.output_exists ? 'bg-[#34c759]/20 text-[#248a3d]' : (stageStatus[1]?.input_exists ? 'bg-blue-100 text-[#0071e3]' : 'bg-black/5 text-[#86868b]')">
+              {{ stageStatus[1]?.output_exists ? '已就绪' : (stageStatus[1]?.input_exists ? '待读取' : '准备中') }}
+            </span>
+          </div>
+
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-[#86868b] shrink-0"></i>
+
+          <!-- 阶段二：胜任匹配与权衡 -->
+          <div @click="openStageModal(2)" class="cursor-pointer flex items-center space-x-2 px-3 py-1.5 rounded-xl border transition group"
+               :class="stageStatus[2]?.output_exists ? 'bg-emerald-50/80 border-emerald-200 text-[#248a3d]' : (stageStatus[2]?.input_exists ? 'bg-blue-50/80 border-blue-200 text-[#0071e3]' : 'bg-black/[0.02] border-black/5 text-[#6e6e73] hover:bg-black/[0.05]')">
+            <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold"
+                  :class="stageStatus[2]?.output_exists ? 'bg-[#34c759] text-white' : 'bg-black/10 text-[#1d1d1f]'">
+              <i v-if="stageStatus[2]?.output_exists" data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
+              <span v-else>2</span>
+            </span>
+            <span class="font-medium">阶段二: 胜任匹配与权衡</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded-md font-mono"
+                  :class="stageStatus[2]?.output_exists ? 'bg-[#34c759]/20 text-[#248a3d]' : (stageStatus[2]?.input_exists ? 'bg-blue-100 text-[#0071e3]' : 'bg-black/5 text-[#86868b]')">
+              {{ stageStatus[2]?.output_exists ? '已就绪' : (stageStatus[2]?.input_exists ? '待读取' : (stageStatus[1]?.output_exists ? '就绪可导' : '准备中')) }}
+            </span>
+          </div>
+
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-[#86868b] shrink-0"></i>
+
+          <!-- 阶段三：源码真题与速记 -->
+          <div @click="openStageModal(3)" class="cursor-pointer flex items-center space-x-2 px-3 py-1.5 rounded-xl border transition group"
+               :class="stageStatus[3]?.output_exists ? 'bg-emerald-50/80 border-emerald-200 text-[#248a3d]' : (stageStatus[3]?.input_exists ? 'bg-blue-50/80 border-blue-200 text-[#0071e3]' : 'bg-black/[0.02] border-black/5 text-[#6e6e73] hover:bg-black/[0.05]')">
+            <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold"
+                  :class="stageStatus[3]?.output_exists ? 'bg-[#34c759] text-white' : 'bg-black/10 text-[#1d1d1f]'">
+              <i v-if="stageStatus[3]?.output_exists" data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
+              <span v-else>3</span>
+            </span>
+            <span class="font-medium">阶段三: 源码真题与速记</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded-md font-mono"
+                  :class="stageStatus[3]?.output_exists ? 'bg-[#34c759]/20 text-[#248a3d]' : (stageStatus[3]?.input_exists ? 'bg-blue-100 text-[#0071e3]' : 'bg-black/5 text-[#86868b]')">
+              {{ stageStatus[3]?.output_exists ? '已就绪' : (stageStatus[3]?.input_exists ? '待读取' : (stageStatus[2]?.output_exists ? '就绪可导' : '准备中')) }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6">
+      
+      <!-- ==================== 页面 1：自定义录入与多仓库透视 ==================== -->
+      <div v-show="activeTab === 'input'" class="space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-bold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="folder-git-2" class="w-5 h-5 text-[#0071e3]"></i>
+              <span>自主录入与本地代码透视</span>
+            </h2>
+            <p class="text-xs text-[#86868b] mt-0.5">支持录入岗位 JD、导入简历文本与批量挂载本地工程仓库</p>
+          </div>
+          <button @click="triggerGenerateSOP" :disabled="loading" class="flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-[#0071e3] hover:bg-[#0077ed] text-white font-bold text-sm shadow-md shadow-blue-500/25 transition-all transform active:scale-95 disabled:opacity-50">
+            <i data-lucide="zap" class="w-4 h-4"></i>
+            <span>{{ loading ? '正在综合分析多仓库与简历...' : '⚡ 一键直接分析生成全套 SOP' }}</span>
+          </button>
+        </div>
+
+        <!-- 阶段一 Agent 协同指引操作条 -->
+        <div class="p-4 rounded-2xl bg-white border border-black/8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-[#0071e3] border border-blue-500/20 flex items-center justify-center font-bold text-sm shrink-0">
+              1
+            </div>
+            <div>
+              <div class="font-bold text-xs text-[#1d1d1f] flex items-center space-x-2">
+                <span>阶段一：填入基础资料 ➔ 交由 Agent 靶向精修简历</span>
+                <span class="px-2 py-0.5 text-[10px] rounded-full font-semibold"
+                      :class="stageStatus[1]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : (stageStatus[1]?.input_exists ? 'bg-blue-100 text-[#0071e3]' : 'bg-black/5 text-[#86868b]')">
+                  {{ stageStatus[1]?.output_exists ? '✅ 阶段一产物已就绪' : (stageStatus[1]?.input_exists ? '⏳ Agent 处理中 (待读取)' : '⚪ 待导出工单') }}
+                </span>
+              </div>
+              <div class="text-[11px] text-[#86868b] mt-0.5">
+                在下方填好 JD、简历与代码仓库后，点击【导出工单】生成输入与 Prompt，交由外部 Agent 基于常驻 Skill 深度处理后，点击【读取产物】一键重新写入升级简历。
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button @click="openStageModal(1, 'export')" class="px-3.5 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1.5 shadow-sm active:scale-95">
+              <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+              <span>📤 导出阶段一工单</span>
+            </button>
+            <button @click="openStageModal(1, 'import')" class="px-3.5 py-1.5 bg-[#248a3d] hover:bg-[#1e6f31] text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1.5 shadow-sm active:scale-95">
+              <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i>
+              <span>📥 读取阶段一产物</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- 左栏：目标公司与职位要求 -->
+          <div class="glass-panel p-5 rounded-2xl flex flex-col space-y-4">
+            <div class="border-b border-black/5 pb-3">
+              <h3 class="text-sm font-semibold text-[#1d1d1f] flex items-center space-x-2">
+                <i data-lucide="building" class="w-4 h-4 text-[#0071e3]"></i>
+                <span>目标公司与职位要求</span>
+              </h3>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-[#6e6e73] mb-1">目标公司名称</label>
+              <input v-model="form.company" type="text" placeholder="例如：字节跳动、阿里巴巴、智谱AI..." class="w-full bg-white border border-black/10 rounded-xl px-3 py-2 text-xs text-[#1d1d1f] focus:outline-none focus:border-[#0071e3] transition" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-[#6e6e73] mb-1">应聘岗位名称</label>
+              <input v-model="form.job_title" type="text" placeholder="例如：多模态大模型算法工程师、具身智能算法实习生..." class="w-full bg-white border border-black/10 rounded-xl px-3 py-2 text-xs text-[#1d1d1f] focus:outline-none focus:border-[#0071e3] transition" />
+            </div>
+
+            <div class="flex-1 flex flex-col">
+              <label class="block text-xs font-medium text-[#6e6e73] mb-1">岗位职责与要求 (JD 文本)</label>
+              <textarea v-model="form.jd" rows="12" placeholder="粘贴该岗位的职责与任职要求描述..." class="w-full flex-1 bg-white border border-black/10 rounded-xl p-3 text-xs text-[#1d1d1f] font-mono leading-relaxed focus:outline-none focus:border-[#0071e3] resize-none transition"></textarea>
+            </div>
+          </div>
+
+          <!-- 中栏：个人简历资料库 (支持本地文件导入) -->
+          <div class="glass-panel p-5 rounded-2xl flex flex-col space-y-4">
+            <div class="flex items-center justify-between border-b border-black/5 pb-3">
+              <h3 class="text-sm font-semibold text-[#1d1d1f] flex items-center space-x-2">
+                <i data-lucide="file-text" class="w-4 h-4 text-[#af52de]"></i>
+                <span>个人简历档案</span>
+              </h3>
+
+              <div class="flex items-center space-x-1.5">
+                <button 
+                  @click="openTask0Modal" 
+                  class="flex items-center space-x-1 text-[11px] text-[#248a3d] hover:bg-[#34c759]/20 cursor-pointer bg-[#34c759]/10 px-2.5 py-1 rounded-lg border border-[#34c759]/25 transition shadow-sm"
+                  title="将当前简历交给外部 Agent 靶向精修并重新写入">
+                  <i data-lucide="sparkles" class="w-3 h-3 text-[#248a3d]"></i>
+                  <span>🤖 Agent 靶向精修</span>
+                </button>
+
+                <!-- 本地文件上传导入 -->
+                <label class="flex items-center space-x-1 text-[11px] text-[#8e24aa] hover:bg-[#af52de]/15 cursor-pointer bg-[#af52de]/10 px-2.5 py-1 rounded-lg border border-[#af52de]/25 transition">
+                  <i data-lucide="upload" class="w-3 h-3"></i>
+                  <span>导入简历文件</span>
+                  <input type="file" @change="handleFileUpload" accept=".txt,.md,.json,.pdf,.doc,.docx" class="hidden" />
+                </label>
+              </div>
+            </div>
+
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center justify-between mb-1">
+                <label class="text-xs font-medium text-[#6e6e73]">简历详情 (可直接粘贴或通过上方按钮导入)</label>
+                <span class="text-[10px] text-[#86868b] font-mono">{{ form.resume.length }} 字符</span>
+              </div>
+              <textarea v-model="form.resume" rows="18" placeholder="在此粘贴你的个人简历文本（包含教育背景、核心技术栈、项目经历等）..." class="w-full flex-1 bg-white border border-black/10 rounded-xl p-3 text-xs text-[#1d1d1f] font-mono leading-relaxed focus:outline-none focus:border-[#af52de] resize-none transition"></textarea>
+            </div>
+          </div>
+
+          <!-- 右栏：多代码仓库智能透视管理器 -->
+          <!-- 右栏：本地代码仓库管理器 (支持多个) -->
+          <div class="glass-panel p-5 rounded-2xl flex flex-col space-y-4">
+            <div class="flex items-center justify-between border-b border-black/5 pb-3">
+              <h3 class="text-sm font-semibold text-[#1d1d1f] flex items-center space-x-2">
+                <i data-lucide="git-branch" class="w-4 h-4 text-[#248a3d]"></i>
+                <span>本地代码仓库 (支持多个)</span>
+              </h3>
+              
+              <!-- 统一的导入代码仓库按钮 -->
+              <div class="flex items-center space-x-2">
+                <button 
+                  @click="openRepoImportDialog" 
+                  class="flex items-center space-x-1 text-[11px] text-[#248a3d] hover:bg-[#34c759]/20 cursor-pointer bg-[#34c759]/10 px-2.5 py-1 rounded-lg border border-[#34c759]/25 transition shadow-sm">
+                  <i data-lucide="folder-plus" class="w-3 h-3"></i>
+                  <span>导入代码仓库</span>
+                </button>
+                <button 
+                  v-if="form.repo_paths.length > 0" 
+                  @click="scanAllRepos" 
+                  :disabled="scanning" 
+                  class="text-[11px] text-[#6e6e73] hover:text-[#0071e3] flex items-center space-x-1 transition">
+                  <i data-lucide="refresh-cw" :class="scanning ? 'animate-spin' : ''" class="w-3 h-3"></i>
+                  <span>{{ scanning ? '扫描中...' : '重新扫描' }}</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 仓库内容与状态区（仅展示已导入的仓库与分析） -->
+            <div class="flex-1 flex flex-col space-y-3">
+              <!-- 空白占位状态：尚未导入任何仓库 -->
+              <div v-if="form.repo_paths.length === 0" class="flex-1 flex flex-col items-center justify-center p-8 border border-dashed border-black/10 rounded-xl text-center space-y-3 bg-[#f5f5f7]/60">
+                <div class="w-12 h-12 rounded-2xl bg-[#34c759]/10 border border-[#34c759]/20 flex items-center justify-center">
+                  <i data-lucide="folder-git-2" class="w-6 h-6 text-[#248a3d]"></i>
+                </div>
+                <div class="space-y-1">
+                  <div class="text-xs font-semibold text-[#1d1d1f]">尚未导入代码仓库</div>
+                  <p class="text-[11px] text-[#86868b] max-w-[240px] leading-relaxed">
+                    点击右上角【导入代码仓库】选择本地工程，系统将自动透视架构与代码亮点。
+                  </p>
+                </div>
+                <button 
+                  @click="openRepoImportDialog" 
+                  class="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-[#34c759]/10 hover:bg-[#34c759]/20 text-[#248a3d] border border-[#34c759]/25 text-xs font-medium transition shadow-sm">
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                  <span>选择并导入本地工程</span>
+                </button>
+              </div>
+
+              <!-- 已导入仓库列表 -->
+              <div v-else class="space-y-3">
+                <div class="flex items-center justify-between text-xs text-[#6e6e73]">
+                  <span>已导入工程清单 ({{ form.repo_paths.length }})</span>
+                  <button @click="openRepoImportDialog" class="text-[11px] text-[#248a3d] hover:underline flex items-center space-x-0.5 font-medium">
+                    <i data-lucide="plus" class="w-3 h-3"></i>
+                    <span>继续添加</span>
+                  </button>
+                </div>
+
+                <div class="space-y-2 max-h-[160px] overflow-y-auto pr-1">
+                  <div v-for="(repoPath, rIdx) in form.repo_paths" :key="rIdx" class="p-2.5 bg-white border border-black/8 rounded-xl flex items-center justify-between group hover:border-[#34c759]/40 transition shadow-sm">
+                    <div class="flex items-center space-x-2 min-w-0 flex-1">
+                      <div class="w-7 h-7 rounded-lg bg-[#34c759]/10 border border-[#34c759]/20 flex items-center justify-center shrink-0">
+                        <i data-lucide="folder-git-2" class="w-3.5 h-3.5 text-[#248a3d]"></i>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="text-xs font-semibold text-[#1d1d1f] truncate font-mono">
+                          {{ getRepoFolderName(repoPath) }}
+                        </div>
+                        <div class="text-[10px] text-[#86868b] truncate font-mono" :title="repoPath">
+                          {{ repoPath }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center space-x-1 shrink-0 ml-2">
+                      <button @click="reScanSingleRepo(repoPath)" title="重新扫描此仓库" class="p-1 text-[#86868b] hover:text-[#0071e3] hover:bg-black/5 rounded-lg transition">
+                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <button @click="removeRepoField(rIdx)" title="移除此仓库" class="p-1 text-[#86868b] hover:text-[#ff3b30] hover:bg-black/5 rounded-lg transition">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 多仓库独立透视摘要展示卡片 -->
+            <div class="flex-1 space-y-3 overflow-y-auto max-h-[220px] pr-1">
+              <div v-for="(repo, ri) in repoSummaries" :key="ri" class="p-3 bg-white border border-black/8 rounded-xl space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-[#1d1d1f] font-bold font-mono">📦 [{{ repo.root_name }}]</span>
+                  <span class="text-[10px] text-[#248a3d] bg-[#34c759]/10 border border-[#34c759]/20 px-2 py-0.5 rounded-full font-medium">已透视</span>
+                </div>
+                <div class="text-[11px] text-[#424245] font-mono space-y-0.5">
+                  <div v-if="repo.model_architecture?.vision_tower">• 视觉模型: {{ repo.model_architecture.vision_tower }}</div>
+                  <div v-if="repo.model_architecture?.projection">• 投影层: {{ repo.model_architecture.projection }}</div>
+                  <div v-if="repo.model_architecture?.llm">• LLM 基座: {{ repo.model_architecture.llm }}</div>
+                  <div v-if="repo.model_architecture?.action_head">• 动作头: {{ repo.model_architecture.action_head }}</div>
+                </div>
+                <div v-if="repo.code_highlights && repo.code_highlights.length" class="text-[10px] text-[#6e6e73] pt-1 border-t border-black/5">
+                  <span class="text-[#0071e3] font-semibold">亮点:</span> {{ repo.code_highlights[0] }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 页面 0：SOP-0 简历靶向精修 (Resume Optimizer) ==================== -->
+      <div v-show="activeTab === 'optimizer'" class="space-y-6" v-if="sopData && sopData.sop_0_resume_optimizer">
+        <!-- 头部标题与全局操作工具栏 -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 glass-panel p-5 rounded-2xl border border-black/8 shadow-sm">
+          <div>
+            <h2 class="text-xl font-bold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="file-edit" class="w-5 h-5 text-[#248a3d]"></i>
+              <span>简历针对性靶向精修与交互式微调</span>
+            </h2>
+            <p class="text-xs text-[#86868b] mt-1">
+              对照 JD 技术栈与本地工程事实诊断原简历缺陷，提供可采纳微调的高分 STAR 子弹点
+            </p>
+          </div>
+
+          <!-- 全局操作按钮组 -->
+          <div class="flex items-center space-x-2.5 shrink-0">
+            <button 
+              @click="openTask0Modal" 
+              class="flex items-center space-x-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl bg-[#0071e3] hover:bg-[#0077ed] text-white shadow-md shadow-blue-500/20 transition active:scale-95"
+              title="将当前针对性精修工单导出给外部 Agent 深度处理，处理完成后重新写入简历">
+              <i data-lucide="bot" class="w-3.5 h-3.5 text-white"></i>
+              <span>🤖 交给外部 Agent 精修与重写</span>
+            </button>
+
+            <button 
+              @click="copyAllOptimizedMarkdown" 
+              class="flex items-center space-x-1.5 px-3 py-2 text-xs font-medium rounded-xl bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] border border-black/10 transition shadow-sm">
+              <i data-lucide="copy" class="w-3.5 h-3.5 text-[#0071e3]"></i>
+              <span>📋 复制全部精修子弹点</span>
+            </button>
+
+            <button 
+              @click="applyAllOptimizedToResume" 
+              class="flex items-center space-x-2 px-4 py-2 text-xs font-bold rounded-xl bg-[#248a3d] hover:bg-[#1e6f31] text-white shadow-md shadow-emerald-600/20 transition active:scale-95">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-white"></i>
+              <span>🔄 同步回填至输入框并重评</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 各项目逐个展开对比卡片 -->
+        <div class="space-y-6">
+          <div 
+            v-for="(proj, pIdx) in sopData.sop_0_resume_optimizer" 
+            :key="pIdx"
+            class="glass-panel p-6 rounded-2xl border border-black/8 space-y-5 shadow-sm">
+            
+            <!-- 项目头部与目标对齐标签 -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-black/5 gap-2">
+              <div class="flex items-center space-x-2.5">
+                <div class="w-8 h-8 rounded-lg bg-[#34c759]/10 border border-[#34c759]/20 flex items-center justify-center text-[#248a3d] font-bold text-sm">
+                  {{ pIdx + 1 }}
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-[#1d1d1f] font-mono flex items-center space-x-2">
+                    <span>{{ proj.project_name }}</span>
+                  </h3>
+                  <div class="text-[11px] text-[#248a3d] font-mono mt-0.5">
+                    🎯 针对岗位关键考点：{{ proj.target_jd_alignment }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- 局部操作按钮 -->
+              <div class="flex items-center space-x-2">
+                <button 
+                  @click="copyProjectBullets(pIdx)" 
+                  class="px-2.5 py-1 bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] text-[11px] rounded-lg border border-black/10 transition flex items-center space-x-1 shadow-sm">
+                  <i data-lucide="copy" class="w-3 h-3 text-[#0071e3]"></i>
+                  <span>复制此项目 Markdown</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 双栏 Diff 与重构面板 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <!-- 左栏：原简历段落与硬伤诊断 (占比 5 列) -->
+              <div class="lg:col-span-5 space-y-4">
+                <!-- 原简历描述回顾 -->
+                <div>
+                  <label class="block text-xs font-semibold text-[#6e6e73] mb-1.5 flex items-center justify-between">
+                    <span class="flex items-center space-x-1">
+                      <i data-lucide="file-text" class="w-3.5 h-3.5 text-[#86868b]"></i>
+                      <span>当前简历原段落回顾</span>
+                    </span>
+                    <span class="text-[10px] text-[#d32f2f] font-mono font-medium">亟待升级</span>
+                  </label>
+                  <div class="bg-[#f5f5f7] border border-black/8 rounded-xl p-3 text-xs text-[#424245] font-mono leading-relaxed whitespace-pre-wrap max-h-[140px] overflow-y-auto">
+                    {{ proj.original_snippet }}
+                  </div>
+                </div>
+
+                <!-- 针对性硬伤诊断 -->
+                <div class="space-y-2">
+                  <span class="text-xs font-semibold text-[#d32f2f] flex items-center space-x-1">
+                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i>
+                    <span>专家诊断：原描述 3 大失分盲区</span>
+                  </span>
+                  <div class="space-y-2">
+                    <div 
+                      v-for="(diag, dIdx) in (proj.diagnosis || proj.diagnostic_flaws || [])" 
+                      :key="dIdx" 
+                      class="p-2.5 bg-rose-50 border border-rose-200/60 rounded-xl space-y-1 text-xs">
+                      <div class="flex items-center justify-between">
+                        <span class="text-[#d32f2f] font-bold text-[11px]">❌ {{ diag.type || diag.label || '失分盲点' }}</span>
+                      </div>
+                      <div class="text-[#424245] leading-snug">{{ diag.flaw || diag.issue || '原描述表现力不足' }}</div>
+                      <div class="text-[#248a3d] text-[11px] pt-1 border-t border-rose-200/40 font-medium">
+                        💡 破局：{{ diag.tip || diag.solution || '结合具体底层实现进行破局话术重塑' }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- JD 关键词对齐映射 -->
+                <div class="space-y-1.5">
+                  <span class="text-[11px] font-semibold text-[#6e6e73]">JD 关键技术栈命中对照：</span>
+                  <div class="flex flex-wrap gap-1.5">
+                    <span 
+                      v-for="(kw, kwi) in (proj.keyword_matches || [])" 
+                      :key="kwi"
+                      class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#f2f2f7] border border-black/8 text-[#1d1d1f] flex items-center space-x-1">
+                      <span class="text-[#0071e3]">●</span>
+                      <span>{{ kw.keyword }}</span>
+                      <span class="text-[#248a3d] font-bold">({{ kw.status }})</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 右栏：交互式高分 STAR 子弹点微调面板 (占比 7 列) -->
+              <div class="lg:col-span-7 space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-semibold text-[#248a3d] flex items-center space-x-1.5">
+                    <i data-lucide="check-check" class="w-4 h-4"></i>
+                    <span>高分 STAR 子弹点（勾选采纳 / 支持就地直接编辑）：</span>
+                  </span>
+                  <span class="text-[10px] text-[#86868b]">已采纳 {{ getSelectedBulletCount(pIdx) }} / {{ (proj.refined_bullet_points || proj.optimized_bullets || []).length }} 条</span>
+                </div>
+
+                <!-- 交互式子弹点列表 -->
+                <div class="space-y-3">
+                  <div 
+                    v-for="(bullet, bIdx) in (proj.refined_bullet_points || proj.optimized_bullets || [])" 
+                    :key="bIdx"
+                    :class="isBulletSelected(pIdx, bIdx) ? 'border-[#34c759]/40 bg-emerald-50/40 shadow-sm' : 'border-black/8 bg-white opacity-70'"
+                    class="p-3.5 rounded-xl border transition space-y-2">
+                    
+                    <div class="flex items-start justify-between gap-2">
+                      <label class="flex items-center space-x-2 cursor-pointer select-none">
+                        <input 
+                          type="checkbox" 
+                          :checked="isBulletSelected(pIdx, bIdx)"
+                          @change="toggleBulletSelection(pIdx, bIdx)"
+                          class="w-4 h-4 rounded text-[#248a3d] bg-white border-black/20 focus:ring-[#34c759] cursor-pointer" />
+                        <span class="text-xs font-bold text-[#1d1d1f]">子弹点 {{ bIdx + 1 }}</span>
+                      </label>
+
+                      <button 
+                        @click="resetBulletText(pIdx, bIdx)" 
+                        title="恢复为此条推荐的默认表达"
+                        class="text-[10px] text-[#86868b] hover:text-[#0071e3] flex items-center space-x-0.5 transition">
+                        <i data-lucide="rotate-ccw" class="w-2.5 h-2.5"></i>
+                        <span>重置默认建议</span>
+                      </button>
+                    </div>
+
+                    <!-- 可编辑文本域 -->
+                    <textarea 
+                      :value="getBulletText(pIdx, bIdx)" 
+                      @input="setBulletText(pIdx, bIdx, $event.target.value)"
+                      rows="3" 
+                      class="w-full bg-white border border-black/10 rounded-lg p-2.5 text-xs text-[#1d1d1f] leading-relaxed font-mono focus:outline-none focus:border-[#248a3d] focus:ring-2 focus:ring-[#34c759]/20 resize-y transition"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 阶段二推进操作卡 -->
+        <div class="p-4 rounded-2xl bg-white border border-black/8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-[#248a3d] border border-emerald-500/20 flex items-center justify-center font-bold text-sm shrink-0">
+              2
+            </div>
+            <div>
+              <div class="font-bold text-xs text-[#1d1d1f] flex items-center space-x-2">
+                <span>阶段二：精修简历已就绪 ➔ 交由 Agent 评估胜任匹配与 STAR 决策矩阵</span>
+                <span class="px-2 py-0.5 text-[10px] rounded-full font-semibold"
+                      :class="stageStatus[2]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : (stageStatus[2]?.input_exists ? 'bg-blue-100 text-[#0071e3]' : 'bg-black/5 text-[#86868b]')">
+                  {{ stageStatus[2]?.output_exists ? '✅ 阶段二产物已就绪' : (stageStatus[2]?.input_exists ? '⏳ Agent 处理中 (待读取)' : '⚪ 就绪可导') }}
+                </span>
+              </div>
+              <div class="text-[11px] text-[#86868b] mt-0.5">
+                将高分重塑简历与工程事实导出给外部 Agent，深度评估五维胜任力雷达与核心方案 B 技术权衡对比矩阵。
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button @click="openStageModal(2, 'export')" class="px-3.5 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1.5 shadow-sm active:scale-95">
+              <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+              <span>📤 导出阶段二工单</span>
+            </button>
+            <button @click="openStageModal(2, 'import')" class="px-3.5 py-1.5 bg-[#248a3d] hover:bg-[#1e6f31] text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1.5 shadow-sm active:scale-95">
+              <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i>
+              <span>📥 读取阶段二产物</span>
+            </button>
+            <button 
+              @click="activeTab = 'matching'" 
+              class="px-3.5 py-1.5 bg-black/5 hover:bg-black/10 text-[#1d1d1f] text-xs font-semibold rounded-xl transition flex items-center space-x-1">
+              <span>前往匹配画像 →</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 页面 2：SOP-1 匹配度与雷达画像 ==================== -->
+      <div v-show="activeTab === 'matching'" class="space-y-6" v-if="sopData">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="target" class="w-5 h-5 text-[#0071e3]"></i>
+              <span>岗位匹配度与胜任力画像</span>
+            </h2>
+            <p class="text-xs text-[#86868b] mt-0.5">五维能力评测画像与求职核心差异化壁垒</p>
+          </div>
+          <div class="flex items-center space-x-3 bg-white border border-black/8 px-4 py-2 rounded-2xl shadow-sm">
+            <span class="text-xs text-[#6e6e73]">综合匹配指数</span>
+            <span class="text-2xl font-black text-[#0071e3] font-mono">{{ sopData.sop_1_matching.overall_score }}</span>
+            <span class="text-xs text-[#248a3d] font-semibold">核心竞争力评定</span>
+          </div>
+        </div>
+
+        <!-- 阶段二操作指引卡片 -->
+        <div class="p-3.5 rounded-2xl bg-white border border-black/8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+          <div class="flex items-center space-x-2.5 text-xs">
+            <span class="w-7 h-7 rounded-lg bg-emerald-500/10 text-[#248a3d] flex items-center justify-center font-bold">2</span>
+            <div>
+              <span class="font-semibold text-[#1d1d1f]">阶段二 · 胜任匹配与技术权衡决策</span>
+              <span class="text-[11px] text-[#86868b] ml-2">已与本地代码事实及升阶简历全面对齐</span>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button @click="openStageModal(2, 'export')" class="px-3 py-1.5 bg-[#0071e3]/10 hover:bg-[#0071e3]/20 text-[#0071e3] text-xs font-medium rounded-xl border border-[#0071e3]/20 transition flex items-center space-x-1">
+              <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+              <span>导出阶段二工单</span>
+            </button>
+            <button @click="openStageModal(2, 'import')" class="px-3 py-1.5 bg-[#248a3d]/10 hover:bg-[#248a3d]/20 text-[#248a3d] text-xs font-medium rounded-xl border border-[#248a3d]/20 transition flex items-center space-x-1">
+              <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i>
+              <span>读取阶段二成果</span>
+            </button>
+            <button @click="openStageModal(3, 'export')" class="px-3.5 py-1.5 bg-[#5856d6] hover:bg-[#4745b8] text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1 shadow-sm active:scale-95">
+              <span>推进至阶段三工单 →</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- 左侧：五维能力评测列表 -->
+          <div class="glass-panel p-5 rounded-2xl space-y-4 shadow-sm">
+            <h3 class="text-sm font-semibold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="bar-chart-2" class="w-4 h-4 text-[#0071e3]"></i>
+              <span>五维能力模型画像</span>
+            </h3>
+
+            <div class="space-y-3.5">
+              <div v-for="(item, idx) in (sopData.sop_1_matching.radar_dimensions || [])" :key="idx" class="space-y-1.5">
+                <div class="flex justify-between text-xs font-medium">
+                  <span class="text-[#1d1d1f]">{{ item.dimension }}</span>
+                  <span class="text-[#0071e3] font-mono font-semibold">{{ item.score }} / 100</span>
+                </div>
+                <div class="w-full bg-[#e5e5ea] h-2 rounded-full overflow-hidden">
+                  <div class="bg-gradient-to-r from-[#0071e3] to-[#30b0c7] h-full rounded-full transition-all duration-1000" :style="{ width: item.score + '%' }"></div>
+                </div>
+                <p class="text-[11px] text-[#6e6e73]">{{ item.comment || item.reason || '' }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右侧：核心优势与面试壁垒 -->
+          <div class="glass-panel p-5 rounded-2xl space-y-4 flex flex-col shadow-sm">
+            <h3 class="text-sm font-semibold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-[#248a3d]"></i>
+              <span>求职核心差异化壁垒 (你的杀手锏)</span>
+            </h3>
+
+            <div class="space-y-3 flex-1">
+              <div v-for="(st, i) in (sopData.sop_1_matching.key_strengths || [])" :key="i" class="p-3.5 bg-white border border-black/8 rounded-xl text-xs text-[#1d1d1f] leading-relaxed shadow-sm">
+                {{ st }}
+              </div>
+            </div>
+
+            <!-- 技能 Gap 补强 -->
+            <div class="pt-3 border-t border-black/5 space-y-2">
+              <span class="text-xs font-semibold text-[#d97706] flex items-center space-x-1.5">
+                <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i>
+                <span>潜在考查盲区 (Gap) 与补充备战建议</span>
+              </span>
+              <div class="space-y-2">
+                <div v-for="(gap, i) in (sopData.sop_1_matching.skill_gaps || [])" :key="i" class="text-xs text-[#1d1d1f] bg-amber-50 border border-amber-200/60 p-2.5 rounded-xl">
+                  <span v-if="typeof gap === 'string'">{{ gap }}</span>
+                  <span v-else>
+                    <span class="font-semibold text-[#d97706]">[{{ gap.skill || '待补强' }}]</span> {{ gap.suggestion || '' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 考前突击优先级规划 -->
+        <div class="glass-panel p-5 rounded-2xl space-y-3 shadow-sm">
+          <h3 class="text-sm font-semibold text-[#1d1d1f] flex items-center space-x-2">
+            <i data-lucide="list-ordered" class="w-4 h-4 text-[#5856d6]"></i>
+            <span>面试前 72 小时重点突破优先级清单 (Sprint Roadmap)</span>
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div v-for="(prio, i) in (sopData.sop_1_matching.sprint_priorities || [])" :key="i" class="p-3 bg-white border border-black/8 rounded-xl text-xs text-[#1d1d1f] leading-relaxed flex items-start space-x-2 shadow-sm">
+              <span class="w-5 h-5 rounded-full bg-[#5856d6]/10 text-[#5856d6] font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">{{ i + 1 }}</span>
+              <span>{{ prio }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 页面 3：SOP-2 STAR 项目深挖与技术权衡对比矩阵 ==================== -->
+      <div v-show="activeTab === 'star'" class="space-y-8" v-if="sopData">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="cpu" class="w-5 h-5 text-[#af52de]"></i>
+              <span>STAR 项目复盘与技术权衡矩阵</span>
+            </h2>
+            <p class="text-xs text-[#86868b] mt-0.5">深度拆解实战架构、选型决策与追问应对</p>
+          </div>
+        </div>
+
+        <!-- 循环多项目卡片 -->
+        <div v-for="(proj, pidx) in sopData.sop_2_star" :key="pidx" class="glass-panel p-6 rounded-2xl border border-black/8 space-y-6 shadow-sm">
+          <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-black/5 pb-4 gap-2">
+            <div>
+              <h3 class="text-base font-bold text-[#1d1d1f] flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#0071e3]"></span>
+                <span>{{ proj.project_name }}</span>
+              </h3>
+              <p class="text-xs text-[#6e6e73] mt-1 font-mono">30 秒电梯演讲: “{{ proj.one_sentence_pitch }}”</p>
+            </div>
+            <button @click="copyText(proj.one_sentence_pitch)" class="text-xs text-[#6e6e73] hover:text-[#0071e3] flex items-center space-x-1 shrink-0 transition">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span>复制介绍词</span>
+            </button>
+          </div>
+
+          <!-- STAR 四步法展示 -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="p-4 bg-blue-50/70 border border-blue-200/50 rounded-xl space-y-2">
+              <div class="flex items-center space-x-2 text-xs font-bold text-[#0071e3] uppercase tracking-wider">
+                <span class="w-5 h-5 rounded-md bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center text-[10px]">S</span>
+                <span>Situation (背景)</span>
+              </div>
+              <p class="text-xs text-[#1d1d1f] leading-relaxed">{{ (proj.star_framework?.situation || proj.situation) || '' }}</p>
+            </div>
+
+            <div class="p-4 bg-purple-50/70 border border-purple-200/50 rounded-xl space-y-2">
+              <div class="flex items-center space-x-2 text-xs font-bold text-[#8e24aa] uppercase tracking-wider">
+                <span class="w-5 h-5 rounded-md bg-[#af52de]/10 text-[#8e24aa] flex items-center justify-center text-[10px]">T</span>
+                <span>Task (目标)</span>
+              </div>
+              <p class="text-xs text-[#1d1d1f] leading-relaxed whitespace-pre-line">{{ (proj.star_framework?.task || proj.task) || '' }}</p>
+            </div>
+
+            <div class="p-4 bg-emerald-50/70 border border-emerald-200/50 rounded-xl space-y-2">
+              <div class="flex items-center space-x-2 text-xs font-bold text-[#248a3d] uppercase tracking-wider">
+                <span class="w-5 h-5 rounded-md bg-[#34c759]/10 text-[#248a3d] flex items-center justify-center text-[10px]">A</span>
+                <span>Action (行动与代码)</span>
+              </div>
+              <p class="text-xs text-[#1d1d1f] leading-relaxed whitespace-pre-line">{{ (proj.star_framework?.action || proj.action) || '' }}</p>
+            </div>
+
+            <div class="p-4 bg-cyan-50/70 border border-cyan-200/50 rounded-xl space-y-2">
+              <div class="flex items-center space-x-2 text-xs font-bold text-[#0071e3] uppercase tracking-wider">
+                <span class="w-5 h-5 rounded-md bg-cyan-500/10 text-[#0071e3] flex items-center justify-center text-[10px]">R</span>
+                <span>Result (成果)</span>
+              </div>
+              <p class="text-xs text-[#1d1d1f] leading-relaxed">{{ (proj.star_framework?.result || proj.result) || '' }}</p>
+            </div>
+          </div>
+
+          <!-- 技术权衡对比矩阵 (Trade-off Matrix) -->
+          <div class="space-y-3 pt-2">
+            <h4 class="text-xs font-bold text-[#0071e3] flex items-center space-x-1.5 uppercase tracking-wide">
+              <i data-lucide="scale" class="w-4 h-4"></i>
+              <span>核心技术决策权衡对比矩阵 (Trade-off Matrix) —— 秒杀“为什么不选方案B”</span>
+            </h4>
+
+            <div class="grid grid-cols-1 gap-4">
+              <div v-for="(tom, tidx) in (proj.trade_off_matrix || [])" :key="tidx" class="p-4 bg-white border border-black/8 rounded-xl space-y-3 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between pb-2 border-b border-black/5 gap-2">
+                  <div class="flex items-center space-x-2">
+                    <span class="px-2 py-0.5 text-[10px] font-bold bg-[#0071e3]/10 text-[#0071e3] border border-[#0071e3]/20 rounded">决策点 {{ tidx + 1 }}</span>
+                    <span class="text-xs font-bold text-[#1d1d1f]">{{ tom.decision_point || '核心技术选型决策' }}</span>
+                  </div>
+                  <div class="flex items-center space-x-2 text-xs font-mono">
+                    <span class="text-[#248a3d] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60 font-semibold">你选的: {{ tom.chosen_solution }}</span>
+                    <span class="text-[#86868b]">vs</span>
+                    <span class="text-[#d32f2f] bg-rose-50 px-2 py-0.5 rounded border border-rose-200/60">方案B: {{ tom.alternative_solution || tom.alternative_solutions || '业界备选方案' }}</span>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                  <div class="bg-[#fbfbfd] p-3 rounded-xl border border-black/8 space-y-1">
+                    <div class="text-[#248a3d] font-bold flex items-center space-x-1">
+                      <span>✓ 选型核心优势 (Why Chosen)</span>
+                    </div>
+                    <p class="text-[#3a3a3c] leading-relaxed">{{ tom.pros_of_chosen || '架构极简高效，参数量轻量，原生兼顾低延迟推理与高表达力' }}</p>
+                    <div class="text-[11px] text-[#6e6e73] pt-1 border-t border-black/5 mt-1">
+                      <span class="text-[#d97706] font-medium">潜在代价：</span>{{ tom.cons_of_chosen || '对基座 LLM 语义表达依赖强，需在对齐预训练阶段严格对齐特征分布' }}
+                    </div>
+                  </div>
+
+                  <div class="bg-[#fbfbfd] p-3 rounded-xl border border-black/8 space-y-1">
+                    <div class="text-[#d32f2f] font-bold flex items-center space-x-1">
+                      <span>✗ 为什么否决备选方案B (Why Not Alternative)</span>
+                    </div>
+                    <p class="text-[#3a3a3c] leading-relaxed">{{ tom.why_not_alternative || tom.trade_off_rationale || '备选方案计算开销过大，侵入破坏原生结构或大幅增加推理时延' }}</p>
+                  </div>
+                </div>
+
+                <!-- 当前前沿演进 -->
+                <div class="bg-indigo-50/80 border border-indigo-200/60 p-2.5 rounded-xl text-xs text-[#3a3a3c] flex items-start space-x-2">
+                  <i data-lucide="compass" class="w-4 h-4 text-[#5856d6] shrink-0 mt-0.5"></i>
+                  <div>
+                    <span class="font-bold text-[#5856d6]">业内当前最新前沿演进方案：</span>
+                    <span>{{ tom.frontier_technology || '业内前沿正在探索动态多尺度投影与混合专家 (MoE) 门控路由演进' }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 面试官致命陷阱题 -->
+          <div class="space-y-3 pt-2">
+            <h4 class="text-xs font-bold text-[#d97706] flex items-center space-x-1.5 uppercase tracking-wide">
+              <i data-lucide="flame" class="w-4 h-4"></i>
+              <span>连环追问陷阱与满分破局话术</span>
+            </h4>
+
+            <div class="space-y-3">
+              <div v-for="(pit, qidx) in (proj.pitfalls_and_countermeasures || proj.pitfalls_and_solutions || [])" :key="qidx" class="p-4 bg-white border border-black/8 rounded-xl space-y-2.5 shadow-sm">
+                <div class="flex items-start justify-between">
+                  <span class="text-xs font-semibold text-[#1d1d1f] flex items-center space-x-1.5">
+                    <span class="text-[#0071e3] font-mono">Q{{ qidx + 1 }}:</span>
+                    <span>{{ pit.question || pit.pitfall || '潜在失分连环追问' }}</span>
+                  </span>
+                  <span class="text-[10px] text-[#d32f2f] bg-rose-50 border border-rose-200/60 px-2 py-0.5 rounded-full shrink-0">
+                    {{ pit.danger || '核心失分盲点' }}
+                  </span>
+                </div>
+                <div class="bg-[#f6f8fa] p-3 rounded-xl border border-black/8 text-xs text-[#24292f] leading-relaxed whitespace-pre-line font-mono">
+                  <span class="text-[#248a3d] font-bold">【最佳实战应答框架】</span>
+{{ pit.best_answer || pit.solution || '从张量流转与算子掩码角度进行破局解答' }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 页面 4：SOP-3 源码结合型高频题库 ==================== -->
+      <div v-show="activeTab === 'questions'" class="space-y-6" v-if="sopData">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="book-open" class="w-5 h-5 text-[#5856d6]"></i>
+              <span>源码结合型定制面试题库</span>
+            </h2>
+            <p class="text-xs text-[#86868b] mt-0.5">串联模型架构、显存优化与实战推演的核心考题</p>
+          </div>
+        </div>
+
+        <!-- 阶段三操作指引卡片 -->
+        <div class="p-3.5 rounded-2xl bg-white border border-black/8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+          <div class="flex items-center space-x-2.5 text-xs">
+            <span class="w-7 h-7 rounded-lg bg-purple-500/10 text-[#8e24aa] flex items-center justify-center font-bold">3</span>
+            <div>
+              <span class="font-semibold text-[#1d1d1f]">阶段三 · 源码真题、模拟面试官与考前速记</span>
+              <span class="text-[11px] text-[#86868b] ml-2">结合工程代码细节生成的硬核高频真题库</span>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button @click="openStageModal(3, 'export')" class="px-3 py-1.5 bg-[#0071e3]/10 hover:bg-[#0071e3]/20 text-[#0071e3] text-xs font-medium rounded-xl border border-[#0071e3]/20 transition flex items-center space-x-1">
+              <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+              <span>导出阶段三工单</span>
+            </button>
+            <button @click="openStageModal(3, 'import')" class="px-3 py-1.5 bg-[#248a3d]/10 hover:bg-[#248a3d]/20 text-[#248a3d] text-xs font-medium rounded-xl border border-[#248a3d]/20 transition flex items-center space-x-1">
+              <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i>
+              <span>读取阶段三成果</span>
+            </button>
+            <button @click="activeTab = 'mock_prompt'" class="px-3.5 py-1.5 bg-[#ff9500] hover:bg-[#e68600] text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1 shadow-sm active:scale-95">
+              <span>前往模拟对练 →</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div v-for="(q, idx) in sopData.sop_3_questions" :key="idx" class="glass-panel p-5 rounded-2xl space-y-4 flex flex-col justify-between shadow-sm">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-[#5856d6]/10 text-[#5856d6] border border-[#5856d6]/20">
+                  {{ q.category }}
+                </span>
+                <span class="text-xs text-[#86868b] font-mono">必考频度: ★★★★★</span>
+              </div>
+              <h3 class="text-sm font-bold text-[#1d1d1f] leading-snug">{{ q.title }}</h3>
+              <div class="bg-[#f6f8fa] p-3.5 rounded-xl border border-black/8 text-xs text-[#24292f] leading-relaxed whitespace-pre-line font-mono">
+                {{ q.framework }}
+              </div>
+            </div>
+
+            <div class="p-3 bg-blue-50/80 border border-blue-200/60 rounded-xl text-xs text-[#0071e3] flex items-start space-x-2">
+              <i data-lucide="lightbulb" class="w-4 h-4 text-[#0071e3] shrink-0 mt-0.5"></i>
+              <div>
+                <span class="font-bold">高分加分锦囊：</span>
+                <span class="text-[#3a3a3c]">{{ q.bonus_tip }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 页面 5：SOP-4 专属定制化模拟面试官 Prompt 发生器 ==================== -->
+      <div v-show="activeTab === 'mock_prompt'" class="space-y-6" v-if="sopData">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="terminal" class="w-5 h-5 text-[#ff9500]"></i>
+              <span>专属模拟面试官 Master Prompt</span>
+            </h2>
+            <p class="text-xs text-[#86868b] mt-0.5">融合简历背景与录入工程事实生成高维对练 Prompt</p>
+          </div>
+
+          <button @click="copyPrompt" class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-[#ff9500] hover:bg-[#e68600] text-white font-bold text-xs shadow-md shadow-orange-500/20 transition transform active:scale-95">
+            <i data-lucide="copy" class="w-4 h-4"></i>
+            <span>📋 一键复制 Prompt 给私有大模型</span>
+          </button>
+        </div>
+
+        <!-- 阶段三操作指引卡片 -->
+        <div class="p-3.5 rounded-2xl bg-white border border-black/8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+          <div class="flex items-center space-x-2.5 text-xs">
+            <span class="w-7 h-7 rounded-lg bg-purple-500/10 text-[#8e24aa] flex items-center justify-center font-bold">3</span>
+            <div>
+              <span class="font-semibold text-[#1d1d1f]">阶段三 · 专属模拟面试官 Master Prompt</span>
+              <span class="text-[11px] text-[#86868b] ml-2">复制下方 Prompt 直接发送给你的大模型开启对练</span>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button @click="openStageModal(3, 'export')" class="px-3 py-1.5 bg-[#0071e3]/10 hover:bg-[#0071e3]/20 text-[#0071e3] text-xs font-medium rounded-xl border border-[#0071e3]/20 transition flex items-center space-x-1">
+              <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+              <span>重新导出阶段三</span>
+            </button>
+            <button @click="openStageModal(3, 'import')" class="px-3 py-1.5 bg-[#248a3d]/10 hover:bg-[#248a3d]/20 text-[#248a3d] text-xs font-medium rounded-xl border border-[#248a3d]/20 transition flex items-center space-x-1">
+              <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i>
+              <span>重新读取阶段三</span>
+            </button>
+            <button @click="activeTab = 'reverse'" class="px-3.5 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1 shadow-sm active:scale-95">
+              <span>查看反向提问 & 速记 →</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- 左侧：风格配置 -->
+          <div class="glass-panel p-5 rounded-2xl space-y-5 shadow-sm">
+            <h3 class="text-sm font-semibold text-[#1d1d1f] flex items-center space-x-2 border-b border-black/5 pb-3">
+              <i data-lucide="sliders" class="w-4 h-4 text-[#0071e3]"></i>
+              <span>面试官风格与侧重微调</span>
+            </h3>
+
+            <div>
+              <label class="block text-xs font-medium text-[#6e6e73] mb-2">面试官人设风格</label>
+              <div class="space-y-2">
+                <label class="flex items-center space-x-2 p-2.5 rounded-xl border border-black/8 bg-white cursor-pointer hover:border-[#0071e3]/40 transition shadow-sm">
+                  <input type="radio" v-model="promptStyle" value="geek" @change="refreshPrompt" class="text-[#0071e3] focus:ring-0" />
+                  <div class="text-xs">
+                    <div class="font-bold text-[#1d1d1f]">技术极客型 (深度死磕源码)</div>
+                    <div class="text-[10px] text-[#6e6e73]">死磕张量维度、重写 forward、算子与显存</div>
+                  </div>
+                </label>
+
+                <label class="flex items-center space-x-2 p-2.5 rounded-xl border border-black/8 bg-white cursor-pointer hover:border-[#0071e3]/40 transition shadow-sm">
+                  <input type="radio" v-model="promptStyle" value="stress" @change="refreshPrompt" class="text-[#0071e3] focus:ring-0" />
+                  <div class="text-xs">
+                    <div class="font-bold text-[#1d1d1f]">压力挑战型 (质疑合理性与指标)</div>
+                    <div class="text-[10px] text-[#6e6e73]">连续追问“为什么不选B”、挑战数据真实性</div>
+                  </div>
+                </label>
+
+                <label class="flex items-center space-x-2 p-2.5 rounded-xl border border-black/8 bg-white cursor-pointer hover:border-[#0071e3]/40 transition shadow-sm">
+                  <input type="radio" v-model="promptStyle" value="architect" @change="refreshPrompt" class="text-[#0071e3] focus:ring-0" />
+                  <div class="text-xs">
+                    <div class="font-bold text-[#1d1d1f]">系统架构型 (业务落地与规模化)</div>
+                    <div class="text-[10px] text-[#6e6e73]">高并发部署、KV Cache优化、具身低延迟控制</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-[#6e6e73] mb-2">考察侧重方向</label>
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <button @click="promptFocus = 'code'; refreshPrompt()" :class="promptFocus === 'code' ? 'bg-[#0071e3]/10 text-[#0071e3] border-[#0071e3]/30 font-semibold' : 'bg-white text-[#6e6e73] border-black/10 hover:border-black/20'" class="p-2 border rounded-xl font-medium text-center transition shadow-sm">
+                  代码底层
+                </button>
+                <button @click="promptFocus = 'theory'; refreshPrompt()" :class="promptFocus === 'theory' ? 'bg-[#0071e3]/10 text-[#0071e3] border-[#0071e3]/30 font-semibold' : 'bg-white text-[#6e6e73] border-black/10 hover:border-black/20'" class="p-2 border rounded-xl font-medium text-center transition shadow-sm">
+                  前沿机理
+                </button>
+                <button @click="promptFocus = 'system'; refreshPrompt()" :class="promptFocus === 'system' ? 'bg-[#0071e3]/10 text-[#0071e3] border-[#0071e3]/30 font-semibold' : 'bg-white text-[#6e6e73] border-black/10 hover:border-black/20'" class="p-2 border rounded-xl font-medium text-center transition shadow-sm">
+                  系统落地
+                </button>
+              </div>
+            </div>
+
+            <!-- 极简使用指引折叠组件 -->
+            <details class="group bg-[#fbfbfd] border border-black/8 rounded-xl p-3 text-xs text-[#3a3a3c] shadow-sm transition">
+              <summary class="flex items-center justify-between cursor-pointer select-none font-semibold text-[#6e6e73] group-open:text-[#d97706]">
+                <span class="flex items-center space-x-1.5">
+                  <i data-lucide="help-circle" class="w-3.5 h-3.5 text-[#ff9500]"></i>
+                  <span>大模型配合使用指引</span>
+                </span>
+                <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-[#86868b] transition group-open:rotate-180"></i>
+              </summary>
+              <ol class="mt-2.5 space-y-1.5 list-decimal list-inside text-[11px] text-[#6e6e73] leading-relaxed pt-2 border-t border-black/5">
+                <li>点击复制完整 Master Prompt；</li>
+                <li>在你的私有大模型（如 DeepSeek-R1、Claude、GPT 等）中作为首条消息发送；</li>
+                <li>模型将扮演主面试官，针对代码展开深度追问并给出评分与扣分诊断。</li>
+              </ol>
+            </details>
+          </div>
+
+          <!-- 右侧：生成的 Prompt -->
+          <div class="lg:col-span-2 glass-panel p-5 rounded-2xl flex flex-col space-y-3 shadow-sm">
+            <div class="flex items-center justify-between border-b border-black/5 pb-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#34c759] animate-pulse"></span>
+                <span class="text-xs font-mono text-[#6e6e73]">生成的 Master Interviewer Prompt (已嵌入多仓库细节)</span>
+              </div>
+              <button @click="copyPrompt" class="text-xs text-[#0071e3] hover:underline flex items-center space-x-1 transition font-medium">
+                <i data-lucide="clipboard" class="w-3.5 h-3.5"></i>
+                <span>复制全部内容</span>
+              </button>
+            </div>
+
+            <div class="flex-1 bg-[#f6f8fa] border border-black/8 rounded-xl p-4 overflow-y-auto max-h-[560px]">
+              <pre class="text-xs font-mono text-[#24292f] whitespace-pre-wrap leading-relaxed select-all">{{ currentPromptText }}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 页面 6：SOP-5 反向提问 & 30分钟速记 ==================== -->
+      <div v-show="activeTab === 'reverse'" class="space-y-6" v-if="sopData">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="help-circle" class="w-5 h-5 text-[#248a3d]"></i>
+              <span>反向提问策略与临考速记</span>
+            </h2>
+            <p class="text-xs text-[#86868b] mt-0.5">分轮次高阶反向提问清单与 30 分钟临考必背要点</p>
+          </div>
+          <button @click="exportFullMarkdown" class="flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-xl bg-[#0071e3] hover:bg-[#0077ed] text-white shadow-md shadow-blue-500/20 transition active:scale-95">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>下载完整 SOP 备战手册</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- 反向提问卡片 -->
+          <div class="glass-panel p-5 rounded-2xl space-y-4 shadow-sm">
+            <h3 class="text-sm font-semibold text-[#1d1d1f] flex items-center space-x-2">
+              <i data-lucide="message-circle-question" class="w-4 h-4 text-[#248a3d]"></i>
+              <span>分轮次反向提问清单 (Reverse Interview)</span>
+            </h3>
+
+            <div class="space-y-4">
+              <div v-for="(stage, sidx) in sopData.sop_5_reverse" :key="sidx" class="p-3.5 bg-white border border-black/8 rounded-xl space-y-2 shadow-sm">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#248a3d]">{{ stage.stage }}</span>
+                  <span class="text-[10px] text-[#86868b]">{{ stage.purpose }}</span>
+                </div>
+                <ul class="text-xs text-[#3a3a3c] space-y-1.5 list-disc list-inside">
+                  <li v-for="(q, qi) in stage.questions" :key="qi" class="leading-relaxed">
+                    {{ q }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 30分钟临考速记卡 -->
+          <div class="glass-panel p-5 rounded-2xl space-y-4 flex flex-col justify-between shadow-sm">
+            <div class="space-y-4">
+              <h3 class="text-sm font-semibold text-[#1d1d1f] flex items-center space-x-2">
+                <i data-lucide="zap" class="w-4 h-4 text-[#ff9500]"></i>
+                <span>30 分钟临考必背关键数字与核心口诀</span>
+              </h3>
+
+              <div class="space-y-2">
+                <div v-for="(num, ni) in sopData.sop_6_cheatsheet.key_numbers" :key="ni" class="p-2.5 bg-white border border-black/8 rounded-xl flex items-center justify-between text-xs shadow-sm">
+                  <span class="text-[#6e6e73]">{{ num.name }}:</span>
+                  <span class="text-[#0071e3] font-mono font-semibold">{{ num.val }}</span>
+                </div>
+              </div>
+
+              <div class="space-y-2 pt-2 border-t border-black/5">
+                <span class="text-xs font-semibold text-[#8e24aa]">临场应变核心心法：</span>
+                <ul class="text-xs text-[#3a3a3c] space-y-1.5 list-disc list-inside">
+                  <li v-for="(rule, ri) in sopData.sop_6_cheatsheet.golden_rules" :key="ri" class="leading-relaxed">
+                    {{ rule }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="p-4 bg-blue-50/70 border border-blue-200/60 rounded-2xl flex items-center justify-between shadow-sm">
+              <div>
+                <div class="text-xs font-bold text-[#1d1d1f]">一切准备就绪！</div>
+                <div class="text-[11px] text-[#6e6e73]">祝你在接下来的面试中发挥出色，旗开得胜！</div>
+              </div>
+              <button @click="triggerConfetti" class="px-3.5 py-2 bg-[#0071e3] text-white text-xs font-bold rounded-xl hover:bg-[#0077ed] transition shadow-md shadow-blue-500/20 active:scale-95">
+                🎉 祝我上岸！
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ==================== 在线项目目录可视化选择器与仓库导入弹窗 ==================== -->
+    <el-dialog 
+      v-model="showExplorerModal" 
+      title="🗂️ 导入代码仓库 (在线项目目录可视化选择器)" 
+      width="720px"
+      custom-class="apple-dialog dark-dialog"
+      :close-on-click-modal="false">
+      <div class="space-y-4">
+        <!-- 顶部操作栏：系统文件管理器 & 手动路径输入 -->
+        <div class="p-3.5 bg-[#fbfbfd] rounded-2xl border border-black/8 space-y-2.5 shadow-sm">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-[#1d1d1f] font-semibold flex items-center space-x-1.5">
+              <i data-lucide="laptop" class="w-3.5 h-3.5 text-[#0071e3]"></i>
+              <span>从系统快速导入:</span>
+            </span>
+            <span class="text-[11px] text-[#86868b]">支持直接调起窗口、点选候选或在下方浏览</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <button 
+              @click="openFolderPicker" 
+              :disabled="browsingFolder"
+              class="flex items-center justify-center space-x-2 bg-[#248a3d] hover:bg-[#1e6f31] text-white text-xs font-semibold py-2 px-3 rounded-xl shadow-sm transition disabled:opacity-50 active:scale-95">
+              <i data-lucide="folder-open" :class="browsingFolder ? 'animate-pulse' : ''" class="w-3.5 h-3.5"></i>
+              <span>{{ browsingFolder ? '正在选择目录...' : '📂 打开文件夹管理器' }}</span>
+            </button>
+
+            <!-- 手动输入路径 -->
+            <div class="flex items-center space-x-1.5">
+              <input 
+                v-model="manualPathInput" 
+                @keyup.enter="addManualRepoPath" 
+                type="text" 
+                placeholder="或粘贴/输入绝对路径..." 
+                class="flex-1 bg-white border border-black/10 rounded-xl px-2.5 py-1.5 text-xs font-mono text-[#1d1d1f] focus:outline-none focus:border-[#0071e3]" />
+              <button 
+                @click="addManualRepoPath" 
+                class="px-3 py-1.5 bg-black/5 hover:bg-black/10 text-[#1d1d1f] rounded-xl text-xs font-medium border border-black/5 shrink-0 transition shadow-sm">
+                添加
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⚡ 本地智能探测候选项目（一键即加，免输路径） -->
+        <div v-if="quickCandidates.length > 0" class="bg-[#fbfbfd] border border-black/8 rounded-2xl p-3.5 space-y-2 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-[#1d1d1f] flex items-center space-x-1.5">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#ff9500]"></i>
+              <span>⚡ 本地已探测候选项目 (点击直接导入):</span>
+            </span>
+            <button @click="fetchQuickDirectories" class="text-[10px] text-[#6e6e73] hover:text-[#0071e3] flex items-center space-x-0.5 transition">
+              <i data-lucide="refresh-cw" class="w-2.5 h-2.5"></i>
+              <span>刷新候选</span>
+            </button>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <button 
+              v-for="(cand, ci) in quickCandidates" 
+              :key="ci"
+              @click="addQuickRepo(cand.path)"
+              :class="form.repo_paths.includes(cand.path) ? 'bg-[#34c759]/10 text-[#248a3d] border-[#34c759]/30' : 'bg-white hover:bg-[#0071e3]/10 text-[#1d1d1f] hover:text-[#0071e3] border-black/10 hover:border-[#0071e3]/30'"
+              class="text-xs px-2.5 py-1 rounded-xl border transition flex items-center space-x-1.5 font-mono shadow-sm"
+              :title="cand.desc + '\n' + cand.path">
+              <i data-lucide="folder" class="w-3.5 h-3.5 text-[#0071e3]"></i>
+              <span>{{ cand.name }}</span>
+              <span v-if="form.repo_paths.includes(cand.path)" class="text-[10px] text-[#248a3d] ml-1 font-semibold">✓ 已导入</span>
+              <span v-else class="text-[10px] text-[#0071e3] ml-1 font-medium">+ 导入</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 目录树在线可视化浏览点选 -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <div class="flex items-center space-x-2">
+              <span class="text-[#1d1d1f] font-semibold flex items-center space-x-1">
+                <i data-lucide="folder-tree" class="w-3.5 h-3.5 text-[#0071e3]"></i>
+                <span>🗂️ 浏览点选目录</span>
+              </span>
+              <div class="flex flex-wrap gap-1 ml-2">
+                <button 
+                  v-for="(sc, sci) in explorerShortcuts" 
+                  :key="sci"
+                  @click="browseTo(sc.path)"
+                  class="px-2 py-0.5 bg-white hover:bg-[#0071e3]/10 text-[#6e6e73] hover:text-[#0071e3] border border-black/10 hover:border-[#0071e3]/30 rounded-lg text-[11px] transition shadow-sm">
+                  {{ sc.name }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 路径面包屑与上层跳转 -->
+          <div class="flex items-center space-x-2 bg-[#fbfbfd] p-2 rounded-xl border border-black/8 text-xs font-mono">
+            <button 
+              v-if="explorerParent" 
+              @click="browseTo(explorerParent)" 
+              title="返回上一级目录" 
+              class="p-1 bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] rounded-lg transition shrink-0 flex items-center space-x-1 px-2 border border-black/10 shadow-sm">
+              <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-[#0071e3]"></i>
+              <span class="text-[11px]">上一层</span>
+            </button>
+            <span class="text-[#86868b] shrink-0">当前:</span>
+            <span class="text-[#0071e3] truncate flex-1 font-semibold">{{ explorerPath || '根目录/磁盘选择' }}</span>
+          </div>
+
+          <!-- 目录列表 -->
+          <div class="border border-black/8 rounded-2xl max-h-[220px] min-h-[140px] overflow-y-auto bg-white p-2 space-y-1">
+            <div v-if="explorerLoading" class="text-center py-8 text-xs text-[#86868b] space-y-2">
+              <i data-lucide="loader-2" class="w-5 h-5 animate-spin mx-auto text-[#0071e3]"></i>
+              <div>正在加载子目录...</div>
+            </div>
+            <div v-else-if="explorerDirectories.length === 0" class="text-center py-8 text-xs text-[#86868b] space-y-1">
+              <i data-lucide="folder-x" class="w-6 h-6 mx-auto text-[#aeaeb2] mb-1"></i>
+              <div>该路径下未发现可见文件夹</div>
+            </div>
+            <div 
+              v-else 
+              v-for="(dir, di) in explorerDirectories" 
+              :key="di"
+              class="flex items-center justify-between p-2 rounded-xl hover:bg-[#f2f2f7] group transition">
+              <div @click="browseTo(dir.path)" class="flex items-center space-x-2.5 min-w-0 flex-1 cursor-pointer">
+                <i data-lucide="folder" class="w-4 h-4 text-[#ff9500] shrink-0"></i>
+                <span class="text-xs text-[#1d1d1f] group-hover:text-[#0071e3] font-mono truncate">{{ dir.name }}</span>
+                <span v-if="dir.is_repo" class="text-[10px] bg-[#34c759]/10 text-[#248a3d] border border-[#34c759]/20 px-1.5 py-0.2 rounded font-medium shrink-0">代码工程</span>
+              </div>
+              <div class="flex items-center space-x-2 shrink-0 ml-2">
+                <button 
+                  @click="selectFolderFromExplorer(dir.path)"
+                  class="px-2.5 py-1 bg-[#248a3d] hover:bg-[#1e6f31] text-white text-[11px] font-medium rounded-lg transition shadow-sm">
+                  选定此仓库
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <template #footer>
+        <div class="flex items-center justify-between text-xs pt-1">
+          <span class="text-[#86868b]">💡 提示：点击文件夹名可进入子目录，点击“选定此仓库”即可直接添加</span>
+          <div class="flex space-x-2">
+            <button @click="showExplorerModal = false" class="px-3.5 py-1.5 bg-black/5 hover:bg-black/10 text-[#1d1d1f] rounded-xl transition shadow-sm">取消</button>
+            <button 
+              v-if="explorerPath" 
+              @click="selectFolderFromExplorer(explorerPath)" 
+              class="px-3.5 py-1.5 bg-[#248a3d] hover:bg-[#1e6f31] text-white rounded-xl font-semibold transition shadow-sm">
+              选定当前所在路径
+            </button>
+          </div>
+        </div>
+      </template>
+    </el-dialog>
+
+    <!-- ==================== 导出给 Agent 弹窗 ==================== -->
+    <el-dialog 
+      v-model="showAgentExportModal" 
+      title="🤖 导出全景上下文给外部 Agent" 
+      width="680px"
+      custom-class="apple-dialog dark-dialog"
+      :close-on-click-modal="false">
+      <div class="space-y-4 text-xs">
+        <div class="p-3.5 bg-[#fbfbfd] rounded-2xl border border-black/8 space-y-2 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-[#1d1d1f] font-semibold text-sm">📋 待导出的候选人工程全貌</span>
+            <span class="px-2 py-0.5 rounded-full bg-[#0071e3]/10 text-[#0071e3] font-mono text-[11px] font-semibold border border-[#0071e3]/20">JSON 结构化契约</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[#6e6e73] pt-1">
+            <div>• 目标公司: <span class="text-[#1d1d1f] font-medium">{{ form.company || '未填写' }}</span></div>
+            <div>• 应聘岗位: <span class="text-[#1d1d1f] font-medium">{{ form.job_title || '未填写' }}</span></div>
+            <div>• JD 字数: <span class="text-[#1d1d1f] font-medium">{{ form.jd.length }} 字符</span></div>
+            <div>• 简历字数: <span class="text-[#1d1d1f] font-medium">{{ form.resume.length }} 字符</span></div>
+            <div class="col-span-2">• 代码仓库数: <span class="text-[#1d1d1f] font-medium">{{ form.repo_paths.length }} 个本地仓库 (已透视提取特征)</span></div>
+          </div>
+        </div>
+
+        <div v-if="agentExportLoading" class="text-center py-8 space-y-2">
+          <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto text-[#248a3d]"></i>
+          <div class="text-[#6e6e73]">正在打包工程事实与全景数据...</div>
+        </div>
+
+        <div v-else-if="agentExportResult" class="space-y-3">
+          <div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200/60 text-[#248a3d] flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#248a3d]"></i>
+              <span>已自动保存至: <code class="font-mono text-[11px] bg-white px-1.5 py-0.5 rounded text-[#248a3d] border border-emerald-200/50">agent_llm_tasks/inputs/current_context.json</code></span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <span class="text-[#6e6e73]">JSON 数据预览:</span>
+            <div class="flex space-x-2">
+              <button @click="copyText(JSON.stringify(agentExportResult.context, null, 2))" class="px-2.5 py-1 bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] border border-black/10 rounded-xl text-[11px] transition shadow-sm">
+                📋 复制 JSON
+              </button>
+              <button @click="downloadExportedJson" class="px-2.5 py-1 bg-[#0071e3] hover:bg-[#0077ed] text-white rounded-xl text-[11px] font-medium transition shadow-sm">
+                💾 下载 input_context.json
+              </button>
+            </div>
+          </div>
+
+          <pre class="max-h-48 overflow-y-auto p-3 rounded-xl bg-[#f6f8fa] border border-black/8 text-[11px] font-mono text-[#24292f]">{{ JSON.stringify(agentExportResult.context, null, 2) }}</pre>
+        </div>
+      </div>
+
+      <template #footer>
+        <div class="flex items-center justify-between text-xs pt-1">
+          <span class="text-[#86868b]">💡 Agent 可直接读取 `agent_llm_tasks` 目录进行处理</span>
+          <button @click="showAgentExportModal = false" class="px-3.5 py-1.5 bg-black/5 hover:bg-black/10 text-[#1d1d1f] rounded-xl transition shadow-sm">关闭</button>
+        </div>
+      </template>
+    </el-dialog>
+
+    <!-- ==================== 装载 Agent 成果弹窗 ==================== -->
+    <el-dialog 
+      v-model="showAgentImportModal" 
+      title="📥 装载外部 Agent 生成的 SOP 成果" 
+      width="680px"
+      custom-class="apple-dialog dark-dialog"
+      :close-on-click-modal="false">
+      <div class="space-y-4 text-xs">
+        <div class="text-[#3a3a3c]">
+          请选择装载数据源，系统将自动校验并一键填充全部 7 个 SOP 面板：
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button 
+            @click="agentImportSource = 'output_file'"
+            :class="agentImportSource === 'output_file' ? 'border-[#af52de] bg-purple-50/70 text-[#1d1d1f] shadow-sm' : 'border-black/8 bg-[#fbfbfd] text-[#6e6e73] hover:bg-[#f5f5f7]'"
+            class="p-3 rounded-2xl border text-left space-y-1 transition">
+            <div class="font-semibold text-[#1d1d1f] flex items-center space-x-1.5">
+              <i data-lucide="file-check" class="w-4 h-4 text-[#8e24aa]"></i>
+              <span>本地生成的 output.json</span>
+            </div>
+            <p class="text-[11px] text-[#6e6e73]">读取 agent_llm_tasks/outputs/output.json (由 run_pipeline 聚合或 Agent 输出)</p>
+          </button>
+
+          <button 
+            @click="agentImportSource = 'example_file'"
+            :class="agentImportSource === 'example_file' ? 'border-[#ff9500] bg-amber-50/70 text-[#1d1d1f] shadow-sm' : 'border-black/8 bg-[#fbfbfd] text-[#6e6e73] hover:bg-[#f5f5f7]'"
+            class="p-3 rounded-2xl border text-left space-y-1 transition">
+            <div class="font-semibold text-[#1d1d1f] flex items-center space-x-1.5">
+              <i data-lucide="sparkles" class="w-4 h-4 text-[#d97706]"></i>
+              <span>官方标准示范样例</span>
+            </div>
+            <p class="text-[11px] text-[#6e6e73]">读取 agent_llm_tasks/outputs/example_output.json (同花顺金融 Agent 实战成果)</p>
+          </button>
+        </div>
+
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between text-[#6e6e73]">
+            <span>或者直接粘贴成果 JSON:</span>
+            <label class="cursor-pointer text-[#0071e3] hover:underline text-[11px] font-medium">
+              <span>[ 上传 JSON 文件 ]</span>
+              <input type="file" accept=".json" @change="handleImportFileUpload" class="hidden" />
+            </label>
+          </div>
+          <textarea 
+            v-model="agentImportJsonText" 
+            placeholder="若直接粘贴 JSON，请将包含 sop_0_resume_optimizer, sop_1_matching 等字段的 JSON 文本粘贴于此..."
+            rows="5"
+            class="w-full p-2.5 rounded-xl bg-white border border-black/10 text-[11px] font-mono text-[#1d1d1f] focus:border-[#af52de] focus:outline-none transition"></textarea>
+        </div>
+      </div>
+
+      <template #footer>
+        <div class="flex items-center justify-between text-xs pt-1">
+          <span class="text-[#86868b]">💡 装载后可立即在线微调、练习模拟面试与导出 PDF</span>
+          <div class="flex space-x-2">
+            <button @click="showAgentImportModal = false" class="px-3.5 py-1.5 bg-black/5 hover:bg-black/10 text-[#1d1d1f] rounded-xl transition shadow-sm">取消</button>
+            <button 
+              @click="executeAgentImport" 
+              :disabled="agentImportLoading"
+              class="px-4 py-1.5 bg-[#af52de] hover:bg-[#9c27b0] text-white rounded-xl font-semibold transition flex items-center space-x-1.5 shadow-sm active:scale-95">
+              <i v-if="agentImportLoading" data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i>
+              <span>确认装载并渲染</span>
+            </button>
+          </div>
+        </div>
+      </template>
+    </el-dialog>
+
+    <!-- ==================== Task 0 外部 Agent 靶向精修与重新写入弹窗 ==================== -->
+    <el-dialog 
+      v-model="showTask0Modal" 
+      title="🤖 外部 Agent 简历靶向精修与重新写入" 
+      width="720px"
+      custom-class="apple-dialog dark-dialog"
+      :close-on-click-modal="false">
+      <div class="space-y-4 text-xs">
+        <div class="p-3 bg-blue-50/70 border border-blue-200/50 rounded-xl text-[#1d1d1f] space-y-1">
+          <div class="font-bold text-[#0071e3] flex items-center space-x-1.5">
+            <i data-lucide="sparkles" class="w-4 h-4 text-[#0071e3]"></i>
+            <span>靶向精修工作流：外部 Agent 深度诊断 ➔ 高分重塑 ➔ 重新写入简历</span>
+          </div>
+          <p class="text-[11px] text-[#6e6e73] leading-relaxed">
+            将当前目标岗位 JD、候选人简历与本地代码透视事实打包为专业级 Prompt，交由外部顶尖大模型（Claude 3.5、DeepSeek-R1、ChatGPT 或私有大模型）处理，并将产出的高分 STAR 子弹点一键重新写入“个人简历档案”。
+          </p>
+        </div>
+
+        <div class="border-b border-black/8 flex space-x-4">
+          <button 
+            @click="task0Tab = 'export'" 
+            :class="task0Tab === 'export' ? 'border-b-2 border-[#0071e3] text-[#0071e3] font-bold pb-2' : 'text-[#6e6e73] pb-2'">
+            1. 导出工单与 Prompt 给 Agent
+          </button>
+          <button 
+            @click="task0Tab = 'import'" 
+            :class="task0Tab === 'import' ? 'border-b-2 border-[#248a3d] text-[#248a3d] font-bold pb-2' : 'text-[#6e6e73] pb-2'">
+            2. 装载 Agent 成果并重新写入简历
+          </button>
+        </div>
+
+        <!-- 选项卡 1：导出工单给 Agent -->
+        <div v-show="task0Tab === 'export'" class="space-y-3">
+          <div v-if="task0ExportLoading" class="text-center py-8 space-y-2">
+            <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto text-[#0071e3]"></i>
+            <div class="text-[#6e6e73]">正在打包靶向精修上下文与 Prompt...</div>
+          </div>
+          <div v-else-if="task0ExportResult" class="space-y-3">
+            <div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200/60 text-[#248a3d] flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-[#248a3d]"></i>
+                <span>已自动生成工单文件: <code class="font-mono text-[11px] bg-white px-1.5 py-0.5 rounded text-[#248a3d] border border-emerald-200/50">agent_llm_tasks/task_0_resume_optimizer/agent_prompt.txt</code></span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-[#6e6e73]">完整 Prompt 预览（可直接复制给大模型）:</span>
+              <div class="flex space-x-2">
+                <button @click="copyText(task0ExportResult.prompt)" class="px-3 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white rounded-xl text-xs font-semibold transition shadow-sm flex items-center space-x-1">
+                  <i data-lucide="copy" class="w-3.5 h-3.5 text-white"></i>
+                  <span>📋 一键复制完整 Prompt</span>
+                </button>
+              </div>
+            </div>
+
+            <pre class="max-h-56 overflow-y-auto p-3 rounded-xl bg-[#f6f8fa] border border-black/8 text-[11px] font-mono text-[#24292f] select-all leading-relaxed whitespace-pre-wrap">{{ task0ExportResult.prompt }}</pre>
+          </div>
+        </div>
+
+        <!-- 选项卡 2：装载成果并重新写入简历 -->
+        <div v-show="task0Tab === 'import'" class="space-y-3">
+          <div class="text-[#3a3a3c]">
+            请选择数据源，系统将解析 Agent 精修成果，并自动<strong>重新写入</strong>原始简历输入框：
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <button 
+              @click="task0ImportSource = 'output_file'"
+              :class="task0ImportSource === 'output_file' ? 'border-[#248a3d] bg-emerald-50/70 text-[#1d1d1f] shadow-sm' : 'border-black/8 bg-[#fbfbfd] text-[#6e6e73] hover:bg-[#f5f5f7]'"
+              class="p-3 rounded-2xl border text-left space-y-1 transition">
+              <div class="font-semibold text-[#1d1d1f] flex items-center space-x-1.5">
+                <i data-lucide="file-check" class="w-4 h-4 text-[#248a3d]"></i>
+                <span>读取本地 output.json</span>
+              </div>
+              <p class="text-[11px] text-[#6e6e73]">读取 agent_llm_tasks/task_0_resume_optimizer/output.json</p>
+            </button>
+
+            <button 
+              @click="task0ImportSource = 'example_file'"
+              :class="task0ImportSource === 'example_file' ? 'border-[#ff9500] bg-amber-50/70 text-[#1d1d1f] shadow-sm' : 'border-black/8 bg-[#fbfbfd] text-[#6e6e73] hover:bg-[#f5f5f7]'"
+              class="p-3 rounded-2xl border text-left space-y-1 transition">
+              <div class="font-semibold text-[#1d1d1f] flex items-center space-x-1.5">
+                <i data-lucide="sparkles" class="w-4 h-4 text-[#d97706]"></i>
+                <span>官方标准精修样例</span>
+              </div>
+              <p class="text-[11px] text-[#6e6e73]">读取已通过校验的高分 STAR 子弹点示范</p>
+            </button>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between text-[#6e6e73]">
+              <span>或直接粘贴 Agent 返回的 JSON 成果:</span>
+            </div>
+            <textarea 
+              v-model="task0ImportJsonText" 
+              placeholder="粘贴包含 sop_0_resume_optimizer 字段的 JSON 文本..."
+              rows="5"
+              class="w-full p-2.5 rounded-xl bg-white border border-black/10 text-[11px] font-mono text-[#1d1d1f] focus:border-[#248a3d] focus:outline-none transition"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <template #footer>
+        <div class="flex items-center justify-between text-xs pt-1">
+          <span class="text-[#86868b]">💡 重新写入后简历将永久升级，并驱动后续匹配度重评</span>
+          <div class="flex space-x-2">
+            <button @click="showTask0Modal = false" class="px-3.5 py-1.5 bg-black/5 hover:bg-black/10 text-[#1d1d1f] rounded-xl transition shadow-sm">关闭</button>
+            <button 
+              v-if="task0Tab === 'import'"
+              @click="executeTask0ImportAndRewrite" 
+              :disabled="task0ImportLoading"
+              class="px-4 py-1.5 bg-[#248a3d] hover:bg-[#1e6f31] text-white rounded-xl font-semibold transition flex items-center space-x-1.5 shadow-sm active:scale-95">
+              <i v-if="task0ImportLoading" data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i>
+              <span>🔄 确认装载并重新写入简历</span>
+            </button>
+            <button 
+              v-else
+              @click="task0Tab = 'import'" 
+              class="px-4 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white rounded-xl font-semibold transition flex items-center space-x-1 shadow-sm active:scale-95">
+              <span>下一步：装载成果 →</span>
+            </button>
+          </div>
+        </div>
+      </template>
+    </el-dialog>
+
+    <!-- ==================== 3 大阶段 Agent 协同流水线专属弹窗 ==================== -->
+    <el-dialog 
+      v-model="showStageModal" 
+      :title="currentStage === 1 ? '阶段一 · 简历针对性靶向精修工单 (Stage 1)' : (currentStage === 2 ? '阶段二 · 岗位胜任力匹配与 STAR 权衡矩阵工单 (Stage 2)' : '阶段三 · 源码结合真题、模拟面试与临考速记工单 (Stage 3)')" 
+      width="740px"
+      custom-class="apple-dialog dark-dialog"
+      :close-on-click-modal="false">
+      <div class="space-y-4 text-xs">
+        <!-- 阶段导引与说明卡片 -->
+        <div class="p-3.5 rounded-2xl border" :class="currentStage === 1 ? 'bg-blue-50/70 border-blue-200/60' : (currentStage === 2 ? 'bg-emerald-50/70 border-emerald-200/60' : 'bg-purple-50/70 border-purple-200/60')">
+          <div class="flex items-center justify-between">
+            <div class="font-bold flex items-center space-x-2" :class="currentStage === 1 ? 'text-[#0071e3]' : (currentStage === 2 ? 'text-[#248a3d]' : 'text-[#8e24aa]')">
+              <i data-lucide="bot" class="w-4 h-4"></i>
+              <span v-if="currentStage === 1">阶段一流程：填入基础资料 ➔ 导出工单 ➔ Agent 深度精修 ➔ 读取产物并重塑简历</span>
+              <span v-else-if="currentStage === 2">阶段二流程：已重塑简历 ➔ 导出工单 ➔ Agent 深度评估 ➔ 读取装载匹配画像与权衡矩阵</span>
+              <span v-else>阶段三流程：核心权衡已定 ➔ 导出工单 ➔ Agent 生成题库对练 ➔ 读取装载真题、Master Prompt 与速记</span>
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/80 border border-black/5 font-semibold text-[#1d1d1f]">
+              Skill: interview-sop-pipeline
+            </span>
+          </div>
+          <p class="text-[11px] text-[#6e6e73] mt-1.5 leading-relaxed">
+            外部 Agent 可直接根据常驻在 <code class="font-mono bg-white px-1.5 py-0.5 rounded border border-black/5 text-[#1d1d1f]">agent_llm_tasks/SKILL.md</code> 的标准化技能定义与 JSON Schema 进行深度处理，并在 outputs 目录写入规范产物。
+          </p>
+        </div>
+
+        <!-- 步骤切换 Tab -->
+        <div class="border-b border-black/8 flex space-x-6">
+          <button 
+            @click="stageModalTab = 'export'" 
+            :class="stageModalTab === 'export' ? 'border-b-2 border-[#0071e3] text-[#0071e3] font-bold pb-2' : 'text-[#6e6e73] pb-2 hover:text-[#1d1d1f]'" class="transition">
+            1. 导出工单与 Prompt (Inputs)
+          </button>
+          <button 
+            @click="stageModalTab = 'import'" 
+            :class="stageModalTab === 'import' ? 'border-b-2 border-[#248a3d] text-[#248a3d] font-bold pb-2' : 'text-[#6e6e73] pb-2 hover:text-[#1d1d1f]'" class="transition flex items-center space-x-1.5">
+            <span>2. 手动读取成果 (Outputs)</span>
+            <span v-if="stageStatus[currentStage]?.output_exists" class="w-2 h-2 rounded-full bg-[#34c759] inline-block animate-pulse"></span>
+          </button>
+        </div>
+
+        <!-- 选项卡 1：导出工单 -->
+        <div v-show="stageModalTab === 'export'" class="space-y-3">
+          <div v-if="stageExportLoading" class="text-center py-8 space-y-2">
+            <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto text-[#0071e3]"></i>
+            <div class="text-[#6e6e73]">正在打包阶段 {{ currentStage }} 上下文并生成工单文件...</div>
+          </div>
+          <div v-else class="space-y-3">
+            <div class="p-3 rounded-xl bg-white border border-black/8 shadow-sm flex items-center justify-between">
+              <div class="space-y-0.5">
+                <div class="text-[#1d1d1f] font-semibold flex items-center space-x-1.5">
+                  <i data-lucide="file-code" class="w-4 h-4 text-[#0071e3]"></i>
+                  <span>本地就绪工单文件：</span>
+                </div>
+                <div class="text-[11px] font-mono text-[#6e6e73]">
+                  • 输入数据: <span class="text-[#0071e3]">agent_llm_tasks/inputs/stage_{{ currentStage }}_input.json</span>
+                </div>
+                <div class="text-[11px] font-mono text-[#6e6e73]">
+                  • 引导提示词: <span class="text-[#248a3d]">agent_llm_tasks/inputs/stage_{{ currentStage }}_prompt.txt</span>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-2 shrink-0">
+                <button @click="downloadStageInputJson(currentStage)" class="px-3 py-1.5 bg-black/5 hover:bg-black/10 text-[#1d1d1f] rounded-xl text-xs font-medium transition shadow-sm flex items-center space-x-1">
+                  <i data-lucide="download" class="w-3.5 h-3.5 text-[#0071e3]"></i>
+                  <span>下载 JSON</span>
+                </button>
+                <button @click="exportStageData(currentStage)" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-[#0071e3] border border-blue-200/60 rounded-xl text-xs font-semibold transition shadow-sm flex items-center space-x-1">
+                  <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                  <span>刷新生成</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-[#6e6e73]">Prompt 预览 (可直接复制发给外部大模型或让 Agent 自行读取):</span>
+              <button @click="copyText(stageExportResult?.prompt || '')" class="px-3 py-1 bg-[#0071e3] hover:bg-[#0077ed] text-white rounded-lg text-[11px] font-semibold transition shadow-sm flex items-center space-x-1">
+                <i data-lucide="copy" class="w-3 h-3 text-white"></i>
+                <span>📋 一键复制 Prompt</span>
+              </button>
+            </div>
+
+            <pre class="max-h-56 overflow-y-auto p-3 rounded-xl bg-[#f6f8fa] border border-black/8 text-[11px] font-mono text-[#24292f] select-all leading-relaxed whitespace-pre-wrap">{{ stageExportResult?.prompt || '点击刷新生成以渲染 Prompt...' }}</pre>
+          </div>
+        </div>
+
+        <!-- 选项卡 2：读取成果 -->
+        <div v-show="stageModalTab === 'import'" class="space-y-3">
+          <div class="text-[#3a3a3c] leading-relaxed">
+            外部 Agent 处理完毕后，请点击下方读取。系统将对数据进行 JSON Schema 规范性校验，并驱动页面实时装载与状态流转：
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <button 
+              @click="stageImportSource = 'output_file'"
+              :class="stageImportSource === 'output_file' ? 'border-[#248a3d] bg-emerald-50/70 text-[#1d1d1f] shadow-sm' : 'border-black/8 bg-[#fbfbfd] text-[#6e6e73] hover:bg-[#f5f5f7]'"
+              class="p-3 rounded-2xl border text-left space-y-1 transition">
+              <div class="font-semibold text-[#1d1d1f] flex items-center justify-between">
+                <span class="flex items-center space-x-1.5">
+                  <i data-lucide="file-check" class="w-4 h-4 text-[#248a3d]"></i>
+                  <span>读取阶段产物</span>
+                </span>
+                <span class="text-[9px] px-1.5 py-0.2 rounded-full font-mono font-bold"
+                      :class="stageStatus[currentStage]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : 'bg-amber-100 text-[#d97706]'">
+                  {{ stageStatus[currentStage]?.output_exists ? '已就绪' : '未生成(自动预装)' }}
+                </span>
+              </div>
+              <p class="text-[10px] text-[#6e6e73]">
+                路径: outputs/stage_{{ currentStage }}_output.json
+                <span v-if="stageStatus[currentStage]?.output_time" class="block text-[9px] text-[#86868b]">更新: {{ stageStatus[currentStage]?.output_time }}</span>
+              </p>
+            </button>
+
+            <button 
+              @click="stageImportSource = 'example_mock'"
+              :class="stageImportSource === 'example_mock' ? 'border-[#ff9500] bg-amber-50/70 text-[#1d1d1f] shadow-sm' : 'border-black/8 bg-[#fbfbfd] text-[#6e6e73] hover:bg-[#f5f5f7]'"
+              class="p-3 rounded-2xl border text-left space-y-1 transition">
+              <div class="font-semibold text-[#1d1d1f] flex items-center justify-between">
+                <span class="flex items-center space-x-1.5">
+                  <i data-lucide="sparkles" class="w-4 h-4 text-[#ff9500]"></i>
+                  <span>预装标准示范成果</span>
+                </span>
+                <span class="text-[9px] px-1.5 py-0.2 rounded-full font-mono font-bold bg-amber-100 text-[#d97706]">
+                  即开即用
+                </span>
+              </div>
+              <p class="text-[10px] text-[#6e6e73]">无需外部 Agent，一键预装并装载官方标准高分产物快速体验</p>
+            </button>
+
+            <button 
+              @click="stageImportSource = 'custom_json'"
+              :class="stageImportSource === 'custom_json' ? 'border-[#0071e3] bg-blue-50/70 text-[#1d1d1f] shadow-sm' : 'border-black/8 bg-[#fbfbfd] text-[#6e6e73] hover:bg-[#f5f5f7]'"
+              class="p-3 rounded-2xl border text-left space-y-1 transition">
+              <div class="font-semibold text-[#1d1d1f] flex items-center space-x-1.5">
+                <i data-lucide="clipboard-paste" class="w-4 h-4 text-[#0071e3]"></i>
+                <span>手动粘贴 JSON 内容</span>
+              </div>
+              <p class="text-[10px] text-[#6e6e73]">直接粘贴由外部大模型 Web 界面生成的符合规范 JSON 文本</p>
+            </button>
+          </div>
+
+          <div v-show="stageImportSource === 'custom_json'" class="space-y-1.5">
+            <div class="flex items-center justify-between text-[#6e6e73]">
+              <span>手动粘贴 JSON 内容:</span>
+              <label class="cursor-pointer text-[#0071e3] hover:underline text-[11px] font-medium">
+                <span>[ 上传 JSON 文件 ]</span>
+                <input type="file" accept=".json" @change="handleStageImportFileUpload" class="hidden" />
+              </label>
+            </div>
+            <textarea 
+              v-model="stageImportJsonText" 
+              placeholder="在此粘贴符合阶段规范的 JSON 文本..."
+              rows="5"
+              class="w-full p-2.5 rounded-xl bg-white border border-black/10 text-[11px] font-mono text-[#1d1d1f] focus:border-[#248a3d] focus:outline-none transition"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <template #footer>
+        <div class="flex items-center justify-between text-xs pt-1">
+          <span class="text-[#86868b]">
+            <span v-if="currentStage === 1">💡 读取后将自动优化并重塑简历文本框</span>
+            <span v-else-if="currentStage === 2">💡 读取后将激活雷达画像与技术权衡决策矩阵</span>
+            <span v-else>💡 读取后将解锁全套源码真题与专属对练 Prompt</span>
+          </span>
+          <div class="flex space-x-2">
+            <button @click="showStageModal = false" class="px-3.5 py-1.5 bg-black/5 hover:bg-black/10 text-[#1d1d1f] rounded-xl transition shadow-sm">关闭</button>
+            <template v-if="stageModalTab === 'import'">
+              <button 
+                @click="executeStagePreload(currentStage)" 
+                :disabled="stageImportLoading"
+                class="px-3.5 py-1.5 bg-[#ff9500] hover:bg-[#e08500] text-white rounded-xl font-semibold transition flex items-center space-x-1.5 shadow-sm active:scale-95">
+                <i v-if="stageImportLoading" data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i>
+                <i v-else data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                <span>⚡ 一键预装示范成果</span>
+              </button>
+              <button 
+                @click="executeStageImport(currentStage)" 
+                :disabled="stageImportLoading"
+                class="px-4 py-1.5 bg-[#248a3d] hover:bg-[#1e6f31] text-white rounded-xl font-semibold transition flex items-center space-x-1.5 shadow-sm active:scale-95">
+                <i v-if="stageImportLoading" data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i>
+                <span>🔄 立即读取并装载</span>
+              </button>
+            </template>
+            <button 
+              v-else
+              @click="stageModalTab = 'import'" 
+              class="px-4 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white rounded-xl font-semibold transition flex items-center space-x-1 shadow-sm active:scale-95">
+              <span>下一步：读取阶段成果 →</span>
+            </button>
+          </div>
+        </div>
+      </template>
+    </el-dialog>
+  </div>
+
+  <script>
+    window.__errors__ = [];
+    window.onerror = function(msg, url, line, col, error) {
+      window.__errors__.push({ msg: String(msg), line: line, col: col, stack: error ? error.stack : '' });
+    };
+    window.addEventListener('unhandledrejection', function(event) {
+      window.__errors__.push({ msg: 'Unhandled rejection: ' + String(event.reason) });
+    });
+
+    const { createApp, ref, onMounted, nextTick, watch } = Vue;
+
+    const app = createApp({
+      setup() {
+        const activeTab = ref('input');
+        const loading = ref(false);
+        const scanning = ref(false);
+        const menuOpen = ref(null);
+        let menuCloseTimer = null;
+
+        const safeCreateIcons = () => {
+          if (typeof lucide !== 'undefined' && lucide && typeof lucide.createIcons === 'function') {
+            try {
+              lucide.createIcons();
+            } catch (e) {
+              console.warn('lucide createIcons error:', e);
+            }
+          }
+        };
+
+        const toggleMenu = (name) => {
+          if (menuCloseTimer) {
+            clearTimeout(menuCloseTimer);
+            menuCloseTimer = null;
+          }
+          menuOpen.value = menuOpen.value === name ? null : name;
+          nextTick(() => safeCreateIcons());
+        };
+
+        const handleMenuEnter = (name) => {
+          if (menuCloseTimer) {
+            clearTimeout(menuCloseTimer);
+            menuCloseTimer = null;
+          }
+          menuOpen.value = name;
+          nextTick(() => safeCreateIcons());
+        };
+
+        const handleMenuLeave = () => {
+          if (menuCloseTimer) clearTimeout(menuCloseTimer);
+          menuCloseTimer = setTimeout(() => {
+            menuOpen.value = null;
+          }, 350);
+        };
+
+        const form = ref({
+          company: '',
+          job_title: '',
+          jd: '',
+          resume: '',
+          repo_paths: []
+        });
+
+        const repoSummaries = ref([]);
+        const sopData = ref(null);
+
+        const promptStyle = ref('geek');
+        const promptFocus = ref('code');
+        const currentPromptText = ref('');
+
+        // 文件夹选择与自动探测相关状态
+        const quickCandidates = ref([]);
+        const browsingFolder = ref(false);
+        const showManualInput = ref(false);
+        const manualPathInput = ref('');
+
+        // 页面内置可视化目录树浏览状态
+        const showExplorerModal = ref(false);
+        const explorerPath = ref('');
+        const explorerParent = ref('');
+        const explorerDirectories = ref([]);
+        const explorerShortcuts = ref([]);
+        const explorerLoading = ref(false);
+
+        // Agent 任务工单交互状态
+        const showAgentExportModal = ref(false);
+        const agentExportLoading = ref(false);
+        const agentExportResult = ref(null);
+        const showAgentImportModal = ref(false);
+        const agentImportSource = ref('output_file');
+        const agentImportJsonText = ref('');
+        const agentImportLoading = ref(false);
+
+        // Task 0 外部 Agent 靶向精修与重新写入状态
+        const showTask0Modal = ref(false);
+        const task0Tab = ref('export');
+        const task0ExportLoading = ref(false);
+        const task0ExportResult = ref(null);
+        const task0ImportLoading = ref(false);
+        const task0ImportSource = ref('example_file');
+        const task0ImportJsonText = ref('');
+
+        // SOP-0 简历靶向精修微调状态
+        const bulletSelections = ref({});
+        const bulletEdits = ref({});
+
+        // 3 大阶段 Agent 协同流水线状态
+        const showStageModal = ref(false);
+        const stageModalTab = ref('export');
+        const currentStage = ref(1);
+        const stageStatus = ref({
+          1: { input_exists: false, output_exists: false, input_time: '', output_time: '' },
+          2: { input_exists: false, output_exists: false, input_time: '', output_time: '' },
+          3: { input_exists: false, output_exists: false, input_time: '', output_time: '' }
+        });
+        const stageExportLoading = ref(false);
+        const stageExportResult = ref(null);
+        const stageImportLoading = ref(false);
+        const stageImportSource = ref('output_file');
+        const stageImportJsonText = ref('');
+
+        const fetchDefaults = async () => {
+          try {
+            const res = await fetch('/api/defaults');
+            const data = await res.json();
+            form.value.company = data.company || '';
+            form.value.job_title = data.job_title || '';
+            form.value.jd = data.jd || '';
+            form.value.resume = data.resume || '';
+            form.value.repo_paths = data.repo_paths || [];
+          } catch (e) {
+            console.error("加载初始状态失败", e);
+          }
+        };
+
+        const fetchQuickDirectories = async () => {
+          try {
+            const res = await fetch('/api/quick_directories');
+            const data = await res.json();
+            if (data.success) {
+              quickCandidates.value = data.candidates || [];
+            }
+          } catch (e) {
+            console.error("获取候选仓库失败", e);
+          }
+        };
+
+        const loadDemoData = async () => {
+          try {
+            const res = await fetch('/api/demo_data');
+            const data = await res.json();
+            form.value.company = data.company;
+            form.value.job_title = data.job_title;
+            form.value.jd = data.jd;
+            form.value.resume = data.resume;
+            form.value.repo_paths = [...data.repo_paths];
+            ElementPlus.ElMessage.success("已载入多模态 Demo 样例（Mini-LLaVA + OpenVLA）！");
+            await scanAllRepos();
+          } catch (e) {
+            ElementPlus.ElMessage.error("载入 Demo 失败");
+          }
+        };
+
+        const loadDemoAgentData = async () => {
+          try {
+            const res = await fetch('/api/demo_agent_data');
+            const data = await res.json();
+            form.value.company = data.company;
+            form.value.job_title = data.job_title;
+            form.value.jd = data.jd;
+            form.value.resume = data.resume;
+            form.value.repo_paths = [...data.repo_paths];
+            ElementPlus.ElMessage.success("已载入同花顺金融投研预测与大模型 Agent 架构实战样例！");
+            await scanAllRepos();
+          } catch (e) {
+            ElementPlus.ElMessage.error("载入 Demo 失败");
+          }
+        };
+
+        const printAsPdf = () => {
+          window.print();
+        };
+
+        const clearAllForm = () => {
+          form.value.company = '';
+          form.value.job_title = '';
+          form.value.jd = '';
+          form.value.resume = '';
+          form.value.repo_paths = [];
+          repoSummaries.value = [];
+          sopData.value = null;
+          ElementPlus.ElMessage.info("已清空所有输入，你可以导入自己的简历与项目仓库");
+        };
+
+        const openFolderPicker = async () => {
+          browsingFolder.value = true;
+          const loadingInstance = ElementPlus.ElLoading.service({
+            text: '正在调起本地文件管理器，请在弹出的系统窗口中选择项目根目录（若被浏览器遮挡请查看下方任务栏）...',
+            background: 'rgba(15, 23, 42, 0.85)'
+          });
+          try {
+            const res = await fetch('/api/browse_folder', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ initial_dir: '' })
+            });
+            const data = await res.json();
+            if (data.success && data.path) {
+              if (!form.value.repo_paths.includes(data.path)) {
+                form.value.repo_paths.push(data.path);
+                ElementPlus.ElMessage.success(`🎉 成功添加代码仓库: ${data.name || data.path}`);
+                await scanAllRepos();
+              } else {
+                ElementPlus.ElMessage.info("该仓库已在列表中，已重新扫描");
+                await scanAllRepos();
+              }
+            } else {
+              // 用户在系统弹窗中取消或未成功选定，自动打开网页内目录树
+              ElementPlus.ElMessage.warning("已为你自动打开网页可视化目录树，可直接点选你的项目代码仓库！");
+              openInPageExplorer();
+            }
+          } catch (err) {
+            ElementPlus.ElMessage.warning("系统弹窗调起受阻，已为你自动切换为网页可视化目录树");
+            openInPageExplorer();
+          } finally {
+            loadingInstance.close();
+            browsingFolder.value = false;
+            nextTick(() => lucide.createIcons());
+          }
+        };
+
+        const openRepoImportDialog = () => {
+          showExplorerModal.value = true;
+          browseTo(explorerPath.value || '');
+          fetchQuickDirectories();
+          nextTick(() => lucide.createIcons());
+        };
+
+        const addQuickRepo = async (path) => {
+          if (!form.value.repo_paths.includes(path)) {
+            form.value.repo_paths.push(path);
+            ElementPlus.ElMessage.success(`🎉 已成功导入代码仓库: ${getRepoFolderName(path)}`);
+            showExplorerModal.value = false;
+            await scanAllRepos();
+          } else {
+            ElementPlus.ElMessage.info(`该仓库已在列表中，已重新扫描: ${getRepoFolderName(path)}`);
+            showExplorerModal.value = false;
+            await scanAllRepos();
+          }
+        };
+
+        const getRepoFolderName = (p) => {
+          if (!p) return '';
+          const clean = p.replace(/[\\/]+$/, '');
+          const parts = clean.split(/[\\/]/);
+          return parts[parts.length - 1] || clean;
+        };
+
+        const addManualRepoPath = async () => {
+          const p = manualPathInput.value.trim();
+          if (!p) return;
+          if (!form.value.repo_paths.includes(p)) {
+            form.value.repo_paths.push(p);
+            manualPathInput.value = '';
+            ElementPlus.ElMessage.success(`🎉 已成功导入代码仓库`);
+            showExplorerModal.value = false;
+            await scanAllRepos();
+          } else {
+            ElementPlus.ElMessage.info(`该仓库已在列表中`);
+            showExplorerModal.value = false;
+          }
+        };
+
+        const reScanSingleRepo = async (path) => {
+          await scanAllRepos();
+        };
+
+        const openInPageExplorer = async () => {
+          showExplorerModal.value = true;
+          await browseTo('');
+        };
+
+        const browseTo = async (targetPath) => {
+          explorerLoading.value = true;
+          try {
+            const url = targetPath ? `/api/list_subdirectories?path=${encodeURIComponent(targetPath)}` : `/api/list_subdirectories`;
+            const res = await fetch(url);
+            const data = await res.json();
+            explorerPath.value = data.current_path || '';
+            explorerParent.value = data.parent_path || '';
+            explorerDirectories.value = data.directories || [];
+            if (data.shortcuts) {
+              explorerShortcuts.value = data.shortcuts;
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("读取目录失败");
+          } finally {
+            explorerLoading.value = false;
+            nextTick(() => lucide.createIcons());
+          }
+        };
+
+        const selectFolderFromExplorer = async (selectedPath) => {
+          if (!selectedPath) return;
+          if (!form.value.repo_paths.includes(selectedPath)) {
+            form.value.repo_paths.push(selectedPath);
+            ElementPlus.ElMessage.success(`🎉 已选定并添加代码仓库: ${getRepoFolderName(selectedPath)}`);
+            showExplorerModal.value = false;
+            await scanAllRepos();
+          } else {
+            ElementPlus.ElMessage.info("该仓库已在列表中，已重新扫描");
+            showExplorerModal.value = false;
+            await scanAllRepos();
+          }
+        };
+
+        const addRepoField = () => {
+          openFolderPicker();
+        };
+
+        const removeRepoField = (idx) => {
+          form.value.repo_paths.splice(idx, 1);
+        };
+
+        const parsingResume = ref(false);
+
+        const handleFileUpload = async (event) => {
+          const file = event.target.files[0];
+          if (!file) return;
+
+          const fileName = file.name.toLowerCase();
+
+          // 1. 如果是 PDF 或 Word .docx 文件，通过后端 /api/parse_resume_file 接口深度解析
+          if (fileName.endsWith('.pdf') || fileName.endsWith('.docx')) {
+            const fileTypeLabel = fileName.endsWith('.docx') ? 'Word (.docx)' : 'PDF';
+            parsingResume.value = true;
+            const loadingInstance = ElementPlus.ElLoading.service({
+              text: `正在深度解析 ${fileTypeLabel} 简历: ${file.name}...`,
+              background: 'rgba(255, 255, 255, 0.9)'
+            });
+
+            try {
+              const formData = new FormData();
+              formData.append('file', file);
+
+              const res = await fetch('/api/parse_resume_file', {
+                method: 'POST',
+                body: formData
+              });
+              const data = await res.json();
+
+              if (data.success && data.text) {
+                form.value.resume = data.text;
+                const pageInfo = data.pages ? `，共 ${data.pages} 页` : '';
+                ElementPlus.ElMessage.success(`🎉 成功解析 ${fileTypeLabel} 简历！${pageInfo}提取 ${data.text.length} 字符`);
+              } else {
+                ElementPlus.ElMessage.error(data.error || `${fileTypeLabel} 解析失败，建议直接复制文本粘贴`);
+              }
+            } catch (err) {
+              ElementPlus.ElMessage.error("文件解析异常，请尝试直接复制粘贴文本");
+            } finally {
+              loadingInstance.close();
+              parsingResume.value = false;
+              event.target.value = '';
+            }
+            return;
+          }
+
+          if (fileName.endsWith('.doc')) {
+            ElementPlus.ElMessage.warning("旧版 .doc 二进制格式建议另存为 .docx 或 PDF 后导入，或直接复制文本粘贴。");
+            event.target.value = '';
+            return;
+          }
+
+          // 2. 如果是纯文本文件 (.txt / .md / .json 等)
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const content = e.target.result;
+            form.value.resume = content;
+            ElementPlus.ElMessage.success(`成功导入简历文本: ${file.name} (${content.length} 字符)`);
+            event.target.value = '';
+          };
+          reader.onerror = () => {
+            ElementPlus.ElMessage.error("读取简历文件失败，请尝试直接复制粘贴");
+            event.target.value = '';
+          };
+          reader.readAsText(file);
+        };
+
+        const scanAllRepos = async () => {
+          const validPaths = form.value.repo_paths.filter(p => p.trim());
+          if (validPaths.length === 0) {
+            ElementPlus.ElMessage.warning("请先添加至少一个代码仓库路径");
+            return;
+          }
+
+          scanning.value = true;
+          try {
+            const res = await fetch('/api/scan_repos', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ repo_paths: validPaths })
+            });
+            const data = await res.json();
+            if (data.success) {
+              repoSummaries.value = data.results.map(r => r.summary);
+              ElementPlus.ElMessage.success(`成功透视扫描 ${data.results.length} 个代码仓库！`);
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("扫描仓库异常");
+          } finally {
+            scanning.value = false;
+            nextTick(() => lucide.createIcons());
+          }
+        };
+
+        const triggerGenerateSOP = async () => {
+          if (!form.value.resume.trim() && form.value.repo_paths.length === 0) {
+            ElementPlus.ElMessage.warning("请至少导入个人简历或添加一个代码仓库路径");
+            return;
+          }
+
+          loading.value = true;
+          try {
+            const res = await fetch('/api/generate_sop', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                company: form.value.company,
+                job_title: form.value.job_title,
+                jd: form.value.jd,
+                resume: form.value.resume,
+                repo_paths: form.value.repo_paths.filter(p => p.trim()),
+                style: promptStyle.value,
+                focus: promptFocus.value
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              sopData.value = data.sop;
+              currentPromptText.value = data.sop.mock_interviewer_prompt;
+              activeTab.value = (data.sop.sop_0_resume_optimizer && data.sop.sop_0_resume_optimizer.length > 0) ? 'optimizer' : 'matching';
+              ElementPlus.ElMessage.success("全流程面试 SOP 与专属 Prompt 构建完成！已为你呈现针对性简历精修建议！");
+              triggerConfetti();
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("生成 SOP 失败，请检查服务状态");
+          } finally {
+            loading.value = false;
+            nextTick(() => lucide.createIcons());
+          }
+        };
+
+        // SOP-0 简历靶向精修微调相关方法
+        const isBulletSelected = (pIdx, bIdx) => {
+          const key = `${pIdx}_${bIdx}`;
+          return bulletSelections.value[key] !== false;
+        };
+
+        const toggleBulletSelection = (pIdx, bIdx) => {
+          const key = `${pIdx}_${bIdx}`;
+          bulletSelections.value[key] = !isBulletSelected(pIdx, bIdx);
+        };
+
+        const getBulletText = (pIdx, bIdx) => {
+          const key = `${pIdx}_${bIdx}`;
+          if (bulletEdits.value[key] !== undefined) {
+            return bulletEdits.value[key];
+          }
+          if (sopData.value && sopData.value.sop_0_resume_optimizer && sopData.value.sop_0_resume_optimizer[pIdx]) {
+            return sopData.value.sop_0_resume_optimizer[pIdx].refined_bullet_points[bIdx] || '';
+          }
+          return '';
+        };
+
+        const setBulletText = (pIdx, bIdx, text) => {
+          const key = `${pIdx}_${bIdx}`;
+          bulletEdits.value[key] = text;
+        };
+
+        const resetBulletText = (pIdx, bIdx) => {
+          const key = `${pIdx}_${bIdx}`;
+          if (sopData.value && sopData.value.sop_0_resume_optimizer && sopData.value.sop_0_resume_optimizer[pIdx]) {
+            bulletEdits.value[key] = sopData.value.sop_0_resume_optimizer[pIdx].refined_bullet_points[bIdx] || '';
+            bulletSelections.value[key] = true;
+            ElementPlus.ElMessage.info("已重置为此条默认建议");
+          }
+        };
+
+        const getSelectedBulletCount = (pIdx) => {
+          if (!sopData.value || !sopData.value.sop_0_resume_optimizer || !sopData.value.sop_0_resume_optimizer[pIdx]) return 0;
+          const total = sopData.value.sop_0_resume_optimizer[pIdx].refined_bullet_points.length;
+          let count = 0;
+          for (let b = 0; b < total; b++) {
+            if (isBulletSelected(pIdx, b)) count++;
+          }
+          return count;
+        };
+
+        const copyProjectBullets = (pIdx) => {
+          if (!sopData.value || !sopData.value.sop_0_resume_optimizer || !sopData.value.sop_0_resume_optimizer[pIdx]) return;
+          const proj = sopData.value.sop_0_resume_optimizer[pIdx];
+          let md = `### ${proj.project_name}\n`;
+          proj.refined_bullet_points.forEach((_, bIdx) => {
+            if (isBulletSelected(pIdx, bIdx)) {
+              md += `- ${getBulletText(pIdx, bIdx)}\n`;
+            }
+          });
+          copyText(md);
+          ElementPlus.ElMessage.success(`已复制项目【${proj.project_name}】的精修子弹点！`);
+        };
+
+        const copyAllOptimizedMarkdown = () => {
+          if (!sopData.value || !sopData.value.sop_0_resume_optimizer) return;
+          let md = `# 针对目标岗位的项目经历精修子弹点汇总 (Resume Optimizer)\n\n`;
+          sopData.value.sop_0_resume_optimizer.forEach((proj, pIdx) => {
+            md += `## ${pIdx + 1}. ${proj.project_name}\n`;
+            md += `> 针对考点：${proj.target_jd_alignment}\n\n`;
+            proj.refined_bullet_points.forEach((_, bIdx) => {
+              if (isBulletSelected(pIdx, bIdx)) {
+                md += `- ${getBulletText(pIdx, bIdx)}\n`;
+              }
+            });
+            md += `\n`;
+          });
+          copyText(md);
+          ElementPlus.ElMessage.success("已复制全部已选项目的精修子弹点 Markdown！");
+        };
+
+        const applyAllOptimizedToResume = async () => {
+          if (!sopData.value || !sopData.value.sop_0_resume_optimizer) return;
+          const optimizers = sopData.value.sop_0_resume_optimizer;
+          const currentResume = form.value.resume ? form.value.resume.trim() : "";
+
+          const sections = [];
+          let baseInfo = "";
+          let trailingSkills = "";
+
+          if (currentResume) {
+            const parts = currentResume.split(/【项目经历|项目经历|项目经验|202[0-9]\./);
+            if (parts.length > 0 && parts[0].trim().length > 5) {
+              baseInfo = parts[0].trim();
+              if (!baseInfo.startsWith("【基本信息】")) {
+                baseInfo = "【基本信息】\n" + baseInfo;
+              }
+            }
+            const skillsMatch = currentResume.match(/(【(?:专业技能|技能特长|个人优势|教育背景|自我评价)】[\s\S]*)$/);
+            if (skillsMatch) {
+              trailingSkills = skillsMatch[1].trim();
+            }
+          }
+
+          if (!baseInfo) {
+            baseInfo = "【基本信息】\n张三 (示例候选人) | 某重点大学 计算机科学与技术 (本/硕)\n求职意向：大模型算法工程师 / 系统架构师 | 邮箱: candidate@example.com | 电话: 138-0000-0000";
+          }
+          sections.push(baseInfo);
+
+          optimizers.forEach((proj, pIdx) => {
+            const chosenBullets = [];
+            proj.refined_bullet_points.forEach((_, bIdx) => {
+              if (isBulletSelected(pIdx, bIdx)) {
+                chosenBullets.push(`- ${getBulletText(pIdx, bIdx)}`);
+              }
+            });
+            if (chosenBullets.length > 0) {
+              sections.push(`【项目经历 ${pIdx + 1}：${proj.project_name}】\n` + chosenBullets.join("\n"));
+            }
+          });
+
+          if (trailingSkills) {
+            sections.push(trailingSkills);
+          } else {
+            sections.push("【专业技能】\n- 熟练掌握 C++、Python、Linux、Docker 容器化部署；\n- 深入理解 Transformer、CLIP、LLaVA、OpenVLA 架构与两阶段训练；\n- 掌握 PyTorch FSDP 多卡分布式训练、LoRA 微调与显存优化；\n- 熟悉 ReAct / Plan-and-Solve 智能体架构与混合 RAG 检索体系。");
+          }
+
+          form.value.resume = sections.join("\n\n").trim();
+          ElementPlus.ElMessage.success("🎉 已成功将所有精修子弹点同步回填至简历输入框！正在自动重新分析全套 SOP...");
+          await triggerGenerateSOP();
+        };
+
+        const refreshPrompt = async () => {
+          try {
+            const res = await fetch('/api/generate_mock_prompt', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                company: form.value.company,
+                job_title: form.value.job_title,
+                jd: form.value.jd,
+                resume: form.value.resume,
+                repo_paths: form.value.repo_paths.filter(p => p.trim()),
+                style: promptStyle.value,
+                focus: promptFocus.value
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              currentPromptText.value = data.prompt;
+              ElementPlus.ElMessage.info("已根据新风格重新渲染专属面试官 Prompt");
+            }
+          } catch (e) {
+            console.error("刷新 Prompt 失败", e);
+          }
+        };
+
+        const copyText = (txt) => {
+          navigator.clipboard.writeText(txt);
+          ElementPlus.ElMessage.success("已复制到剪贴板");
+        };
+
+        const copyPrompt = () => {
+          if (!currentPromptText.value) return;
+          navigator.clipboard.writeText(currentPromptText.value);
+          ElementPlus.ElMessage.success("🎉 面试官 Master Prompt 已复制！直接粘贴给你的私有大模型即可开启对练！");
+          triggerConfetti();
+        };
+
+        const triggerConfetti = () => {
+          confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+        };
+
+        const exportFullMarkdown = () => {
+          if (!sopData.value) return;
+          const s = sopData.value;
+          let md = `# 面试全流程备战手册 (SOP Report)\n\n`;
+          md += `**目标公司**: ${form.value.company || '未指定'}\n`;
+          md += `**应聘岗位**: ${form.value.job_title || '未指定'}\n`;
+          md += `**综合匹配指数**: ${s.sop_1_matching.overall_score} / 100\n\n`;
+          
+          if (s.sop_0_resume_optimizer && s.sop_0_resume_optimizer.length) {
+            md += `## 零、针对目标岗位的简历项目级靶向精修 (Resume Optimizer)\n\n`;
+            s.sop_0_resume_optimizer.forEach((proj, pi) => {
+              md += `### ${pi+1}. ${proj.project_name}\n`;
+              md += `> 针对岗位关键考点: ${proj.target_jd_alignment}\n\n`;
+              md += `#### 原简历描述回顾\n\`\`\`\n${proj.original_snippet}\n\`\`\`\n\n`;
+              md += `#### 专家硬伤诊断\n`;
+              proj.diagnosis.forEach(d => {
+                md += `- **[${d.type}]**: ${d.flaw} (破局建议: ${d.tip})\n`;
+              });
+              md += `\n#### 高分 STAR 精修子弹点 (已采纳项)\n`;
+              proj.refined_bullet_points.forEach((_, bi) => {
+                if (isBulletSelected(pi, bi)) {
+                  md += `- ${getBulletText(pi, bi)}\n`;
+                }
+              });
+              md += `\n`;
+            });
+          }
+
+          md += `## 一、岗位匹配度与核心优势\n`;
+          s.sop_1_matching.key_strengths.forEach(st => md += `- ${st}\n`);
+          md += `\n### 考前突击优先级\n`;
+          s.sop_1_matching.sprint_priorities.forEach((sp, i) => md += `${i+1}. ${sp}\n`);
+
+          md += `\n## 二、多项目 STAR 全要素深度挖掘 & 技术权衡对比矩阵 (Trade-off Matrix)\n`;
+          s.sop_2_star.forEach(proj => {
+            md += `### ${proj.project_name}\n`;
+            md += `> ${proj.one_sentence_pitch}\n\n`;
+            md += `- **Situation**: ${proj.star_framework?.situation || proj.situation || ''}\n`;
+            md += `- **Task**: ${proj.star_framework?.task || proj.task || ''}\n`;
+            md += `- **Action**: ${proj.star_framework?.action || proj.action || ''}\n`;
+            md += `- **Result**: ${proj.star_framework?.result || proj.result || ''}\n\n`;
+            
+            md += `#### 技术权衡对比矩阵 (Trade-off Matrix)\n`;
+            (proj.trade_off_matrix || []).forEach((tom, i) => {
+              md += `##### [决策 ${i+1}] ${tom.decision_point}\n`;
+              md += `- **我方选型**: ${tom.chosen_solution} (优势: ${tom.pros_of_chosen})\n`;
+              md += `- **备选方案B**: ${tom.alternative_solution}\n`;
+              md += `- **为何不选方案B**: ${tom.why_not_alternative}\n`;
+              md += `- **前沿演进方案**: ${tom.frontier_technology}\n\n`;
+            });
+
+            md += `#### 致命追问防踩坑\n`;
+            (proj.pitfalls_and_countermeasures || proj.pitfalls_and_solutions || []).forEach(pit => {
+              md += `**Q: ${pit.question}**\n*陷阱: ${pit.danger}*\n\n\`\`\`\n${pit.best_answer}\n\`\`\`\n\n`;
+            });
+          });
+
+          md += `## 三、核心技术考点与加分锦囊\n`;
+          s.sop_3_questions.forEach(q => {
+            md += `### [${q.category}] ${q.title}\n`;
+            md += `${q.framework}\n\n`;
+            md += `*加分技巧: ${q.bonus_tip}*\n\n`;
+          });
+
+          md += `## 四、专属模拟面试官 Master Prompt\n\n`;
+          md += `\`\`\`markdown\n${currentPromptText.value}\n\`\`\`\n\n`;
+
+          md += `## 五、反向提问策略 (Reverse Interview)\n`;
+          s.sop_5_reverse.forEach(st => {
+            md += `### ${st.stage} (${st.purpose})\n`;
+            st.questions.forEach(q => md += `- ${q}\n`);
+            md += `\n`;
+          });
+
+          md += `## 六、30分钟临考速记口诀\n`;
+          s.sop_6_cheatsheet.key_numbers.forEach(kn => md += `- **${kn.name}**: ${kn.val}\n`);
+          s.sop_6_cheatsheet.golden_rules.forEach(gr => md += `- ${gr}\n`);
+
+          const blob = new Blob([md], { type: 'text/markdown;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `Interview_SOP_${form.value.company || 'Custom'}_${form.value.job_title || 'Report'}.md`;
+          a.click();
+          URL.revokeObjectURL(url);
+          ElementPlus.ElMessage.success("SOP 战报 Markdown 文件已成功下载！");
+        };
+
+        // Agent 导出与装载逻辑
+        const openAgentExportModal = async () => {
+          menuOpen.value = null;
+          showAgentExportModal.value = true;
+          agentExportLoading.value = true;
+          try {
+            const res = await fetch('/api/agent/export_inputs', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                company: form.value.company,
+                job_title: form.value.job_title,
+                jd: form.value.jd,
+                resume: form.value.resume,
+                repo_paths: form.value.repo_paths
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              agentExportResult.value = data;
+              ElementPlus.ElMessage.success("已成功将工程全貌与上下文打包导出！");
+            } else {
+              ElementPlus.ElMessage.error(data.detail || "导出失败");
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("导出请求出现异常: " + e.message);
+          } finally {
+            agentExportLoading.value = false;
+            nextTick(() => lucide.createIcons());
+          }
+        };
+
+        const downloadExportedJson = () => {
+          if (!agentExportResult.value || !agentExportResult.value.context) return;
+          const str = JSON.stringify(agentExportResult.value.context, null, 2);
+          const blob = new Blob([str], { type: 'application/json;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'input_context.json';
+          a.click();
+          URL.revokeObjectURL(url);
+          ElementPlus.ElMessage.success("已下载 input_context.json！");
+        };
+
+        const openAgentImportModal = () => {
+          menuOpen.value = null;
+          showAgentImportModal.value = true;
+          nextTick(() => lucide.createIcons());
+        };
+
+        const handleImportFileUpload = (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            agentImportJsonText.value = ev.target.result;
+            ElementPlus.ElMessage.success(`已成功加载 JSON 文件: ${file.name}`);
+          };
+          reader.readAsText(file);
+        };
+
+        const executeAgentImport = async () => {
+          agentImportLoading.value = true;
+          try {
+            let payload = {};
+            if (agentImportJsonText.value && agentImportJsonText.value.trim()) {
+              try {
+                const parsed = JSON.parse(agentImportJsonText.value.trim());
+                payload = { output_data: parsed };
+              } catch (err) {
+                ElementPlus.ElMessage.error("输入的 JSON 语法无效，请检查！");
+                agentImportLoading.value = false;
+                return;
+              }
+            } else if (agentImportSource.value === 'example_file') {
+              payload = { file_path: "example_output.json" };
+            } else {
+              payload = {};
+            }
+
+            const res = await fetch('/api/agent/import_output', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.success && data.sop) {
+              sopData.value = data.sop;
+              if (data.sop.input_meta) {
+                if (data.sop.input_meta.company && !form.value.company) form.value.company = data.sop.input_meta.company;
+                if (data.sop.input_meta.job_title && !form.value.job_title) form.value.job_title = data.sop.input_meta.job_title;
+              }
+              showAgentImportModal.value = false;
+              activeTab.value = 'optimizer';
+              triggerConfetti();
+              ElementPlus.ElMessage.success(data.message || "Agent 成果已成功装载并渲染！");
+              nextTick(() => lucide.createIcons());
+            } else {
+              ElementPlus.ElMessage.error(data.detail || "装载失败，未检测到合规成果数据");
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("装载请求出错: " + e.message);
+          } finally {
+            agentImportLoading.value = false;
+          }
+        };
+
+        // Task 0 专属 Agent 导出与装载重新写入方法
+        const openTask0Modal = async () => {
+          showTask0Modal.value = true;
+          task0Tab.value = 'export';
+          await exportTask0Prompt();
+          nextTick(() => lucide.createIcons());
+        };
+
+        const exportTask0Prompt = async () => {
+          task0ExportLoading.value = true;
+          try {
+            const res = await fetch('/api/agent/export_task0', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                company: form.value.company,
+                job_title: form.value.job_title,
+                jd: form.value.jd,
+                resume: form.value.resume,
+                repo_paths: form.value.repo_paths
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              task0ExportResult.value = data;
+              ElementPlus.ElMessage.success("已成功生成针对当前简历与 JD 的 Agent 精修工单！");
+            } else {
+              ElementPlus.ElMessage.error(data.detail || "生成工单失败");
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("导出工单异常: " + e.message);
+          } finally {
+            task0ExportLoading.value = false;
+            nextTick(() => lucide.createIcons());
+          }
+        };
+
+        const executeTask0ImportAndRewrite = async () => {
+          task0ImportLoading.value = true;
+          try {
+            let payload = { current_resume: form.value.resume };
+            if (task0ImportJsonText.value && task0ImportJsonText.value.trim()) {
+              try {
+                payload.output_data = JSON.parse(task0ImportJsonText.value.trim());
+              } catch (err) {
+                ElementPlus.ElMessage.error("输入的 JSON 语法无效，请检查！");
+                task0ImportLoading.value = false;
+                return;
+              }
+            } else if (task0ImportSource.value === 'example_file') {
+              payload.file_path = "";
+            }
+
+            const res = await fetch('/api/agent/import_task0', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.success && data.sop_0_resume_optimizer) {
+              if (!sopData.value) {
+                sopData.value = {
+                  sop_0_resume_optimizer: data.sop_0_resume_optimizer,
+                  sop_1_matching: {
+                    overall_score: 95,
+                    radar_dimensions: [
+                      { dimension: "代码工程事实契合度", score: 96, comment: "已融合真实代码亮点" },
+                      { dimension: "大模型核心架构理解", score: 94, comment: "多模态与智能体兼备" },
+                      { dimension: "系统优化与显存工程", score: 92, comment: "FSDP/量化落地" },
+                      { dimension: "业务落地与场景匹配", score: 95, comment: "精准命中目标 JD 核心" },
+                      { dimension: "高维表达与决策壁垒", score: 98, comment: "STAR 强动词量化重塑" }
+                    ],
+                    key_strengths: ["已结合本地代码事实重写核心项目，工程壁垒显著提升"],
+                    skill_gaps: [],
+                    sprint_priorities: ["基于精修简历复习核心 STAR 故事", "对照技术权衡矩阵梳理决策依据"]
+                  }
+                };
+              } else {
+                sopData.value.sop_0_resume_optimizer = data.sop_0_resume_optimizer;
+              }
+              
+              // 关键动作：将 Agent 精修成果重新写入简历文本框
+              if (data.rewritten_resume) {
+                form.value.resume = data.rewritten_resume;
+              }
+              
+              showTask0Modal.value = false;
+              activeTab.value = 'optimizer';
+              triggerConfetti();
+              ElementPlus.ElMessage.success("🎉 Agent 靶向精修成果已成功重新写入简历输入框！");
+              nextTick(() => lucide.createIcons());
+            } else {
+              ElementPlus.ElMessage.error(data.detail || "装载失败，未检测到合规数据");
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("装载请求出错: " + e.message);
+          } finally {
+            task0ImportLoading.value = false;
+          }
+        };
+
+        // 3 大阶段 Agent 协同流水线方法
+        const fetchStageStatus = async () => {
+          try {
+            const res = await fetch('/api/agent/stage_status');
+            const data = await res.json();
+            if (data.success && data.stages) {
+              stageStatus.value = data.stages;
+            }
+          } catch (e) {
+            console.error("获取阶段状态失败", e);
+          }
+        };
+
+        const openStageModal = async (stageNum, defaultTab = 'export') => {
+          currentStage.value = stageNum;
+          stageModalTab.value = defaultTab;
+          showStageModal.value = true;
+          stageImportJsonText.value = '';
+          await fetchStageStatus();
+          if (defaultTab === 'export') {
+            await exportStageData(stageNum);
+          }
+          nextTick(() => safeCreateIcons());
+        };
+
+        const exportStageData = async (stageNum) => {
+          stageExportLoading.value = true;
+          try {
+            const res = await fetch('/api/agent/export_stage', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                stage: stageNum,
+                company: form.value.company,
+                job_title: form.value.job_title,
+                jd: form.value.jd,
+                resume: form.value.resume,
+                repo_paths: form.value.repo_paths
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              stageExportResult.value = data;
+              await fetchStageStatus();
+              ElementPlus.ElMessage.success(`🎉 阶段 ${stageNum} 任务工单与 Prompt 已成功导出！`);
+            } else {
+              ElementPlus.ElMessage.error(data.detail || `导出阶段 ${stageNum} 工单失败`);
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("导出工单请求异常: " + e.message);
+          } finally {
+            stageExportLoading.value = false;
+            nextTick(() => safeCreateIcons());
+          }
+        };
+
+        const downloadStageInputJson = (stageNum) => {
+          if (!stageExportResult.value || !stageExportResult.value.input_data) return;
+          const str = JSON.stringify(stageExportResult.value.input_data, null, 2);
+          const blob = new Blob([str], { type: 'application/json;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `stage_${stageNum}_input.json`;
+          a.click();
+          URL.revokeObjectURL(url);
+          ElementPlus.ElMessage.success(`已下载 stage_${stageNum}_input.json！`);
+        };
+
+        const handleStageImportFileUpload = (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            stageImportJsonText.value = ev.target.result;
+            ElementPlus.ElMessage.success(`已成功加载 JSON 文件: ${file.name}`);
+          };
+          reader.readAsText(file);
+        };
+
+        const executeStagePreload = async (stageNum) => {
+          stageImportLoading.value = true;
+          try {
+            const res = await fetch('/api/agent/preload_stage', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                stage: stageNum,
+                current_resume: form.value.resume
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              if (!sopData.value) {
+                sopData.value = {
+                  sop_0_resume_optimizer: [],
+                  sop_1_matching: {
+                    overall_score: 93,
+                    radar_dimensions: [],
+                    key_strengths: [],
+                    skill_gaps: [],
+                    sprint_priorities: []
+                  },
+                  sop_2_star: [],
+                  sop_3_questions: [],
+                  mock_interviewer_prompt: "",
+                  sop_5_reverse: [],
+                  sop_6_cheatsheet: { key_numbers: [], golden_rules: [] }
+                };
+              }
+
+              if (stageNum === 1) {
+                sopData.value = {
+                  ...sopData.value,
+                  sop_0_resume_optimizer: data.sop_0_resume_optimizer || []
+                };
+                if (data.rewritten_resume) {
+                  form.value.resume = data.rewritten_resume;
+                }
+                activeTab.value = 'optimizer';
+              } else if (stageNum === 2) {
+                sopData.value = {
+                  ...sopData.value,
+                  sop_1_matching: data.sop_1_matching,
+                  sop_2_star: data.sop_2_star || []
+                };
+                activeTab.value = 'matching';
+              } else if (stageNum === 3) {
+                sopData.value = {
+                  ...sopData.value,
+                  sop_3_questions: data.sop_3_questions || [],
+                  mock_interviewer_prompt: data.mock_interviewer_prompt || '',
+                  sop_5_reverse: data.sop_5_reverse || [],
+                  sop_6_cheatsheet: data.sop_6_cheatsheet || { key_numbers: [], golden_rules: [] }
+                };
+                if (data.mock_interviewer_prompt) {
+                  currentPromptText.value = data.mock_interviewer_prompt;
+                }
+                activeTab.value = 'questions';
+              }
+
+              await fetchStageStatus();
+              showStageModal.value = false;
+              triggerConfetti();
+              ElementPlus.ElMessage.success(data.message || `已成功预装阶段 ${stageNum} 官方标准示范成果！`);
+              nextTick(() => safeCreateIcons());
+            } else {
+              ElementPlus.ElMessage.error(data.detail || `预装阶段 ${stageNum} 成果失败`);
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("预装请求出错: " + e.message);
+          } finally {
+            stageImportLoading.value = false;
+          }
+        };
+
+        const executeStageImport = async (stageNum) => {
+          if (stageImportSource.value === 'example_mock') {
+            return await executeStagePreload(stageNum);
+          }
+
+          stageImportLoading.value = true;
+          try {
+            let payload = {
+              stage: stageNum,
+              current_resume: form.value.resume,
+              preload_if_missing: true
+            };
+            if (stageImportSource.value === 'custom_json' && stageImportJsonText.value && stageImportJsonText.value.trim()) {
+              try {
+                payload.output_data = JSON.parse(stageImportJsonText.value.trim());
+              } catch (err) {
+                ElementPlus.ElMessage.error("输入的 JSON 语法无效，请检查！");
+                stageImportLoading.value = false;
+                return;
+              }
+            }
+
+            const res = await fetch('/api/agent/import_stage', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.success) {
+              if (!sopData.value) {
+                sopData.value = {
+                  sop_0_resume_optimizer: [],
+                  sop_1_matching: {
+                    overall_score: 93,
+                    radar_dimensions: [],
+                    key_strengths: [],
+                    skill_gaps: [],
+                    sprint_priorities: []
+                  },
+                  sop_2_star: [],
+                  sop_3_questions: [],
+                  mock_interviewer_prompt: "",
+                  sop_5_reverse: [],
+                  sop_6_cheatsheet: { key_numbers: [], golden_rules: [] }
+                };
+              }
+
+              if (stageNum === 1) {
+                sopData.value = {
+                  ...sopData.value,
+                  sop_0_resume_optimizer: data.sop_0_resume_optimizer || []
+                };
+                if (data.rewritten_resume) {
+                  form.value.resume = data.rewritten_resume;
+                }
+                activeTab.value = 'optimizer';
+              } else if (stageNum === 2) {
+                sopData.value = {
+                  ...sopData.value,
+                  sop_1_matching: data.sop_1_matching,
+                  sop_2_star: data.sop_2_star || []
+                };
+                activeTab.value = 'matching';
+              } else if (stageNum === 3) {
+                sopData.value = {
+                  ...sopData.value,
+                  sop_3_questions: data.sop_3_questions || [],
+                  mock_interviewer_prompt: data.mock_interviewer_prompt || '',
+                  sop_5_reverse: data.sop_5_reverse || [],
+                  sop_6_cheatsheet: data.sop_6_cheatsheet || { key_numbers: [], golden_rules: [] }
+                };
+                if (data.mock_interviewer_prompt) {
+                  currentPromptText.value = data.mock_interviewer_prompt;
+                }
+                activeTab.value = 'questions';
+              }
+
+              await fetchStageStatus();
+              showStageModal.value = false;
+              triggerConfetti();
+              ElementPlus.ElMessage.success(data.message || `阶段 ${stageNum} 成果已成功装载！`);
+              nextTick(() => safeCreateIcons());
+            } else {
+              ElementPlus.ElMessage.error(data.detail || `装载阶段 ${stageNum} 成果失败`);
+            }
+          } catch (e) {
+            ElementPlus.ElMessage.error("装载请求出错: " + e.message);
+          } finally {
+            stageImportLoading.value = false;
+          }
+        };
+
+        onMounted(() => {
+          fetchDefaults();
+          fetchQuickDirectories();
+          fetchStageStatus();
+          window.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown-trigger-container')) {
+              menuOpen.value = null;
+            }
+          });
+          watch(activeTab, () => {
+            nextTick(() => safeCreateIcons());
+          });
+          nextTick(() => safeCreateIcons());
+        });
+
+        return {
+          activeTab,
+          loading,
+          scanning,
+          menuOpen,
+          toggleMenu,
+          handleMenuEnter,
+          handleMenuLeave,
+          form,
+          repoSummaries,
+          sopData,
+          promptStyle,
+          promptFocus,
+          currentPromptText,
+          // Agent 任务工单
+          showAgentExportModal,
+          agentExportLoading,
+          agentExportResult,
+          showAgentImportModal,
+          agentImportSource,
+          agentImportJsonText,
+          agentImportLoading,
+          openAgentExportModal,
+          downloadExportedJson,
+          openAgentImportModal,
+          handleImportFileUpload,
+          executeAgentImport,
+          // Task 0 专属 Agent 靶向精修与重新写入
+          showTask0Modal,
+          task0Tab,
+          task0ExportLoading,
+          task0ExportResult,
+          task0ImportLoading,
+          task0ImportSource,
+          task0ImportJsonText,
+          openTask0Modal,
+          exportTask0Prompt,
+          executeTask0ImportAndRewrite,
+          // 文件夹选择与自动探测
+          openRepoImportDialog,
+          quickCandidates,
+          browsingFolder,
+          showManualInput,
+          manualPathInput,
+          openFolderPicker,
+          fetchQuickDirectories,
+          addQuickRepo,
+          getRepoFolderName,
+          addManualRepoPath,
+          reScanSingleRepo,
+          // 页面内目录树浏览
+          showExplorerModal,
+          explorerPath,
+          explorerParent,
+          explorerDirectories,
+          explorerShortcuts,
+          explorerLoading,
+          openInPageExplorer,
+          browseTo,
+          selectFolderFromExplorer,
+          loadDemoData,
+          loadDemoAgentData,
+          printAsPdf,
+          clearAllForm,
+          addRepoField,
+          removeRepoField,
+          handleFileUpload,
+          scanAllRepos,
+          triggerGenerateSOP,
+          refreshPrompt,
+          copyText,
+          copyPrompt,
+          triggerConfetti,
+          exportFullMarkdown,
+          // SOP-0 简历靶向精修微调
+          bulletSelections,
+          bulletEdits,
+          isBulletSelected,
+          toggleBulletSelection,
+          getBulletText,
+          setBulletText,
+          resetBulletText,
+          getSelectedBulletCount,
+          copyProjectBullets,
+          copyAllOptimizedMarkdown,
+          applyAllOptimizedToResume,
+          // 3 大阶段 Agent 协同流水线
+          showStageModal,
+          stageModalTab,
+          currentStage,
+          stageStatus,
+          stageExportLoading,
+          stageExportResult,
+          stageImportLoading,
+          stageImportSource,
+          stageImportJsonText,
+          fetchStageStatus,
+          openStageModal,
+          exportStageData,
+          downloadStageInputJson,
+          handleStageImportFileUpload,
+          executeStagePreload,
+          executeStageImport
+        };
+      }
+    });
+
+    try {
+      if (window.ElementPlus) {
+        app.use(ElementPlus);
+      }
+      app.config.errorHandler = (err, instance, info) => {
+        window.__errors__.push({ msg: 'Vue config error: ' + String(err), stack: err ? err.stack : '', info: info });
+      };
+      window.__VUE_APP__ = app.mount('#app');
+    } catch (e) {
+      window.__errors__.push({ msg: 'Mount catch: ' + String(e), stack: e.stack });
+    }
+  </script>
+</body>
+</html>

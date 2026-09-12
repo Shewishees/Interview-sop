@@ -1,0 +1,25 @@
+# 阶段一 · 简历靶向精修重构 (Stage 1 Resume Optimizer)
+
+【任务目标】
+深度诊断候选人简历中各重点项目的 3 大失分盲区（动词弱、缺少量化、关键算法盲点），
+并结合上述代码仓库真实事实重构 3~4 条高分 STAR 子弹点。
+
+【输出规范】
+输出文件应保存至 agent_llm_tasks/outputs/stage_1_output.json，必须包含顶级键 sop_0_resume_optimizer，格式参照 task_0_resume_optimizer/output_schema.json。
+
+## 输入全景上下文 (Input Context):
+```json
+{
+  "stage": 1,
+  "company": "目标公司",
+  "job_title": "应聘岗位",
+  "jd": "",
+  "resume": "",
+  "repo_paths": [],
+  "scanned_repo_facts": [],
+  "style": "geek",
+  "focus": "code"
+}
+```
+
+请严格输出合法 JSON，并确保通过 python run_pipeline.py --stage 1 --validate 校验。

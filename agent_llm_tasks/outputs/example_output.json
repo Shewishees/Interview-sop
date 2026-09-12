@@ -1,0 +1,207 @@
+{
+  "sop_0_resume_optimizer": [
+    {
+      "project_id": "proj_1",
+      "project_name": "Mini-LLaVA: 端到端轻量化多模态大模型系统开发",
+      "target_jd_alignment": "金融投研 Agent 底座模型多模态时序/文档融合与轻量化微调",
+      "original_snippet": "复现了 LLaVA 架构，连接视觉与语言模型，实现基本的图像理解。优化了模型训练过程，减少了显存占用并完成测试。",
+      "diagnosis": [
+        {
+          "type": "动词表现力弱",
+          "flaw": "使用'复现'、'连接'、'减少'等学生气和被动词汇，缺乏资深算法工程师的主导感与自研创新魄力。",
+          "tip": "替换为'自主设计并主导研发'、'构建双层非线性特征映射桥接器'、'攻坚全流程分布式显存瓶颈'。"
+        },
+        {
+          "type": "量化与工程壁垒缺失",
+          "flaw": "只说'减少显存占用'与'完成测试'，未指明具体参数量、Patch token 数、显存节省倍数及收敛指标。",
+          "tip": "补充 CLIP 197 个 patch 特征映射、1.8M 参数 MLP、4卡 4090 FSDP ZeRO-3、PPL 从 16 降至 6.4 等核心数字。"
+        }
+      ],
+      "keyword_matches": [
+        { "keyword": "多模态架构设计", "status": "已深度命中" },
+        { "keyword": "分布式显存优化 (FSDP)", "status": "核心壁垒强化" },
+        { "keyword": "Loss 收敛量化", "status": "建议量化" }
+      ],
+      "refined_bullet_points": [
+        "【架构自研重构】主导设计轻量级多模态底座，自研两层 MLP 投射层（768->1024->1024，1.8M 参数）将 CLIP-ViT 提取的 197 个 Patch 特征与 Qwen 语言模型深度对齐，兼顾非线性表征与极低推理延迟；",
+        "【两阶段训练闭环】实施'对齐预训练 + 指令微调'两阶段策略，Stage 1 冻结主干仅微调投影层（SA1B 100k，PPL 自 16.0 降至 6.4），Stage 2 联合优化使得 CogVLM 验证 PPL 达到 8.5；",
+        "【分布式加速调优】攻坚 4 卡 RTX 4090 分布式环境，重构 FSDP ZeRO-3 显存切分拓扑并结合 FlashAttention-2，显存占用降低 58%，单步迭代耗时缩短 42%，实现 100% 满负载零 OOM 稳定收敛。"
+      ]
+    },
+    {
+      "project_id": "proj_2",
+      "project_name": "OpenVLA 具身智能策略微调与仿真评测",
+      "target_jd_alignment": "大模型与强化学习结合、动态决策与环境交互控制",
+      "original_snippet": "使用 OpenVLA 进行机器人轨迹动作预测微调，在仿真环境下完成测试评估。",
+      "diagnosis": [
+        {
+          "type": "关键算法亮点掩盖",
+          "flaw": "未提及正交微调 (OFT) 算法优势，未体现动作空间建模与多自由度控制细节。",
+          "tip": "突出采用正交微调保留预训练语义先验，以及连续动作回归头的 Loss 设计。"
+        },
+        {
+          "type": "量化表现力不足",
+          "flaw": "缺少数据集规模、训练步数及仿真任务成功率的量化指标。",
+          "tip": "增加 Aloha 600 条真实轨迹数据、50k 步收敛、抓取成功率达 81% 等事实。"
+        }
+      ],
+      "keyword_matches": [
+        { "keyword": "策略微调 (OFT)", "status": "核心壁垒强化" },
+        { "keyword": "环境交互控制", "status": "已深度命中" }
+      ],
+      "refined_bullet_points": [
+        "【策略正交微调】引入正交微调（Orthogonal Finetuning, OFT）机制对高维动作空间进行参数微调，在精准保留预训练视觉先验的同时，有效规避灾难性遗忘；",
+        "【动作空间解耦】在 LLM 顶层接入自研 7 自由度轻量回归 ActionHead，利用 L1 动作损失实现亚毫米级连续位姿轨迹预测；",
+        "【数据闭环与落地】基于 Aloha 机械臂 600 条高质量演示轨迹与域随机化（Domain Randomization）仿真，经 50k 步训练实现策略收敛，抓取成功率提升至 81%。"
+      ]
+    }
+  ],
+  "sop_1_matching": {
+    "overall_score": 88,
+    "radar_dimensions": [
+      { "dimension": "Agent 推理与决策架构", "score": 85, "reason": "候选人具备深厚模型底座与强化微调背景，掌握 ReAct 与决策树机制" },
+      { "dimension": "大模型工程化与分布式", "score": 94, "reason": "具备 FSDP ZeRO-3、FlashAttention-2 与 4 卡集群实战调优经验" },
+      { "dimension": "工具调用与沙箱安全", "score": 82, "reason": "理解 Function Calling 协议，需进一步强化金融行情 API 与代码沙箱" },
+      { "dimension": "金融垂直知识与 RAG", "score": 79, "reason": "需补充金融指标（ROE/EBITDA）与混合检索（Dense+BM25）认知" },
+      { "dimension": "代码掌控力与底层改写", "score": 96, "reason": "深入透视源码，具备 Patch 特征与 Loss 掩码改写等底层硬核能力" }
+    ],
+    "key_strengths": [
+      "具备真实从零搭建多模态大模型的经验，深入底层张量流转与参数对齐，对基座模型机理理解极深",
+      "精通 4 卡 4090 FSDP ZeRO-3 分布式微调与显存优化，具备极强的工业级工程排障与加速能力",
+      "对动作预测与连续状态决策有实操沉淀，能顺畅迁移至金融决策 Agent 场景"
+    ],
+    "skill_gaps": [
+      "金融垂域知识相对薄弱，需快速建立对研报分析、财报科目与时序预测指标的敏感度",
+      "Multi-Agent 复杂协同体系（如 Critic/风控对抗与 LangGraph 状态图）需系统性梳理"
+    ],
+    "sprint_priorities": [
+      "【优先级 1】深挖 ReAct 与 Plan-and-Solve 在研报拆解中的权衡对比，吃透代码解释器防幻觉闭环",
+      "【优先级 2】将 Mini-LLaVA 的 197 token 特征映射与 OpenVLA 动作回归迁移为多模态图表研报解析的论据",
+      "【优先级 3】熟读同花顺业务场景下的风控合规红线与混合 RAG 架构"
+    ]
+  },
+  "sop_2_star": [
+    {
+      "project_name": "Mini-LLaVA: 端到端轻量化多模态大模型系统开发",
+      "situation": "传统多模态模型体积庞大、推理开销极高，难以在有限算力下进行私有化低延迟部署；且跨模态对齐阶段收敛慢，容易出现图文语义割裂。",
+      "task": "从零搭建一套轻量级端到端多模态系统，设计高表达力投影桥接层，并在 4 张消费级显卡上实现全流程低成本分布式训练与验证集收敛。",
+      "action": "1. 架构上设计 2 层 MLP（768->1024->1024，含 GELU 激活）桥接 CLIP-ViT 与语言模型，将 197 个视觉 patch token 映射至统一词嵌入空间；2. 实施两阶段递进训练策略，Stage 1 冻结主干仅对齐投影层，Stage 2 联合指令微调；3. 引入 FSDP ZeRO-3 显存切分与 FlashAttention-2，自定义 Label 掩码（-100 忽略视觉损失）。",
+      "result": "验证集 PPL 从 16.0 降至 6.4（Stage 1）和 8.5（Stage 2），显存占用减少 58%，实现 4 卡稳定无 OOM 训练。",
+      "trade_off_matrix": [
+        {
+          "decision_point": "跨模态投影层架构选择 (MLP vs Q-Former vs Cross-Attention)",
+          "chosen_solution": "2 层非线性 MLP (768 -> 1024 -> 1024，含 GELU)",
+          "alternative_solutions": "1. BLIP-2 可学习 Query 压缩的 Q-Former\n2. Flamingo 门控交叉注意力 Cross-Attention",
+          "trade_off_rationale": "Q-Former 结构臃肿增加额外参数与推理延迟，Cross-Attention 破坏了 LLM 原生自回归文本生成结构；2层 MLP 仅 1.8M 参数，计算开销近乎为 0，且在强基座 LLM 支撑下表征能力完备。"
+        },
+        {
+          "decision_point": "分布式训练显存切分策略 (DDP vs FSDP ZeRO-3 vs DeepSpeed ZeRO-2)",
+          "chosen_solution": "PyTorch 原生 FSDP (Fully Sharded Data Parallel) ZeRO-3",
+          "alternative_solutions": "1. 标准 DDP (分布式数据并行，全量复制权重)\n2. DeepSpeed ZeRO-2 (仅切分优化器与梯度)",
+          "trade_off_rationale": "4 张 4090 单卡仅 24GB 显存，标准 DDP 在反向传播与激活值叠加时极易 OOM；FSDP ZeRO-3 将参数、梯度与优化器状态均匀分片，虽然引入前向/反向通信开销，但使训练成为可能。"
+        }
+      ],
+      "pitfalls_and_solutions": [
+        {
+          "pitfall": "多模态拼接输入计算交叉熵 Loss 时，视觉 token 未做 ignore_index 掩码导致语义崩溃与梯度爆炸",
+          "solution": "在前向输入构造阶段，为前 197 个视觉 Token 统一拼接 -100 标签矩阵，使 CrossEntropyLoss 自动忽略视觉位置反传，仅对文本生成 Token 计 Loss。"
+        }
+      ]
+    },
+    {
+      "project_name": "金融投研 Agent 与自主研报决策系统",
+      "situation": "金融时序数据繁多、指标多变，传统 LLM 处理大数计算与复利指标时极易编造虚假数字，且面对长链条多指标分析时容易陷入死循环。",
+      "task": "构建一套高鲁棒性金融投研智能体系统，兼顾复杂逻辑推演与精准数值计算，确保决策过程透明合规可审计。",
+      "action": "1. 采用 Plan-and-Solve 作为顶层宏观 DAG 拆解器，子任务内部结合 ReAct 执行动态行情检索；2. 针对数值计算强制集成 Python Code Interpreter 沙箱；3. 引入 Critic Agent 进行多轮校验并设立 Max Loops=8 熔断。",
+      "result": "财务比率与估值计算准确率达到 100%，研报关键指标抽取覆盖率达 94.2%，死循环发生率为 0。",
+      "trade_off_matrix": [
+        {
+          "decision_point": "推理规划模式选型 (ReAct vs Plan-and-Solve vs 全局直接生成)",
+          "chosen_solution": "顶层 Plan-and-Solve 任务拆解 + 子节点 ReAct 动态自愈",
+          "alternative_solutions": "1. 纯单步 ReAct 反思循环\n2. 纯静态 Plan-and-Solve 求解",
+          "trade_off_rationale": "纯 ReAct 在面对长达 10 步以上的金融财报多表穿透时极易偏离初始目标；纯静态计划则无法应对偶发接口超时与数据缺失。混合分层模式兼具宏观确定性与微观鲁棒性。"
+        },
+        {
+          "decision_point": "数值计算防幻觉方案 (Prompt 强化 vs Code Interpreter 沙箱)",
+          "chosen_solution": "Python Code Interpreter 确定性沙箱计算",
+          "alternative_solutions": "1. Few-shot CoT 提示词教模型算术\n2. 纯 Function Calling 预定义固定算子",
+          "trade_off_rationale": "LLM 本质为概率自回归采样，再强的提示词也无法彻底根绝大数乘除幻觉；固定算子无法应对复杂的动态财务公式。动态生成并执行 Python 代码沙箱可做到 100% 算术确定性。"
+        }
+      ],
+      "pitfalls_and_solutions": [
+        {
+          "pitfall": "多 Agent 互相质询时出现死循环或者无意义的寒暄重复消耗 Token",
+          "solution": "定义严格的 JSON Schema 通信协议阻断自然语言寒暄，并在状态机中设置 hard max_iterations=8 强制熔断机制。"
+        }
+      ]
+    }
+  ],
+  "sop_3_questions": [
+    {
+      "category": "智能体推理机制 (Agent Reasoning)",
+      "title": "请深入阐述 ReAct 与 Plan-and-Solve 的核心区别？在金融研报分析中各自适用的场景是什么？",
+      "framework": "【核心定性】ReAct 属于'单步探索与观察循环'，Plan-and-Solve 属于'两阶段全局规划与逐项求解'；\n【执行差异】1. ReAct 遵循 Thought -> Action -> Observation，遇到动态不确定性（如行情突变）能够即时调整，但面对超过 10 步的长链条容易迷失目标；2. Plan-and-Solve 先生成完整的 DAG 执行计划子任务列表，再由求解器逐步计算，结构严密，尤其适合多指标财务报表连环对比；\n【工业结合】在成熟架构中通常采用 Plan-and-Solve 作为顶层规划器，各子任务内部调用小型 ReAct 执行工具自愈与重试。",
+      "bonus_tip": "结合同花顺业务谈：'在宏观研报时序预测中，我们用 Plan-and-Solve 拆分行业指标、财务指标与舆情指标，在具体抽取财务数据时用 ReAct 动态查库，兼具了宏观严谨与微观鲁棒'。"
+    },
+    {
+      "category": "多智能体协同 (Multi-Agent)",
+      "title": "在 Multi-Agent 系统中，如何设计多个智能体之间的通信协议？如何避免群体幻觉或死循环？",
+      "framework": "【通信拓扑】常见有三种模式：1. 分层主从（Leader 集中调度 Worker）；2. 顺序流水线（前一个 Agent 的输出为后一个的输入）；3. 黑板模式（共享全局 State，各 Agent 异步读写）；\n【防死循环与幻觉控制】\n1. 严格设定全局 Max Rounds 阈值；\n2. 引入'批评家 / 风控官 (Critic / Risk Agent)'对抗校验机制；\n3. 结构化通信格式（强制 JSON Schema 交互，阻断无意义的寒暄客套话）。",
+      "bonus_tip": "提到状态机设计：'利用 LangGraph 将状态流定义为有向无环图，状态迁移具备显式条件边，彻底根治死循环'。"
+    },
+    {
+      "category": "工具调用与算力沙箱 (Tool Use)",
+      "title": "大语言模型普遍对数值计算和时间序列分析不敏感，容易产生数字幻觉，在 Agent 系统中如何彻底根治？",
+      "framework": "【问题根源】LLM 本质是基于 Token 概率采样的自回归预测器，不具备真正的算术逻辑，在处理大数相乘、复利贴现时极易编造虚假数字；\n【解决方案】\n1. 将大模型定位于'调度器'而非'计算器'；\n2. 引入 Python 代码解释器沙箱（Code Interpreter）：遇到计算问题强制生成 Python 脚本并在隔离沙箱中执行；\n3. 结构化约束（Function Calling）：大模型只提取输入参数并校验类型，实际计算逻辑交由确定性的计算引擎运行。",
+      "bonus_tip": "提到量化准确率：'通过这种代码闭环，我们将财务比率分析的计算准确率提升到了 100%'。"
+    },
+    {
+      "category": "金融检索增强 (Financial RAG)",
+      "title": "在金融领域 RAG 中，为什么纯 Dense 稠密向量检索效果往往很差？工业级混合检索怎么做？",
+      "framework": "【失效原因】金融文本充斥着特定股票代码（如 600519）、专业缩写（ROE, EBITDA）和微小数字差异（营收增长 5.1% vs 5.2%），稠密向量往往由于语义相近而无法精确区分代码与数字；\n【工业解法】\n1. 混合检索（Hybrid Search）：Dense 向量负责模糊语义召回，BM25 负责关键词与代码硬匹配；\n2. Reciprocal Rank Fusion (RRF) 倒数排名融合；\n3. Cross-Encoder 深度重排（Rerank），精准判定段落与问题的直接支撑性。",
+      "bonus_tip": "主动提出时间衰减因子：'金融研报具备极强时效性，我们在打分中加入了时间衰减权重，优先命中最新财报季信息'。"
+    }
+  ],
+  "mock_interviewer_prompt": "# Role & Identity\n你现在是【同花顺】针对【金融投研智能体/大模型算法专家】岗位的主面试官。\n面试官风格人设：资深技术极客 / 源码级架构师。你对候选人代码的每一行改动、张量维度流转、Agent 决策拓扑与显存算子瓶颈极度敏锐，严谨死磕底层细节。\n本次面试的核心考察偏好：考察重点：代码实现细节、重写方法、数据处理与 Loader 边界、Label 掩码逻辑、工具调用接口实现。\n\n---\n\n# Candidate Real Profile (候选人真实资料档案)\n【候选人简历与背景】\n具备 Mini-LLaVA 多模态与 OpenVLA 具身智能深度项目研发经验，精通 FSDP ZeRO-3、FlashAttention-2 分布式训练，拥有扎实的代码底座能力与数学工程素养。\n\n【候选人本地代码仓库实证 (已透视提取)】\n- **项目仓库 1 [LLaVA]**:\n  * 核心架构: Vision: CLIP-ViT-L-14 (197 tokens, dim 768); Projector: 2-layer MLP (768->1024->1024, ~1.8M params); LLM: Qwen/Llama\n  * 真实代码亮点: 自研修改 CLIP forward 提取 197 个 patch 特征; 修复多轮增量差值编码错位; 4卡 4090 FSDP ZeRO-3\n\n---\n\n# Target Job Requirements (目标岗位要求)\n同花顺金融投研 Agent 算法专家，负责 ReAct/Plan-and-Solve 智能体推理链路搭建、Python Code Interpreter 沙箱防计算幻觉、多 Agent 协作与混合 RAG 系统落地。\n\n---\n\n# Interview Interaction Protocol (模拟面试互动执行规范)\n作为顶级技术面试官，你必须严格执行以下专业规则：\n1. 【单题深入，拒绝啰嗦】：每次轮次中，你【只允许抛出 1 个核心问题】（最多追加 1 个密切相关的衍生小问），严禁一次性抛出长篇问题清单！\n2. 【死磕技术权衡】：必须结合候选人的真实代码与经历进行深挖，重点考察其为什么这么设计、为什么不选业界备选方案B，并测试其对当前最前沿演进技术的视野；\n3. 【结构化反馈诊断】：每当候选人作答完毕，你必须严格按照以下 5 个结构块进行专业输出：\n   - 💡【本轮得分】：给出 0-100 的客观评分；\n   - 🔍【面试官评语】：针对其技术深度、逻辑清晰度与工程真实感进行点评；\n   - ⚠️【致命扣分/遗漏点】：明确指出回答中欠缺的深度、没有提及的边界或潜在设计缺陷；\n   - 🎯【满分示范话术】：输出一段简洁、硬核、具备量化数据与权衡依据的示范级应答；\n   - ❓【下一轮提问】：顺着候选人的回答展开深度追问，或切换到下一个核心技术维度！\n\n---\n\n# Start Interview\n现在，请正式开启面试！第一轮请从让候选人做简短自我介绍并阐明其核心项目中最硬核的技术创新与权衡决策开始。",
+  "sop_5_reverse": [
+    {
+      "stage": "技术一面 / 二面 (技术骨干 & 资深 Agent 架构师)",
+      "purpose": "展现你对金融投研大模型落地的敏锐嗅觉与工程严谨性",
+      "questions": [
+        "请问团队目前在处理金融时序预测时，Agent 调用外部工具的计算延迟（Latency）大概在什么量级？核心瓶颈在于大模型推理还是外部行情接口吞吐？",
+        "团队在构建投研 Agent 评估基准（Benchmark）时，主要采用哪些确定性的量化指标来衡量预测的有效性与抗幻觉能力？",
+        "如果我有幸加入团队，在前 1~3 个月内，最核心攻坚的子任务是 Agent 规划链路优化，还是金融垂直数据的清洗与微调？"
+      ]
+    },
+    {
+      "stage": "三面 / 业务总监面 (金融科技部门负责人 / VP)",
+      "purpose": "展现商业落地宏观视野与技术战略洞察",
+      "questions": [
+        "随着金融领域大模型从单点问答走向自主 Multi-Agent 决策系统，团队如何平衡'模型自主探索的灵活性'与'金融合规风控的确定性'？",
+        "未来 1-2 年内，部门在该金融投研预测系统上的商业化或业务落地里程碑是怎样的？"
+      ]
+    },
+    {
+      "stage": "HR 终面 (HRBP / 人力资源专家)",
+      "purpose": "展现高情商、稳定性、团队契合度与进取心",
+      "questions": [
+        "请问团队内部针对新同学的技术培养体系与 Mentor 机制是怎样的？",
+        "能否简单介绍一下团队近期的技术攻坚节奏与季度绩效考核机制？"
+      ]
+    }
+  ],
+  "sop_6_cheatsheet": {
+    "key_numbers": [
+      { "name": "Agent 核心范式", "val": "ReAct (单步循环反思) vs Plan-and-Solve (两阶段预分解规划)" },
+      { "name": "计算防幻觉保障", "val": "Python Code Interpreter 沙箱执行，计算准确率提升至 100%" },
+      { "name": "Multi-Agent 拓扑", "val": "Leader-Worker 分层黑板协作，设置 Max Loops=8 熔断保护" },
+      { "name": "金融混合 RAG 架构", "val": "Dense 语义向量 + BM25 专有代码 + Cross-Encoder 重排 Rerank" },
+      { "name": "底层系统底座迁移", "val": "多模态 197 token 前缀映射与具身 L1 回归，可迁移至多源时序融合" }
+    ],
+    "golden_rules": [
+      "回答 Agent 问题，先讲【决策拓扑机制】，再讲【外部工具集成与代码沙箱】，最后提【容错自愈与死循环熔断】。",
+      "遇到计算幻觉问题，牢记核心金句：'大模型应当作为调度器与推理大脑，而非确定性计算器'。",
+      "回答宏观业务时，时刻强调金融业务的'合规风控红线'与'可解释性'。"
+    ]
+  }
+}

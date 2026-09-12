@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["sop_6_cheatsheet"],
+  "properties": {
+    "sop_6_cheatsheet": {
+      "type": "object",
+      "required": ["key_numbers", "golden_rules"],
+      "properties": {
+        "key_numbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "val"],
+            "properties": {
+              "name": { "type": "string" },
+              "val": { "type": "string" }
+            }
+          }
+        },
+        "golden_rules": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

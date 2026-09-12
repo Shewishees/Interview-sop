@@ -1,0 +1,102 @@
+{
+  "sop_1_matching": {
+    "overall_score": 88,
+    "radar_dimensions": [
+      {
+        "dimension": "Agent 推理与决策架构",
+        "score": 85,
+        "reason": "候选人具备深厚模型底座与强化微调背景，掌握 ReAct 与决策树机制"
+      },
+      {
+        "dimension": "大模型工程化与分布式",
+        "score": 94,
+        "reason": "具备 FSDP ZeRO-3、FlashAttention-2 与 4 卡集群实战调优经验"
+      },
+      {
+        "dimension": "工具调用与沙箱安全",
+        "score": 82,
+        "reason": "理解 Function Calling 协议，需进一步强化金融行情 API 与代码沙箱"
+      },
+      {
+        "dimension": "金融垂直知识与 RAG",
+        "score": 79,
+        "reason": "需补充金融指标（ROE/EBITDA）与混合检索（Dense+BM25）认知"
+      },
+      {
+        "dimension": "代码掌控力与底层改写",
+        "score": 96,
+        "reason": "深入透视源码，具备 Patch 特征与 Loss 掩码改写等底层硬核能力"
+      }
+    ],
+    "key_strengths": [
+      "具备真实从零搭建多模态大模型的经验，深入底层张量流转与参数对齐，对基座模型机理理解极深",
+      "精通 4 卡 4090 FSDP ZeRO-3 分布式微调与显存优化，具备极强的工业级工程排障与加速能力",
+      "对动作预测与连续状态决策有实操沉淀，能顺畅迁移至金融决策 Agent 场景"
+    ],
+    "skill_gaps": [
+      "金融垂域知识相对薄弱，需快速建立对研报分析、财报科目与时序预测指标的敏感度",
+      "Multi-Agent 复杂协同体系（如 Critic/风控对抗与 LangGraph 状态图）需系统性梳理"
+    ],
+    "sprint_priorities": [
+      "【优先级 1】深挖 ReAct 与 Plan-and-Solve 在研报拆解中的权衡对比，吃透代码解释器防幻觉闭环",
+      "【优先级 2】将 Mini-LLaVA 的 197 token 特征映射与 OpenVLA 动作回归迁移为多模态图表研报解析的论据",
+      "【优先级 3】熟读同花顺业务场景下的风控合规红线与混合 RAG 架构"
+    ]
+  },
+  "sop_2_star": [
+    {
+      "project_name": "Mini-LLaVA: 端到端轻量化多模态大模型系统开发",
+      "situation": "传统多模态模型体积庞大、推理开销极高，难以在有限算力下进行私有化低延迟部署；且跨模态对齐阶段收敛慢，容易出现图文语义割裂。",
+      "task": "从零搭建一套轻量级端到端多模态系统，设计高表达力投影桥接层，并在 4 张消费级显卡上实现全流程低成本分布式训练与验证集收敛。",
+      "action": "1. 架构上设计 2 层 MLP（768->1024->1024，含 GELU 激活）桥接 CLIP-ViT 与语言模型，将 197 个视觉 patch token 映射至统一词嵌入空间；2. 实施两阶段递进训练策略，Stage 1 冻结主干仅对齐投影层，Stage 2 联合指令微调；3. 引入 FSDP ZeRO-3 显存切分与 FlashAttention-2，自定义 Label 掩码（-100 忽略视觉损失）。",
+      "result": "验证集 PPL 从 16.0 降至 6.4（Stage 1）和 8.5（Stage 2），显存占用减少 58%，实现 4 卡稳定无 OOM 训练。",
+      "trade_off_matrix": [
+        {
+          "decision_point": "跨模态投影层架构选择 (MLP vs Q-Former vs Cross-Attention)",
+          "chosen_solution": "2 层非线性 MLP (768 -> 1024 -> 1024，含 GELU)",
+          "alternative_solutions": "1. BLIP-2 可学习 Query 压缩的 Q-Former\n2. Flamingo 门控交叉注意力 Cross-Attention",
+          "trade_off_rationale": "Q-Former 结构臃肿增加额外参数与推理延迟，Cross-Attention 破坏了 LLM 原生自回归文本生成结构；2层 MLP 仅 1.8M 参数，计算开销近乎为 0，且在强基座 LLM 支撑下表征能力完备。"
+        },
+        {
+          "decision_point": "分布式训练显存切分策略 (DDP vs FSDP ZeRO-3 vs DeepSpeed ZeRO-2)",
+          "chosen_solution": "PyTorch 原生 FSDP (Fully Sharded Data Parallel) ZeRO-3",
+          "alternative_solutions": "1. 标准 DDP (分布式数据并行，全量复制权重)\n2. DeepSpeed ZeRO-2 (仅切分优化器与梯度)",
+          "trade_off_rationale": "4 张 4090 单卡仅 24GB 显存，标准 DDP 在反向传播与激活值叠加时极易 OOM；FSDP ZeRO-3 将参数、梯度与优化器状态均匀分片，虽然引入前向/反向通信开销，但使训练成为可能。"
+        }
+      ],
+      "pitfalls_and_solutions": [
+        {
+          "pitfall": "多模态拼接输入计算交叉熵 Loss 时，视觉 token 未做 ignore_index 掩码导致语义崩溃与梯度爆炸",
+          "solution": "在前向输入构造阶段，为前 197 个视觉 Token 统一拼接 -100 标签矩阵，使 CrossEntropyLoss 自动忽略视觉位置反传，仅对文本生成 Token 计 Loss。"
+        }
+      ]
+    },
+    {
+      "project_name": "金融投研 Agent 与自主研报决策系统",
+      "situation": "金融时序数据繁多、指标多变，传统 LLM 处理大数计算与复利指标时极易编造虚假数字，且面对长链条多指标分析时容易陷入死循环。",
+      "task": "构建一套高鲁棒性金融投研智能体系统，兼顾复杂逻辑推演与精准数值计算，确保决策过程透明合规可审计。",
+      "action": "1. 采用 Plan-and-Solve 作为顶层宏观 DAG 拆解器，子任务内部结合 ReAct 执行动态行情检索；2. 针对数值计算强制集成 Python Code Interpreter 沙箱；3. 引入 Critic Agent 进行多轮校验并设立 Max Loops=8 熔断。",
+      "result": "财务比率与估值计算准确率达到 100%，研报关键指标抽取覆盖率达 94.2%，死循环发生率为 0。",
+      "trade_off_matrix": [
+        {
+          "decision_point": "推理规划模式选型 (ReAct vs Plan-and-Solve vs 全局直接生成)",
+          "chosen_solution": "顶层 Plan-and-Solve 任务拆解 + 子节点 ReAct 动态自愈",
+          "alternative_solutions": "1. 纯单步 ReAct 反思循环\n2. 纯静态 Plan-and-Solve 求解",
+          "trade_off_rationale": "纯 ReAct 在面对长达 10 步以上的金融财报多表穿透时极易偏离初始目标；纯静态计划则无法应对偶发接口超时与数据缺失。混合分层模式兼具宏观确定性与微观鲁棒性。"
+        },
+        {
+          "decision_point": "数值计算防幻觉方案 (Prompt 强化 vs Code Interpreter 沙箱)",
+          "chosen_solution": "Python Code Interpreter 确定性沙箱计算",
+          "alternative_solutions": "1. Few-shot CoT 提示词教模型算术\n2. 纯 Function Calling 预定义固定算子",
+          "trade_off_rationale": "LLM 本质为概率自回归采样，再强的提示词也无法彻底根绝大数乘除幻觉；固定算子无法应对复杂的动态财务公式。动态生成并执行 Python 代码沙箱可做到 100% 算术确定性。"
+        }
+      ],
+      "pitfalls_and_solutions": [
+        {
+          "pitfall": "多 Agent 互相质询时出现死循环或者无意义的寒暄重复消耗 Token",
+          "solution": "定义严格的 JSON Schema 通信协议阻断自然语言寒暄，并在状态机中设置 hard max_iterations=8 强制熔断机制。"
+        }
+      ]
+    }
+  ]
+}
