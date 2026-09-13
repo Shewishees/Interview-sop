@@ -1,7 +1,7 @@
 # 🎯 InterviewSOP Master (技术面试全流程 SOP 智能备战系统)
 
 <p align="center">
-  <b>融合多代码仓库深度透视、大模型 Agent 协同流水线与工业级全流程 SOP 的技术面试备战平台</b>
+  <b>融合多代码仓库深度透视、AI-Agent 原生协同流水线与工业级全流程 SOP 的技术面试备战平台</b>
 </p>
 
 <p align="center">
@@ -9,8 +9,8 @@
   <img src="https://img.shields.io/badge/FastAPI-0.100+-009688?logo=fastapi" alt="FastAPI" />
   <img src="https://img.shields.io/badge/Vue-3.x-4FC08D?logo=vuedotjs" alt="Vue 3" />
   <img src="https://img.shields.io/badge/TailwindCSS-3.x-38B2AC?logo=tailwindcss" alt="TailwindCSS" />
+  <img src="https://img.shields.io/badge/Architecture-Agent--Native-FF6F00" alt="Agent-Native" />
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" />
-  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome" />
 </p>
 
 ---
@@ -19,83 +19,139 @@
 
 技术面试早已告别单纯背诵八股文和刷 LeetCode 的旧时代。现代高阶技术面试（大厂架构师、算法专家、具身智能/大模型工程师）的核心痛点在于：
 1. **项目描述空泛**：简历上的项目大多缺少强动词、量化指标与硬核工程壁垒，容易沦为“平庸流水账”；
-2. **源码与八股脱节**：准备的八股文与候选人实际写过的代码割裂，面试官一旦结合真实仓库底层（如模型结构、显存分布、分布式训练、动态路由）追问，极易陷入被动；
+2. **源码与八股脱节**：准备的八股文与候选人实际写过的代码割裂，面试官一旦结合真实代码底层（如模型结构、显存分布、分布式训练、动态路由）深入追问，极易陷入被动；
 3. **技术权衡说不清**：无法清晰回答面试官最致命的追问——“**为什么不选方案 B？你的技术权衡依据是什么？**”；
 4. **缺少实战压测与临考速记**：缺乏高度拟真的面试官对抗追问与临场 30 分钟应急锦囊。
 
-**InterviewSOP Master** 旨在打造一套**工业级、端到端闭环的技术面试备战流水线**。系统通过**本地代码仓库静态透视引擎**自动抓取真实工程亮点，串联 **7 大核心 SOP 模块**，并原生支持**外部大模型 Agent（Antigravity / Cursor / Claude / GPT 等）阶段协同工作流**，帮助候选人从“简历靶向精修”到“源码真题深挖”再到“反向提问策略”全维度提升竞争力。
+**InterviewSOP Master** 旨在打造一套**工业级、端到端闭环的技术面试备战流水线**：
+- **纯粹的 Agent-Native 原生协同**：彻底剔除伪装成“内置大模型”的黑盒残留，系统完全专注于**代码底层静态透视 + 阶段标准化工单调度 + 标杆数据离线预装**。真实的高阶深度推理与润色全面开放给外部 Agent（Claude 3.5 Sonnet / DeepSeek-R1 / GPT-4o / Cursor / Antigravity）。
+- **Apple 极简毛玻璃 3 阶段工作流**：将繁复的面试准备划分为 **Stage 1 (简历精修)** ➔ **Stage 2 (胜任与权衡)** ➔ **Stage 3 (源码真题与速记)**，逐级流转、渐进解锁，并支持零门槛一键预装。
 
 ---
 
-## 🌟 核心特色与功能矩阵 (Features)
+## 🔄 3 阶段工作流详解 (What Happens in Each Stage)
 
-### 1. 🔍 多维信息智能接入与本地代码仓库静态透视
-- **多工程并行透视 (`RepoScanner`)**：
-  - 本地直接挂载候选人的真实代码仓库（如自研多模态框架、金融投研 Agent、分布式训练项目等）；
-  - 自动 AST 与规则语法分析，深度识别：模型 Backbone（Vision Encoder / LLM / Projector 维度）、分布式并行方案（FSDP / DeepSpeed ZeRO-1/2/3）、训练超参、显存优化（FlashAttention、Activation Checkpointing）与核心关键脚本；
-  - 提供全盘可视化目录选择器，支持实时扫描与亮点一键重算。
-- **简历全格式智能解析与数据清洗**：
-  - 原生集成 `pypdf` 引擎，支持 PDF、Markdown、纯文本简历文件极速上传解析；
-  - 自动剔除二进制零字符、多余制表符与非打印乱码，保留高保真排版。
-- **目标岗位 JD 针对性对齐**：
-  - 自由录入目标公司（如阿里、字节、同花顺、商汤等）与目标职位职责要求；
-  - 内置两套工业级开箱即用标杆演示数据（Mini-LLaVA 多模态端到端工程 + 金融投研 Agent 架构师）。
-
-### 2. ⚡ 七大一体化 SOP 备战模块 (SOP 0 ~ 6)
-
-| 模块 | 核心能力 | 产出价值 |
-| :--- | :--- | :--- |
-| **SOP-0 · 简历靶向精修重构** | 自动诊断项目 3 大失分盲区（动词弱、缺少量化、关键算法盲点），重构高分 STAR 子弹点 | 支持子弹点实时交互勾选微调，**一键永久回写并升级简历文本框** |
-| **SOP-1 · 胜任力雷达与 Gap 画像** | 0-100 分量化画像、核心求职壁垒（杀手锏）、考查盲区深度预警 | 输出 **面试前 72 小时冲刺优先级清单 (Sprint Roadmap)**，指引黄金突击路径 |
-| **SOP-2 · STAR 复盘与权衡决策矩阵** | 四段式硬核技术拆解、致命陷阱连环追问与满分破局话术 | **独创技术决策权衡对比矩阵 (Trade-off Matrix)**，击破大厂面试官“为什么不选方案 B”连环追问 |
-| **SOP-3 · 源码结合型定制真题库** | 结合候选人真实代码与业务场景定制 4 道大厂级高频实战深挖题 | 配备 **三层逐级加分锦囊** 与 **30 秒黄金回答破局框架**，彻底告别八股死记 |
-| **SOP-4 · AI 沉浸式模拟面试官** | 动态合成涵盖背景与深挖逻辑的 Master Prompt，支持 3 种面试官风格（极客狂/架构师/业务官） | 在线多轮对练打分，逐轮提供扣分点诊断与润色示范 |
-| **SOP-5 · 分轮次高阶反向提问策略库** | 技术一面/二面、技术总监三面、HR 终面深度反问清单 | 展现高阶业务敏锐度、团队领导力潜质与组织协同视野 |
-| **SOP-6 · 30 分钟临考速记卡** | 关键工程量化指标速查、核心避坑心法与破局口诀 | 支持一键导出排版精美的 **完整 Markdown 备战手册战报** |
-
-### 3. 🤖 外部 Agent 协同流水线 (3-Stage Milestone Workflow)
-除了系统内置的极速生成能力外，系统针对复杂工程场景构建了**人机协同的标准阶段式工单流**：
-- **标准技能常驻契约 (`agent_llm_tasks/SKILL.md`)**：严格定义每个阶段工单的 JSON Schema 与任务边界，外部 Agent 可直接理解并精准输出；
-- **阶段一 (Stage 1 · Resume Optimizer)**：基础资料 ➔ 导出工单 ➔ Agent 深度精修 ➔ 读取产物并重塑简历；
-- **阶段二 (Stage 2 · Matching & STAR)**：已重塑简历 ➔ 导出工单 ➔ Agent 深度评估 ➔ 装载匹配画像与权衡矩阵；
-- **阶段三 (Stage 3 · Questions & Mock)**：权衡已定 ➔ 导出工单 ➔ Agent 生成源码真题 ➔ 解锁模拟对练与速记；
-- **智能降级与自动预装**：具备 **4 级容错机制**，在外部 Agent 未运行时，点击任意阶段均可**一键预装官方标准示范成果**，杜绝 404 阻断，即开即用。
-
----
-
-## 🏗️ 架构设计 (Architecture)
+系统采用严谨的**逐级演进依赖机制**，前序阶段未完成时后续阶段严格锁定。每个阶段均支持“**外部 Agent 深度推理**”与“**官方标杆成果一键预装**”双通道：
 
 ```text
-[用户输入: 岗位JD / 简历文件 / 本地代码库]
-           │
-           ▼
-[FastAPI 后端核心 (app.py)]
-   ├─► RepoScanner 本地代码静态透视 (AST / 超参 / 分布式架构)
-   ├─► PDF/Text 智能解析与清洗引擎
-   │
-   ▼
-[双模驱动引擎]
-   ├─► 模式 1: 内置专家规则 & LLMClient 实时极速生成
-   └─► 模式 2: 3 大阶段外部 Agent 协同流水线 (agent_llm_tasks/)
-           ├─ Stage 1: 简历针对性精修工单 (SOP-0)
-           ├─ Stage 2: 胜任力雷达与 STAR 权衡矩阵 (SOP-1, SOP-2)
-           └─ Stage 3: 源码真题、Master 对练与速记 (SOP-3, 4, 5, 6)
-   │
-   ▼
-[前端 Apple 极简毛玻璃交互界面 (Vue 3 + Tailwind + Element Plus)]
-   ├─ 阶段工单导出 / 产物自动装载与智能兜底
-   ├─ 简历子弹点自由编辑与一键回填
-   ├─ 五维雷达交互画像与技术决策权衡矩阵
-   ├─ 多风格模拟对练与 30 分钟速记口诀
-   └─ 一键下载完整 SOP 备战手册 Markdown
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                           【用户输入与本地静态特征提取】                          │
+│     目标公司 / 目标岗位 JD   +   候选人简历 (PDF/MD/TXT)   +   本地代码工程 (RepoScanner)   │
+└───────────────────────────────────────┬─────────────────────────────────────────┘
+                                        │
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ 🚀 阶段一：Stage 1 · 候选人简历针对性靶向精修 (Resume Targeting & Refinement)        │
+│ ─────────────────────────────────────────────────────────────────────────────── │
+│ • 核心输入：目标 JD + 简历原稿 + RepoScanner 提取的代码事实亮点                 │
+│ • 智能诊断：对每个项目诊断 3 大失分盲区 (动词弱化 / 缺少量化指标 / 关键算法盲点) │
+│ • 高分重塑：基于 STAR 原则输出高分子弹点 (强动词起手 + 量化指标 + 技术壁垒)   │
+│ • 交互赋能：Diff 对比展示、子弹点自由勾选微调、一键回写覆盖简历文本框          │
+│ • 阶段流转：Stage 1 完成并就绪后，平滑跳转 SOP-0 并解锁 Stage 2 阶段卡片       │
+└───────────────────────────────────────┬─────────────────────────────────────────┘
+                                        │ (精修简历 + 代码事实输入)
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ 🎯 阶段二：Stage 2 · 目标人岗胜任匹配度与 STAR 技术权衡 (Matching & Trade-off)    │
+│ ─────────────────────────────────────────────────────────────────────────────── │
+│ • 核心输入：Stage 1 精修后的高分简历 + 目标岗位 JD + 本地代码工程特征            │
+│ • 胜任画像：5 维雷达量化评分 (业务/架构/工程/显存分布式/前沿视野) + 72h 冲刺清单 │
+│ • 技术权衡：独创技术决策权衡对比矩阵 (Trade-off Matrix)                         │
+│             针对核心设计深度对比备选方案，讲清“为什么不选方案 B”的取舍逻辑      │
+│ • 阶段流转：Stage 2 完成并就绪后，平滑跳转 SOP-1 并解锁 Stage 3 冲刺卡片       │
+└───────────────────────────────────────┬─────────────────────────────────────────┘
+                                        │ (技术权衡 + 架构深度输入)
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ ⚡ 阶段三：Stage 3 · 源码级实战真题、模拟面试与临考速记 (Questions & Cheatsheet)   │
+│ ─────────────────────────────────────────────────────────────────────────────── │
+│ • 源码真题：结合真实工程代码锚点，定制 4 道大厂级实战真题 + 三层加分锦囊       │
+│ • 模拟对练：动态生成工业级 Master Prompt (极客狂/架构师/业务官风格)，5段式诊断   │
+│ • 反向提问：分轮次高阶反问清单 (技术一面/二面架构骨干、三面总监、HR 终面)       │
+│ • 临考速记：30 分钟抢分速记卡 (5 大必背关键量化参数 + 3 条应答黄金法则)        │
+│ • 战报导出：全阶段达成 (3/3)，一键导出排版精良的全局 Markdown 备战手册战报     │
+└─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🚀 极速上手 (Quick Start)
+## 📁 详尽文件架构与职责清单 (Project Layout & File Roles)
+
+每个文件各司其职，无任何冗余或死代码。完整目录结构及定位如下：
+
+```text
+Interview-sop/
+│
+├── 📜 核心服务与引擎
+│   ├── app.py                      # FastAPI 后端核心调度服务
+│   ├── repo_scanner.py             # 本地代码仓库静态特征透视引擎
+│   ├── knowledge_base.py           # 专家知识库、离线规则引擎与标杆演示数据中心
+│   ├── run.py                      # 系统主启动脚本（环境检查、拉起服务、自动打开浏览器）
+│   ├── requirements.txt            # Python 核心依赖清单
+│   ├── push_to_github.bat          # Windows 快捷 Git 提交流水线脚本
+│   └── LICENSE                     # MIT 开源许可证
+│
+├── 🎨 前端界面 (Apple 极简毛玻璃 UI)
+│   └── static/
+│       ├── index.html              # Vue 3 单页应用（全功能界面：Stepper看板、7大SOP、弹窗与交互）
+│       └── vendor/                 # 离线前端第三方资源包（TailwindCSS、Element Plus、Vue、Lucide 图标）
+│
+├── 🤖 外部 Agent 任务工单与契约体系 (agent_llm_tasks/)
+│   ├── SKILL.md                    # 工业级标准化 Agent Skill 契约规范（供外部 Agent 遵循）
+│   ├── README.md                   # Agent 任务包专属架构说明与协同指导
+│   ├── run_pipeline.py             # 离线流水线任务校验 (--validate) 与合成聚合 (--aggregate) 脚本
+│   ├── inputs/                     # 阶段工单导出目录（系统输出给外部 Agent）
+│   │   ├── stage_1_input.json      # Stage 1 阶段工单上下文数据
+│   │   ├── stage_1_prompt.txt      # Stage 1 阶段执行提示词
+│   │   ├── stage_2_input.json      # Stage 2 阶段工单上下文数据
+│   │   ├── stage_2_prompt.txt      # Stage 2 阶段执行提示词
+│   │   ├── stage_3_input.json      # Stage 3 阶段工单上下文数据
+│   │   ├── stage_3_prompt.txt      # Stage 3 阶段执行提示词
+│   │   ├── current_context.json    # 用户当前填写的完整上下文快照
+│   │   └── example_context.json    # 官方基准输入样例
+│   ├── outputs/                    # 阶段成果落盘目录（外部 Agent 输出给系统）
+│   │   ├── stage_1_output.json     # Stage 1 简历精修成果（回填 SOP-0）
+│   │   ├── stage_2_output.json     # Stage 2 胜任力与权衡成果（回填 SOP-1 & SOP-2）
+│   │   ├── stage_3_output.json     # Stage 3 真题/面试官/反问/速记成果（回填 SOP-3~6）
+│   │   ├── output.json             # 全局 7 大模块聚合产物
+│   │   └── example_output.json     # 官方全量标杆示范输出
+│   ├── task_0_resume_optimizer/    # 任务 0 独立工单包：简历靶向精修 (CoT说明 + Prompt + Schema)
+│   ├── task_1_matching_radar/      # 任务 1 独立工单包：5 维胜任力雷达画像 (CoT说明 + Prompt + Schema)
+│   ├── task_2_star_tradeoff/       # 任务 2 独立工单包：STAR 深度复盘与权衡矩阵 (CoT + Prompt + Schema)
+│   ├── task_3_questions_bank/      # 任务 3 独立工单包：源码真题题库与加分锦囊 (CoT + Prompt + Schema)
+│   ├── task_4_mock_interviewer/    # 任务 4 独立工单包：沉浸式模拟面试官 Master Prompt (CoT + Prompt + Schema)
+│   ├── task_5_reverse_interview/   # 任务 5 独立工单包：分轮次高阶反向提问策略 (CoT + Prompt + Schema)
+│   └── task_6_cheatsheet/          # 任务 6 独立工单包：30 分钟临考极速速记卡 (CoT + Prompt + Schema)
+│
+└── 🧪 自动化测试与质量审计套件
+    ├── test_backend.py             # 核心后端引擎与三阶段规范化单元测试
+    ├── test_stage_pipeline.py      # 三阶段工单导出/导入/预装等 5 大 REST API 集成测试
+    ├── test_final_audit.py         # 10 大核心模块、30 项关键指标全链路深度验收审计
+    ├── test_api_server.py          # API 基础接口连通性自动化测试
+    ├── test_live_server.py         # 运行中实时服务健康与响应测试
+    └── test_pdf_parse.py           # PDF 简历上传解析与去乱码测试
+```
+
+---
+
+### 🔍 核心文件功能速查表
+
+| 文件路径 | 职责类型 | 核心功能与技术实现 |
+| :--- | :--- | :--- |
+| **`app.py`** | 后端主控 | 1. 提供 FastAPI 服务路由与静态资源挂载；<br>2. 调度 `RepoScanner` 进行多仓库并发透视；<br>3. 实现 PDF/文本简历流式清洗解析 (`parse_resume_file`)；<br>4. 智能发现与遍历本机项目目录 (`quick_directories`, `list_subdirectories`)；<br>5. 负责 Stage 1/2/3 工单导出、产物装载与**智能数据规范化校验层 (Normalization Layer)**；<br>6. 支持零门槛**一键预装示范成果兜底**。 |
+| **`repo_scanner.py`** | 静态透视 | 1. 递归扫描指定目录下的 `.py`, `.json`, `.yaml` 等源码与配置文件；<br>2. 通过 AST 与正则智能识别模型 Backbone (CLIP, ViT, Qwen, LLaMA)、MLP Projector、Action Head；<br>3. 自动提取训练技术栈 (FSDP, DeepSpeed ZeRO, FlashAttention, LoRA, BF16)；<br>4. 提炼上百条真实代码高光，杜绝面试无话可说的尴尬。 |
+| **`knowledge_base.py`** | 专家知识库 | 1. 内置两套工业级标杆数据：Mini-LLaVA 多模态端到端工程 + 金融投研 Agent 架构师；<br>2. 专家级 SOP 生成引擎 (`generate_expert_sop`)；<br>3. 沉浸式模拟面试官 Master Prompt 动态构造器 (`build_custom_mock_prompt`)；<br>4. 包含 Trade-off 决策矩阵、三层破局锦囊与 30 分钟速记口诀库。 |
+| **`run.py`** | 启动器 | 1. 检查 Python 环境依赖；<br>2. 启动 Uvicorn 本地服务（默认端口 8000）；<br>3. 自动拉起系统默认浏览器访问 Web 页面。 |
+| **`static/index.html`** | 前端核心 | 1. 基于 Vue 3 Composition API 构建极简毛玻璃界面；<br>2. 实现 **【Agent 协同三阶段流水线看板 (Stepper Card)】**；<br>3. 渐进式解锁顶部 Segmented Control 导航；<br>4. 渲染 SOP 0~6 全套视图（Diff 对比、ECharts 雷达图、权衡矩阵表、真题折叠卡）；<br>5. 目录选择器弹窗、全套 Markdown 备战手册一键导出。 |
+| **`agent_llm_tasks/SKILL.md`** | Agent 契约 | 严格定义外部智能体（如 Cursor, Claude, Antigravity）在此项目中遵循的角色设定、输入输出规范与防幻觉指令。 |
+| **`agent_llm_tasks/run_pipeline.py`**| 离线流水线 | 1. 离线校验各阶段输出是否满足 JSON Schema (`--validate`)；<br>2. 自动将 task_0~task_6 各模块产物合并为全局 `outputs/output.json` (`--aggregate`)。 |
+
+---
+
+## 🚀 极速上手与运行 (Quick Start)
 
 ### 1. 环境准备
-确保本地已安装 Python 3.10 或更高版本。
+确保本地安装了 Python 3.10 或更高版本：
 
 ```bash
 # 克隆仓库
@@ -106,125 +162,95 @@ cd Interview-sop
 pip install -r requirements.txt
 ```
 
-### 2. 一键启动服务
-在项目根目录下直接运行：
+### 2. 一键启动
+在项目根目录执行：
 
 ```bash
 python run.py
 ```
-
-终端将启动 FastAPI 服务并**自动在系统默认浏览器中打开**：
-```
-http://127.0.0.1:8000
-```
-
-> **提示**：Windows 用户也可以直接双击根目录下的 `push_to_github.bat` 脚本快捷完成 GitHub 提交与推送。
+服务拉起后，系统将**自动在默认浏览器中打开** `http://127.0.0.1:8000`。
 
 ---
 
-## 💡 两种备战工作模式指引 (Usage Modes)
+## 💡 两种经典使用场景指引
 
-### 模式 A：单机极速体验模式（内置样例 / 一键直出）
-1. 打开网页右上角 **【样例演示】** 菜单：
-   - 可选择 `多模态具身智能 (Mini-LLaVA + OpenVLA)` 或 `金融投研大模型 Agent (同花顺)`；
-2. 页面自动填入岗位 JD、精选高分简历与本地仓库路径；
-3. 点击顶部 **【⚡ 一键直接分析生成全套 SOP】**；
-4. 系统将根据内置专家规则库秒级合成 7 大板块完整战报。
+### 场景 A：零门槛 1 秒体验官方标杆演示 (Zero-Barrier Preload)
+1. 访问首页，点击右上角 **【样例演示】** 载入示例数据（提供多模态具身智能或金融 Agent 两套标杆）；
+2. 看到首页中央的 **【Agent 协同三阶段流水线看板】**：
+   - 点击 Stage 1 的 **【⚡ 一键预装示范成果】** ➔ 秒级重塑简历并**自动平滑跳转至 SOP-0 靶向精修**；
+   - 点击 Stage 2 的 **【⚡ 一键预装示范成果】** ➔ 解锁并**自动跳转至 SOP-1 胜任雷达与 SOP-2 权衡矩阵**；
+   - 点击 Stage 3 的 **【⚡ 一键预装示范成果】** ➔ 解锁并**自动跳转至 SOP-3 源码定制真题库**；
+3. 此时 3 阶段全部就绪，顶部导航全线解锁，可自由查阅模拟面试人设与临考速记卡，或点击右上角导出全局 Markdown 战报。
 
-### 模式 B：外部 Agent 深度协同流水线模式（推荐工业级精细打磨）
-当需要针对您自己的私有大型项目进行深度复盘时，推荐使用顶部 **【Agent 协同三阶段工作流】**：
-1. **阶段一（靶向精修）**：
-   - 录入您的个人简历与代码库；
-   - 点击 **【导出阶段一工单】**，工单自动保存在 `agent_llm_tasks/inputs/`；
-   - 让您的外部 Agent（如 Cursor / Antigravity / Claude）读取 `agent_llm_tasks/SKILL.md` 与输入文件完成深度精修；
-   - 返回页面点击 **【读取阶段一产物】**（或点击 **【⚡ 一键预装示范成果】**），页面自动应用优化后的 STAR 描述并回写简历输入框；
-2. **阶段二（胜任匹配与权衡决策）**：
-   - 点击进入阶段二，导出工单并交由 Agent 评估；
-   - 读取产物后，解锁 5 维雷达匹配分、Gap 诊断以及“为什么不选方案 B”的权衡矩阵；
-3. **阶段三（源码真题与模拟对练）**：
-   - 导出工单，Agent 结合代码细节生成定制真题；
-   - 读取后即可解锁 4 道硬核真题、加分锦囊与 30 分钟临考速记口诀；
-4. 点击右上角 **【下载完整 SOP 备战手册】**，保存为离线 Markdown。
-
----
-
-## 📁 详细目录结构 (Project Layout)
-
-```text
-Interview-sop/
-├── app.py                          # FastAPI 后端服务主入口（API 路由、规范化清洗、多阶段工单调度）
-├── knowledge_base.py               # 内置专家知识库、标杆示范工程数据与离线生成引擎
-├── llm_client.py                   # 大模型客户端适配器（支持 DeepSeek / OpenAI / 自定义代理）
-├── repo_scanner.py                 # 本地代码仓库静态特征透视引擎（AST、超参、分布式策略解析）
-├── run.py                          # 一键启动脚本（环境检查、服务拉起、自动打开浏览器）
-├── requirements.txt                # 运行环境核心依赖清单
-├── LICENSE                         # MIT 开源许可证
-├── README.md                       # 项目全景使用与架构文档
-├── push_to_github.bat              # Windows 一键安全推送 GitHub 辅助脚本
-├── static/                         # 前端单页 Web 应用
-│   ├── index.html                  # 交互主页面（Vue 3 + TailwindCSS + Element Plus + Lucide Icons）
-│   └── vendor/                     # 离线前端静态依赖库
-└── agent_llm_tasks/                # 外部 Agent 协同核心工作区
-    ├── SKILL.md                    # 工业级标准化 Agent Skill 契约规范
-    ├── run_pipeline.py             # 离线验证与流水线任务自动聚合执行脚本
-    ├── inputs/                     # 阶段工单导出目录（stage_1/2/3_input.json, prompt.txt）
-    ├── outputs/                    # 阶段成果落盘目录（stage_1/2/3_output.json, example_output.json）
-    ├── task_0_resume_optimizer/    # 任务 0 专属定义与 JSON Schema
-    ├── task_1_matching_radar/      # 任务 1 专属定义与 JSON Schema
-    ├── task_2_star_tradeoff/       # 任务 2 专属定义与 JSON Schema
-    ├── task_3_questions_bank/      # 任务 3 专属定义与 JSON Schema
-    ├── task_4_mock_interviewer/    # 任务 4 专属定义与 JSON Schema
-    ├── task_5_reverse_interview/   # 任务 5 专属定义与 JSON Schema
-    └── task_6_cheatsheet/          # 任务 6 专属定义与 JSON Schema
-```
+### 场景 B：求职者真实项目私有精磨 (Private In-Depth Preparation)
+1. **录入与透视**：
+   - 录入真实求职公司与岗位 JD；
+   - 上传自己的简历（PDF/Markdown/文本）；
+   - 在“关联本地代码仓库”区域，直接点选本地开发的项目工程目录（自动透视代码亮点）；
+2. **阶段一（简历靶向精修）**：
+   - 在 Stage 1 卡片点击 **【📤 导出 Stage 1 工单】**（数据落盘至 `agent_llm_tasks/inputs/`）；
+   - 将生成的 Prompt 发送给您的外部大模型 Agent 执行，成果保存至 `outputs/stage_1_output.json`；
+   - 点击 **【📥 装载 Stage 1 成果】**，系统自动呈现 Diff 诊断并支持一键将高分精修子弹点回写至简历；
+3. **阶段二（胜任匹配与权衡决策）**：
+   - 自动解锁后，点击 Stage 2 卡片的 **【📤 导出 Stage 2 工单】**；
+   - 外部 Agent 评估生成后，点击 **【📥 装载 Stage 2 成果】**，即刻查阅 5 维雷达与“为什么不选方案 B”权衡矩阵；
+4. **阶段三（源码真题与对练速记）**：
+   - 自动解锁后，点击 Stage 3 卡片的 **【📤 导出 Stage 3 工单】**；
+   - 外部 Agent 结合代码生成真题与速记后，点击 **【📥 装载 Stage 3 成果】**；
+   - 获取 4 道源码结合型大厂真题与专属 Master Prompt，直接复制到外部模型开始 1v1 模拟面试！
 
 ---
 
-## ⚙️ 大模型 API 配置（可选）
+## 🧪 自动化测试与工程质量保证
 
-系统默认处于**高精度离线专家规则库模式**，无需配置任何 API Key 即可体验全部完整功能。
-
-若需要针对生僻自定义岗位调用公网大模型实时扩写，可在系统环境变量中配置：
+系统配备了全层级自动化测试与真机端到端走查脚本：
 
 ```bash
-# Windows PowerShell
-$env:DEEPSEEK_API_KEY="sk-your-deepseek-api-key"
-$env:DEEPSEEK_BASE_URL="https://api.deepseek.com/v1"
+# 1. 核心后端引擎与阶段数据规范化测试
+python test_backend.py
 
-# Linux / macOS
-export DEEPSEEK_API_KEY="sk-your-deepseek-api-key"
-export DEEPSEEK_BASE_URL="https://api.deepseek.com/v1"
+# 2. 三阶段工单导出/导入/预装 REST API 集成测试
+python test_stage_pipeline.py
+
+# 3. 10 大核心模块、30 项严苛指标全链路深度验收审计
+python test_final_audit.py
 ```
+
+### 真实浏览器 (CDP) 端到端自动化验收证据
+通过 Chrome DevTools Protocol (CDP) 无头浏览器对真实界面进行 6 阶段真机流转走查，DOM 断言与视觉截图验证均 100% 通过：
+1. **初始健康状态**：移除旧生成入口，Stage 1 就绪待处理，Stage 2/3 锁定；
+2. **Stage 1 预装**：成功装载并自动平滑跳转至 SOP-0 靶向精修；
+3. **Stage 2 触发解锁**：返回首页看板，Stage 1 显示已就绪，Stage 2 成功解锁；
+4. **Stage 2 预装**：装载胜任匹配与权衡矩阵，自动平滑跳转至 SOP-1；
+5. **Stage 3 预装**：装载真题库与速记，自动平滑跳转至 SOP-3 源码真题；
+6. **全阶段 3/3 达成**：首页 3 阶段卡片全绿就绪，顶部导航全线点亮。
 
 ---
 
 ## ❓ 常见问题 (FAQ)
 
 <details>
-<summary><b>Q1: 点击读取产物时，如果外部 Agent 还没生成文件会报错吗？</b></summary>
-<b>绝对不会。</b> 系统内置了完善的 4 级智能容错机制。若未检测到本地 <code>stage_X_output.json</code>，系统会自动兜底并预装官方标准示范成果，以 200 OK 顺畅渲染页面，绝无 404 错误阻断。
+<summary><b>Q1: 为什么彻底砍掉了“内置大模型”？</b></summary>
+所谓的“内置大模型”往往需要用户自行填写公网 API Key，或暗藏死循环漏洞与调用额度限制。我们将大模型深度推理职责完全解耦给外部 Agent（如 Claude、Cursor、DeepSeek、GPT），主系统专注于<b>代码透视、规范约束、成果可视化与离线标杆预装</b>，既保障了私有代码安全性，又提供了确定性极高的使用体验。
 </details>
 
 <details>
-<summary><b>Q2: 扫描本地代码仓库会上传我的私有代码到公网吗？</b></summary>
-<b>绝对不会。</b> <code>repo_scanner.py</code> 是纯本地静态解析脚本，仅在本地提取文件结构、模型组件名与超参关键特征，全程零网络外传，隐私与代码绝对安全。
+<summary><b>Q2: 如果外部 Agent 尚未生成 output 文件，点击装载会报错吗？</b></summary>
+<b>绝对不会。</b> 系统在后端设计了完善的容错与兜底预装机制。若本地尚未生成文件，系统会自动预装官方标杆成果并返回 200 OK，绝无 404 或界面崩溃风险。
 </details>
 
 <details>
-<summary><b>Q3: 上传的 PDF 简历解析出来会不会乱码？</b></summary>
-系统使用 <code>pypdf</code> 进行精准文字层提取，并由后端正则清洗非打印字符、制表符与多余空行。若遇到纯图片扫描件 PDF，建议使用 OCR 工具或直接将文字复制粘贴进简历文本框。
+<summary><b>Q3: 本地代码仓库透视会上传我的源码吗？</b></summary>
+<b>绝对不会。</b> <code>repo_scanner.py</code> 纯在本地运行 AST 与正则静态语法分析，仅提取组件名、超参和代码段亮点，零网络外传，隐私与代码资产 100% 安全。
 </details>
 
----
-
-## 🤝 贡献与反馈 (Contributing)
-
-欢迎提交 Issue 与 Pull Request！
-- 代码规范：建议遵循 PEP 8 规范；
-- 前端规范：保持 Apple 极简毛玻璃审美风格，兼顾深色与浅色自适应体验。
+<details>
+<summary><b>Q4: 上传的 PDF 简历解析会不会出现二进制乱码？</b></summary>
+系统集成了 <code>pypdf</code> 文本层提取与专用正则清洗管道，自动剔除 <code>\x00</code>、制表符与非打印符号，确保提取出的简历排版整洁。若简历为纯图片扫描件，建议先使用 OCR 工具识别或直接将文本复制到输入框中。
+</details>
 
 ---
 
 ## 📄 开源许可证 (License)
 
-本项目基于 [MIT License](LICENSE) 协议开源。
+本项目基于 [MIT License](LICENSE) 协议开源，欢迎自由使用、复用与贡献。

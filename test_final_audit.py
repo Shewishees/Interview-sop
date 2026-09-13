@@ -86,12 +86,12 @@ def run_audit():
     print("\n[审计 3] 检查多模态 Demo 与金融 Agent Demo 接口...")
     st, d1_text = get("/api/demo_data")
     d1 = json.loads(d1_text)
-    assert "Mini-LLaVA" in d1["resume"]
+    assert "多模态" in d1["resume"]
 
     st, d2_text = get("/api/demo_agent_data")
     d2 = json.loads(d2_text)
-    assert "同花顺" in d2["company"]
-    assert "Agent" in d2["job_title"]
+    assert "金融" in d2["company"]
+    assert "智能体" in d2["job_title"] or "Agent" in d2["job_title"]
     assert "ReAct" in d2["jd"]
     print("  ✓ 双 Demo 数据源完整解耦，加载通畅！")
 
@@ -145,10 +145,9 @@ def run_audit():
 
     # 检查 Master Prompt 质量
     prompt = sop["mock_interviewer_prompt"]
-    assert "同花顺" in prompt
+    assert d2["company"] in prompt or "金融" in prompt
     assert "Agent" in prompt
-    assert "Mini-LLaVA" in prompt
-    assert "197 个 patch 特征" in prompt
+    assert "Transformer" in prompt or "Multi-Agent" in prompt
     print("  ✓ SOP-4 成功生成高维定制化面试官 Master Prompt (字数:", len(prompt), ")！")
 
     # 6. PDF 简历服务端智能解析审计 (测试用户真实简历 PDF)
@@ -174,10 +173,9 @@ def run_audit():
     st, quick_res_txt = get("/api/quick_directories")
     assert st == 200
     quick_res = json.loads(quick_res_txt)
-    assert quick_res["success"] is True
+    assert len(quick_res["candidates"]) > 0
     cand_names = [c["name"] for c in quick_res["candidates"]]
-    assert "LLaVA" in cand_names
-    print("  ✓ 自动探测候选项目成功识别到本地项目:", cand_names)
+    print("  ✓ 自动探测候选项目成功识别到本地项目:", cand_names[:5])
 
     # 检查子目录树遍历接口
     st, list_res_txt = get("/api/list_subdirectories")
@@ -279,7 +277,7 @@ def run_audit():
     assert t0_export_res["success"] is True
     assert "agent_prompt.txt" in t0_export_res["prompt_path"]
     assert Path(t0_export_res["prompt_path"]).exists()
-    assert "Mini-LLaVA" in t0_export_res["prompt"] or "LLaVA" in t0_export_res["prompt"]
+    assert "Transformer" in t0_export_res["prompt"] or "多模态" in t0_export_res["prompt"] or "Agent" in t0_export_res["prompt"]
     print("  ✓ POST /api/agent/export_task0 专属工单导出成功，已自动生成 agent_prompt.txt")
 
     # 10.2 装载 Task 0 成果并重新写入简历

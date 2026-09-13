@@ -1,9 +1,9 @@
 {
   "stage": 3,
-  "company": "目标公司",
-  "job_title": "应聘岗位",
-  "jd": "",
-  "resume": "【基本信息】\n张三 (示例候选人) | 2002.06 | 某重点大学 计算机科学与技术 (本/硕)\n邮箱: candidate@example.com | 电话: 138-0000-0000\n求职意向: 大模型算法工程师 / 系统架构师\n\n【重点项目 1：基于 Transformer 的轻量化多模态对话模型研发 (示例项目)】\n- 架构实现：基于开源轻量语言模型底座与预训练视觉编码器，自主设计双层非线性特征映射桥接层 (Projector)，将高维视觉 Token 精准对齐至文本 Embedding 空间；\n- 模态对齐预训练：在千万级高质量图文数据集上实施 Stage 1 投影层特征对齐预训练，有效冻结主干权重，降低模态坍塌风险，验证集困惑度 (PPL) 显著收敛；\n- 指令微调与部署：构建多轮图文对话微调集实施 Stage 2 全链路增量微调，结合 FlashAttention 与 FP16 混合精度优化，推理端单图端到端响应延迟低于 150ms。\n\n【重点项目 2：企业级多智能体协同分析与决策系统 (示例项目)】\n- 架构设计：基于 ReAct 范式与 Plan-and-Solve 机制主导设计分布式 Multi-Agent 协作架构，定义有向无环图 (DAG) 状态迁移流转规范；\n- 工具沙箱与检索增强：集成工具调用安全沙箱与 Hybrid RAG 稠密检索模块，结合动态反思自纠机制，工具调用准确率提升至 94.2%；\n- 性能优化与压测：采用异步并发读写与局部状态隔离机制，单节点吞吐处理能力突破 300 QPS，稳定保障高并发业务场景。\n\n【专业技能】\n- 熟练掌握 Python、C++、Linux、Docker、Git；\n- 熟练掌握 PyTorch 深度学习框架与主流大模型微调推理工具；\n- 深入理解 Transformer、VLM、LLM 底层注意力与分布式并行机制 (FSDP / DeepSpeed / LoRA)；\n- 熟悉大模型 Agent 开发范式 (ReAct, Function Calling, LangGraph, RAG)。",
+  "company": "测试大厂",
+  "job_title": "多模态大模型算法工程师",
+  "jd": "负责多模态大模型架构研发，熟悉 ViT、LLaVA、Projection 层与分布式训练。",
+  "resume": "【基本信息】\n测试候选人 | 13800138000 | test@test.com\n【项目经历 1: 基于 LLaVA 架构的轻量化多模态对话大模型】\n- 架构实现：基于 Qwen 与 CLIP 手动实现多模态投影层；\n- 训练加速：引入 FlashAttention-2 提升吞吐。",
   "repo_paths": [],
   "scanned_repo_facts": [],
   "style": "geek",

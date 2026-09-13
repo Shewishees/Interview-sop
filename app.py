@@ -19,7 +19,6 @@ from pydantic import BaseModel
 from pypdf import PdfReader
 
 from repo_scanner import RepoScanner
-from llm_client import LLMClient
 from knowledge_base import (
     DEMO_RESUME,
     DEMO_COMPANY,
@@ -115,12 +114,6 @@ class PreloadStageRequest(BaseModel):
 
 class SingleRepoScanRequest(BaseModel):
     repo_path: str
-
-class MockChatRequest(BaseModel):
-    question: str
-    user_answer: str
-    round_num: int = 1
-    interview_style: str = "geek"
 
 @app.get("/api/defaults")
 def get_defaults():
@@ -498,18 +491,6 @@ def generate_mock_prompt(req: GeneratePromptRequest):
     builder = sop_data.get("sop_4_prompt_builder")
     prompt_str = builder(style=req.style, focus=req.focus) if builder else sop_data.get("default_mock_prompt", "")
     return {"success": True, "prompt": prompt_str}
-
-@app.post("/api/mock_interview/chat")
-def mock_interview_chat(req: MockChatRequest):
-    """模拟面试对练智能打分与实时追问接口"""
-    client = LLMClient()
-    review = client.mock_review_answer(
-        question=req.question,
-        user_answer=req.user_answer,
-        round_num=req.round_num,
-        interview_style=req.interview_style
-    )
-    return {"success": True, "review": review}
 
 @app.post("/api/agent/export_inputs")
 def export_inputs_for_agent(req: AgentExportRequest):

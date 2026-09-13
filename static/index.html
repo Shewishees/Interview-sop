@@ -353,38 +353,38 @@
     <!-- 步骤导航条 (macOS 风格分段胶囊控制器 Segmented Control) -->
     <div class="border-b border-black/5 bg-[#f5f5f7]/95 backdrop-blur-md px-6 py-2 sticky top-[57px] z-30">
       <div class="max-w-4xl mx-auto flex items-center justify-between text-xs font-medium bg-[#e5e5ea]/80 p-1 rounded-2xl border border-black/5 shadow-inner">
-        <button @click="activeTab = 'input'" :class="activeTab === 'input' ? 'bg-white text-[#1d1d1f] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : 'text-[#6e6e73] hover:text-[#1d1d1f]'" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="第一步：自主录入与多代码仓库透视">
+        <button @click="handleTabClick('input')" :class="activeTab === 'input' ? 'bg-white text-[#1d1d1f] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : 'text-[#6e6e73] hover:text-[#1d1d1f]'" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="第一步：自主录入与多代码仓库透视">
           <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">1</span>
           <span>录入</span>
         </button>
 
-        <button @click="activeTab = 'optimizer'" :disabled="!sopData" :class="activeTab === 'optimizer' ? 'bg-white text-[#248a3d] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#248a3d] hover:text-[#1e6f31]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-0 简历靶向精修 (Diff)">
+        <button @click="handleTabClick('optimizer')" :disabled="!isTabUnlocked('optimizer')" :class="activeTab === 'optimizer' ? 'bg-white text-[#248a3d] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (isTabUnlocked('optimizer') ? 'text-[#248a3d] hover:text-[#1e6f31]' : 'text-slate-400 cursor-not-allowed opacity-50')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-0 简历靶向精修 (Diff)">
           <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-[#248a3d] border border-emerald-500/30 flex items-center justify-center text-[10px] font-bold">0</span>
           <span class="font-bold">靶向精修</span>
           <span class="sr-only">SOP-0 简历靶向精修 (Diff)</span>
         </button>
 
-        <button @click="activeTab = 'matching'" :disabled="!sopData" :class="activeTab === 'matching' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-1 职位匹配与雷达画像">
+        <button @click="handleTabClick('matching')" :disabled="!isTabUnlocked('matching')" :class="activeTab === 'matching' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (isTabUnlocked('matching') ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed opacity-50')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-1 职位匹配与雷达画像">
           <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">2</span>
           <span>胜任匹配</span>
         </button>
 
-        <button @click="activeTab = 'star'" :disabled="!sopData" :class="activeTab === 'star' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-2 STAR 深挖与技术权衡矩阵">
+        <button @click="handleTabClick('star')" :disabled="!isTabUnlocked('star')" :class="activeTab === 'star' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (isTabUnlocked('star') ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed opacity-50')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-2 STAR 深挖与技术权衡矩阵">
           <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">3</span>
           <span>STAR复盘</span>
         </button>
 
-        <button @click="activeTab = 'questions'" :disabled="!sopData" :class="activeTab === 'questions' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-3 源码结合型定制题库">
+        <button @click="handleTabClick('questions')" :disabled="!isTabUnlocked('questions')" :class="activeTab === 'questions' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (isTabUnlocked('questions') ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed opacity-50')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-3 源码结合型定制题库">
           <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">4</span>
           <span>源码真题</span>
         </button>
 
-        <button @click="activeTab = 'mock_prompt'" :disabled="!sopData" :class="activeTab === 'mock_prompt' ? 'bg-white text-[#d97706] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-4 专属面试官 Prompt 发生器">
+        <button @click="handleTabClick('mock_prompt')" :disabled="!isTabUnlocked('mock_prompt')" :class="activeTab === 'mock_prompt' ? 'bg-white text-[#d97706] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (isTabUnlocked('mock_prompt') ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed opacity-50')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-4 专属面试官 Prompt 发生器">
           <span class="w-4 h-4 rounded-full bg-amber-500/20 text-[#d97706] flex items-center justify-center text-[10px]">5</span>
           <span class="font-bold">模拟对练</span>
         </button>
 
-        <button @click="activeTab = 'reverse'" :disabled="!sopData" :class="activeTab === 'reverse' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (sopData ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-5 反向提问 & 考前速记">
+        <button @click="handleTabClick('reverse')" :disabled="!isTabUnlocked('reverse')" :class="activeTab === 'reverse' ? 'bg-white text-[#0071e3] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] font-semibold' : (isTabUnlocked('reverse') ? 'text-[#6e6e73] hover:text-[#1d1d1f]' : 'text-slate-400 cursor-not-allowed opacity-50')" class="flex-1 flex items-center justify-center space-x-1 px-2.5 py-1.5 rounded-xl transition" title="SOP-5 反向提问 & 考前速记">
           <span class="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center text-[10px]">6</span>
           <span>临考速记</span>
         </button>
@@ -465,42 +465,141 @@
               <i data-lucide="folder-git-2" class="w-5 h-5 text-[#0071e3]"></i>
               <span>自主录入与本地代码透视</span>
             </h2>
-            <p class="text-xs text-[#86868b] mt-0.5">支持录入岗位 JD、导入简历文本与批量挂载本地工程仓库</p>
+            <p class="text-xs text-[#86868b] mt-0.5">录入目标岗位 JD、简历与本地工程仓库，通过 3 阶段 Agent 协同流水线逐层打磨生成高分 SOP</p>
           </div>
-          <button @click="triggerGenerateSOP" :disabled="loading" class="flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-[#0071e3] hover:bg-[#0077ed] text-white font-bold text-sm shadow-md shadow-blue-500/25 transition-all transform active:scale-95 disabled:opacity-50">
-            <i data-lucide="zap" class="w-4 h-4"></i>
-            <span>{{ loading ? '正在综合分析多仓库与简历...' : '⚡ 一键直接分析生成全套 SOP' }}</span>
-          </button>
+          <div class="flex items-center space-x-2">
+            <span class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-blue-50 border border-blue-200/60 text-[#0071e3] text-xs font-semibold">
+              <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+              <span>Agent-Native 纯协同架构</span>
+            </span>
+          </div>
         </div>
 
-        <!-- 阶段一 Agent 协同指引操作条 -->
-        <div class="p-4 rounded-2xl bg-white border border-black/8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
-          <div class="flex items-center space-x-3">
-            <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-[#0071e3] border border-blue-500/20 flex items-center justify-center font-bold text-sm shrink-0">
-              1
+        <!-- 可视化 3 阶段工作流看板 (3-Stage Workflow Stepper Cards) -->
+        <div class="rounded-2xl bg-white/95 border border-black/8 p-4 shadow-sm backdrop-blur-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="w-6 h-6 rounded-lg bg-gradient-to-tr from-[#0071e3] to-[#42a5f5] flex items-center justify-center text-white text-[11px] shadow-sm">
+                <i data-lucide="layers" class="w-3.5 h-3.5 text-white"></i>
+              </span>
+              <h3 class="text-xs font-bold text-[#1d1d1f] tracking-tight">Agent 协同三阶段流水线看板 (逐级递进)</h3>
             </div>
-            <div>
-              <div class="font-bold text-xs text-[#1d1d1f] flex items-center space-x-2">
-                <span>阶段一：填入基础资料 ➔ 交由 Agent 靶向精修简历</span>
-                <span class="px-2 py-0.5 text-[10px] rounded-full font-semibold"
-                      :class="stageStatus[1]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : (stageStatus[1]?.input_exists ? 'bg-blue-100 text-[#0071e3]' : 'bg-black/5 text-[#86868b]')">
-                  {{ stageStatus[1]?.output_exists ? '✅ 阶段一产物已就绪' : (stageStatus[1]?.input_exists ? '⏳ Agent 处理中 (待读取)' : '⚪ 待导出工单') }}
-                </span>
-              </div>
-              <div class="text-[11px] text-[#86868b] mt-0.5">
-                在下方填好 JD、简历与代码仓库后，点击【导出工单】生成输入与 Prompt，交由外部 Agent 基于常驻 Skill 深度处理后，点击【读取产物】一键重新写入升级简历。
-              </div>
+            <div class="flex items-center space-x-2 text-[11px] text-[#86868b]">
+              <span>进度: <strong class="text-[#0071e3]">{{ (stageStatus[1]?.output_exists ? 1 : 0) + (stageStatus[2]?.output_exists ? 1 : 0) + (stageStatus[3]?.output_exists ? 1 : 0) }}</strong> / 3 阶段</span>
             </div>
           </div>
-          <div class="flex items-center space-x-2 shrink-0">
-            <button @click="openStageModal(1, 'export')" class="px-3.5 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1.5 shadow-sm active:scale-95">
-              <i data-lucide="bot" class="w-3.5 h-3.5"></i>
-              <span>📤 导出阶段一工单</span>
-            </button>
-            <button @click="openStageModal(1, 'import')" class="px-3.5 py-1.5 bg-[#248a3d] hover:bg-[#1e6f31] text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1.5 shadow-sm active:scale-95">
-              <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i>
-              <span>📥 读取阶段一产物</span>
-            </button>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            <!-- Stage 1 Card -->
+            <div class="p-4 rounded-xl border transition-all flex flex-col justify-between"
+                 :class="stageStatus[1]?.output_exists ? 'bg-emerald-50/40 border-emerald-200/80 shadow-sm' : 'bg-[#fbfbfd] border-black/5 hover:border-black/10'">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-6 h-6 rounded-lg bg-blue-500/10 text-[#0071e3] border border-blue-500/20 flex items-center justify-center font-bold text-xs">
+                      1
+                    </div>
+                    <span class="font-bold text-xs text-[#1d1d1f]">阶段一 · 靶向精修</span>
+                  </div>
+                  <span class="px-2 py-0.5 text-[10px] rounded-full font-semibold"
+                        :class="stageStatus[1]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : (stageStatus[1]?.input_exists ? 'bg-blue-100 text-[#0071e3]' : 'bg-black/5 text-[#86868b]')">
+                    {{ stageStatus[1]?.output_exists ? '✅ 已就绪' : (stageStatus[1]?.input_exists ? '⏳ 待读取' : '⚪ 待处理') }}
+                  </span>
+                </div>
+                <p class="text-[11px] text-[#6e6e73] leading-relaxed">
+                  失分盲区诊断、动词强化与量化指标对齐，产出优化后 STAR 经历并回写简历。
+                </p>
+              </div>
+
+              <div class="pt-3 mt-3 border-t border-black/5 flex flex-wrap items-center gap-1.5">
+                <button @click="openStageModal(1, 'export')" class="flex-1 px-2.5 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white text-[11px] font-semibold rounded-lg transition flex items-center justify-center space-x-1 shadow-sm active:scale-95">
+                  <i data-lucide="bot" class="w-3 h-3"></i>
+                  <span>导出工单</span>
+                </button>
+                <button @click="executeStagePreload(1)" :disabled="stageImportLoading" class="px-2.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-[11px] font-semibold rounded-lg transition flex items-center justify-center space-x-1 shadow-sm active:scale-95 disabled:opacity-50" title="无需外部 Agent，一键体验标杆效果">
+                  <i data-lucide="zap" class="w-3 h-3"></i>
+                  <span>一键预装</span>
+                </button>
+                <button @click="openStageModal(1, 'import')" class="px-2 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold rounded-lg transition flex items-center justify-center space-x-1 shadow-sm active:scale-95">
+                  <i data-lucide="download-cloud" class="w-3 h-3"></i>
+                  <span>读取</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Stage 2 Card -->
+            <div class="p-4 rounded-xl border transition-all flex flex-col justify-between"
+                 :class="!stageStatus[1]?.output_exists ? 'bg-black/[0.02] border-black/5 opacity-60' : (stageStatus[2]?.output_exists ? 'bg-emerald-50/40 border-emerald-200/80 shadow-sm' : 'bg-[#fbfbfd] border-black/5 hover:border-black/10')">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-6 h-6 rounded-lg bg-purple-500/10 text-[#8e24aa] border border-purple-500/20 flex items-center justify-center font-bold text-xs">
+                      2
+                    </div>
+                    <span class="font-bold text-xs text-[#1d1d1f]">阶段二 · 匹配与权衡</span>
+                  </div>
+                  <span class="px-2 py-0.5 text-[10px] rounded-full font-semibold"
+                        :class="!stageStatus[1]?.output_exists ? 'bg-black/5 text-[#86868b]' : (stageStatus[2]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : (stageStatus[2]?.input_exists ? 'bg-blue-100 text-[#0071e3]' : 'bg-amber-100 text-[#d97706]'))">
+                    {{ !stageStatus[1]?.output_exists ? '🔒 待阶段一' : (stageStatus[2]?.output_exists ? '✅ 已就绪' : (stageStatus[2]?.input_exists ? '⏳ 待读取' : '⚪ 就绪可导')) }}
+                  </span>
+                </div>
+                <p class="text-[11px] text-[#6e6e73] leading-relaxed">
+                  生成 5 维胜任力雷达评分、冲刺优先级清单与“为什么不选方案 B”权衡矩阵。
+                </p>
+              </div>
+
+              <div class="pt-3 mt-3 border-t border-black/5 flex flex-wrap items-center gap-1.5">
+                <button @click="openStageModal(2, 'export')" :disabled="!stageStatus[1]?.output_exists" class="flex-1 px-2.5 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white text-[11px] font-semibold rounded-lg transition flex items-center justify-center space-x-1 shadow-sm active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed">
+                  <i data-lucide="bot" class="w-3 h-3"></i>
+                  <span>导出工单</span>
+                </button>
+                <button @click="executeStagePreload(2)" :disabled="!stageStatus[1]?.output_exists || stageImportLoading" class="px-2.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-[11px] font-semibold rounded-lg transition flex items-center justify-center space-x-1 shadow-sm active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed" title="无需外部 Agent，一键体验标杆效果">
+                  <i data-lucide="zap" class="w-3 h-3"></i>
+                  <span>一键预装</span>
+                </button>
+                <button @click="openStageModal(2, 'import')" :disabled="!stageStatus[1]?.output_exists" class="px-2 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold rounded-lg transition flex items-center justify-center space-x-1 shadow-sm active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed">
+                  <i data-lucide="download-cloud" class="w-3 h-3"></i>
+                  <span>读取</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Stage 3 Card -->
+            <div class="p-4 rounded-xl border transition-all flex flex-col justify-between"
+                 :class="!stageStatus[2]?.output_exists ? 'bg-black/[0.02] border-black/5 opacity-60' : (stageStatus[3]?.output_exists ? 'bg-emerald-50/40 border-emerald-200/80 shadow-sm' : 'bg-[#fbfbfd] border-black/5 hover:border-black/10')">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-6 h-6 rounded-lg bg-orange-500/10 text-[#d97706] border border-orange-500/20 flex items-center justify-center font-bold text-xs">
+                      3
+                    </div>
+                    <span class="font-bold text-xs text-[#1d1d1f]">阶段三 · 真题与速记</span>
+                  </div>
+                  <span class="px-2 py-0.5 text-[10px] rounded-full font-semibold"
+                        :class="!stageStatus[2]?.output_exists ? 'bg-black/5 text-[#86868b]' : (stageStatus[3]?.output_exists ? 'bg-emerald-100 text-[#248a3d]' : (stageStatus[3]?.input_exists ? 'bg-blue-100 text-[#0071e3]' : 'bg-amber-100 text-[#d97706]'))">
+                    {{ !stageStatus[2]?.output_exists ? '🔒 待阶段二' : (stageStatus[3]?.output_exists ? '✅ 已就绪' : (stageStatus[3]?.input_exists ? '⏳ 待读取' : '⚪ 就绪可导')) }}
+                  </span>
+                </div>
+                <p class="text-[11px] text-[#6e6e73] leading-relaxed">
+                  源码深度结合定制真题、专属 Master 对练 Prompt、分轮次反问与考前速记卡。
+                </p>
+              </div>
+
+              <div class="pt-3 mt-3 border-t border-black/5 flex flex-wrap items-center gap-1.5">
+                <button @click="openStageModal(3, 'export')" :disabled="!stageStatus[2]?.output_exists" class="flex-1 px-2.5 py-1.5 bg-[#0071e3] hover:bg-[#0077ed] text-white text-[11px] font-semibold rounded-lg transition flex items-center justify-center space-x-1 shadow-sm active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed">
+                  <i data-lucide="bot" class="w-3 h-3"></i>
+                  <span>导出工单</span>
+                </button>
+                <button @click="executeStagePreload(3)" :disabled="!stageStatus[2]?.output_exists || stageImportLoading" class="px-2.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-[11px] font-semibold rounded-lg transition flex items-center justify-center space-x-1 shadow-sm active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed" title="无需外部 Agent，一键体验标杆效果">
+                  <i data-lucide="zap" class="w-3 h-3"></i>
+                  <span>一键预装</span>
+                </button>
+                <button @click="openStageModal(3, 'import')" :disabled="!stageStatus[2]?.output_exists" class="px-2 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold rounded-lg transition flex items-center justify-center space-x-1 shadow-sm active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed">
+                  <i data-lucide="download-cloud" class="w-3 h-3"></i>
+                  <span>读取</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -2948,6 +3047,48 @@
           }
         };
 
+        const isTabUnlocked = (tab) => {
+          if (tab === 'input') return true;
+          if (tab === 'optimizer') {
+            return !!(stageStatus.value[1]?.output_exists || (sopData.value?.sop_0_resume_optimizer && sopData.value.sop_0_resume_optimizer.length > 0));
+          }
+          if (tab === 'matching' || tab === 'star') {
+            return !!(stageStatus.value[2]?.output_exists || (sopData.value?.sop_1_matching && sopData.value.sop_1_matching.radar_dimensions && sopData.value.sop_1_matching.radar_dimensions.length > 0));
+          }
+          if (tab === 'questions' || tab === 'mock_prompt' || tab === 'reverse') {
+            return !!(stageStatus.value[3]?.output_exists || (sopData.value?.sop_3_questions && sopData.value.sop_3_questions.length > 0));
+          }
+          return false;
+        };
+
+        const handleTabClick = async (tab) => {
+          if (!isTabUnlocked(tab)) {
+            let msg = "请按顺序先完成前序阶段任务";
+            if (tab === 'optimizer') msg = "请先完成阶段一：导出工单或一键预装示范成果";
+            else if (tab === 'matching' || tab === 'star') msg = "请先完成阶段二：胜任匹配与权衡决策";
+            else if (tab === 'questions' || tab === 'mock_prompt' || tab === 'reverse') msg = "请先完成阶段三：源码真题与对练速记";
+            ElementPlus.ElMessage.warning(msg);
+            return;
+          }
+
+          // 若对应阶段产物已在磁盘生成但未装载至内存，点击该 Tab 时自动装载
+          if (tab === 'optimizer' && (!sopData.value?.sop_0_resume_optimizer?.length) && stageStatus.value[1]?.output_exists) {
+            await executeStageImport(1);
+            return;
+          }
+          if ((tab === 'matching' || tab === 'star') && (!sopData.value?.sop_1_matching?.radar_dimensions?.length) && stageStatus.value[2]?.output_exists) {
+            await executeStageImport(2);
+            return;
+          }
+          if ((tab === 'questions' || tab === 'mock_prompt' || tab === 'reverse') && (!sopData.value?.sop_3_questions?.length) && stageStatus.value[3]?.output_exists) {
+            await executeStageImport(3);
+            return;
+          }
+
+          activeTab.value = tab;
+          nextTick(() => safeCreateIcons());
+        };
+
         const openStageModal = async (stageNum, defaultTab = 'export') => {
           currentStage.value = stageNum;
           stageModalTab.value = defaultTab;
@@ -3300,7 +3441,9 @@
           downloadStageInputJson,
           handleStageImportFileUpload,
           executeStagePreload,
-          executeStageImport
+          executeStageImport,
+          isTabUnlocked,
+          handleTabClick
         };
       }
     });
